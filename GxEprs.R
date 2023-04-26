@@ -5,8 +5,8 @@ GWAS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
   param_vec <- paste0(parameters, collapse = ", ")
   
   # Run plink analysis
-  system(paste0("plink --bfile ", b_file, 
-                " --logistic beta interaction --pheno ", 
+  system(paste0("plink2 --bfile ", b_file, 
+                " --glm --pheno ", 
                 pheno_file, 
                 " --covar ", covar_file, 
                 " --parameters ", param_vec, 
@@ -15,8 +15,9 @@ GWAS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
                 " --out B_gwas"))
   
   # Filter plink output
-  plink_output <- read.table("B_gwas.assoc.logistic", header = TRUE)
-  filtered_output <- plink_output[(plink_output$TEST=="ADD"),]
+  plink_output <- read.table("B_gwas.PHENO1.glm.logistic.hybrid", header = FALSE)
+  filtered_output <- plink_output[(plink_output$V8=="ADD"),]
+  filtered_output$V10 = log(filtered_output$V10)
   
   #Write B_trd.sum file
   sink("B_trd.sum")
@@ -31,8 +32,8 @@ GWEIS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
   param_vec <- paste0(parameters, collapse = ", ")
   
   # Run plink analysis
-  system(paste0("plink --bfile ", b_file, 
-                " --logistic beta interaction --pheno ", 
+  system(paste0("plink2 --bfile ", b_file, 
+                " --glm interaction --pheno ", 
                 pheno_file, 
                 " --covar ", covar_file, 
                 " --parameters ", param_vec, 
@@ -41,9 +42,11 @@ GWEIS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
                 " --out B_gweis"))
   
   # Filter plink output
-  plink_output <- read.table("B_gweis.assoc.logistic", header = TRUE)
-  filtered_output <- plink_output[(plink_output$TEST=="ADD"),]
-  filtered_output2 <- plink_output[(plink_output$TEST=="ADDxCOV1"),]
+  plink_output <- read.table("B_gweis.PHENO1.glm.logistic.hybrid", header = FALSE)
+  filtered_output <- as.data.frame(plink_output[(plink_output$V8=="ADD"),])
+  filtered_output$V10 = log(filtered_output$V10)
+  filtered_output2 <- plink_output[(plink_output$V8=="ADDxCOVAR1"),]
+  filtered_output2$V10 <- log(filtered_output2$V10)
   
   #Write B_add.sum file
   sink("B_add.sum")
@@ -58,12 +61,12 @@ GWEIS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
 
 PRS_binary <- function(b_file){
   # Run plink code to obtain polygenic risk scores
-  system(paste0("plink --bfile ", b_file, 
-                " --score B_trd.sum 2 4 7 header --out B_trd"))
-  system(paste0("plink --bfile ", b_file, 
-                " --score B_add.sum 2 4 7 header --out B_add"))
-  system(paste0("plink --bfile ", b_file, 
-                " --score B_gxe.sum 2 4 7 header --out B_gxe"))
+  system(paste0("plink2 --bfile ", b_file, 
+                " --score B_trd.sum 3 6 10 header --out B_trd"))
+  system(paste0("plink2 --bfile ", b_file, 
+                " --score B_add.sum 3 6 10 header --out B_add"))
+  system(paste0("plink2 --bfile ", b_file, 
+                " --score B_gxe.sum 3 6 10 header --out B_gxe"))
 }
 
 results_binary <- function(n_confounders){
@@ -72,11 +75,17 @@ results_binary <- function(n_confounders){
   dat=read.table("Bcov_target.txt",header=F)
   colnames(dat)[1] <- "FID"
   colnames(dat)[2] <- "IID"
-  prs0_all=read.table("B_trd.profile",header=T)
+  prs0_all=read.table("B_trd.sscore")
+  colnames(prs0_all)[1] <- "FID"
+  colnames(prs0_all)[2] <- "IID"
   prs0=merge(fam, prs0_all, by = "FID")
-  prs1_all=read.table("B_add.profile",header=T)
+  prs1_all=read.table("B_add.sscore")
+  colnames(prs1_all)[1] <- "FID"
+  colnames(prs1_all)[2] <- "IID"
   prs1=merge(fam, prs1_all, by = "FID")
-  prs2_all=read.table("B_gxe.profile",header=T)
+  prs2_all=read.table("B_gxe.sscore")
+  colnames(prs2_all)[1] <- "FID"
+  colnames(prs2_all)[2] <- "IID"
   prs2=merge(fam, prs2_all, by = "FID")
   
   m1 <- match(prs0$IID.x, dat$IID)
@@ -84,12 +93,12 @@ results_binary <- function(n_confounders){
   out = fam$PHENOTYPE[m1]
   
   cov=dat$V3[m1]
-  ps0=scale(prs0$SCORE)
-  ps1=scale(prs1$SCORE)
-  ps2=scale(prs2$SCORE)
-  xv0=scale(prs0$SCORE*cov)
-  xv1=scale(prs1$SCORE*cov)
-  xv2=scale(prs2$SCORE*cov)
+  ps0=scale(prs0$V5)
+  ps1=scale(prs1$V5)
+  ps2=scale(prs2$V5)
+  xv0=scale(prs0$V5*cov)
+  xv1=scale(prs1$V5*cov)
+  xv2=scale(prs2$V5*cov)
   
   cov2=scale(cov^2)
   
@@ -140,20 +149,6 @@ PRS_binary(DummyData)
 #Test results_binary
 results_binary(0)
 results_binary(14)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
