@@ -27,7 +27,7 @@ GWAS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
   parameters <- c(1, (1:n_confounders)+3)
   param_vec <- paste0(parameters, collapse = ", ")
 
-  system(paste0("plink2 --bfile ", b_file, 
+  system(paste0("./plink2 --bfile ", b_file, 
                 " --glm --pheno ", 
                 pheno_file, 
                 " --covar ", covar_file, 
