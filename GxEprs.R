@@ -5,7 +5,7 @@ GWAS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
   param_vec <- paste0(parameters, collapse = ", ")
   
   # Run plink analysis
-  system(paste0("plink2 --bfile ", b_file, 
+  system(paste0("./plink2 --bfile ", b_file, 
                 " --glm --pheno ", 
                 pheno_file, 
                 " --covar ", covar_file, 
@@ -32,7 +32,7 @@ GWEIS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
   param_vec <- paste0(parameters, collapse = ", ")
   
   # Run plink analysis
-  system(paste0("plink2 --bfile ", b_file, 
+  system(paste0("./plink2 --bfile ", b_file, 
                 " --glm interaction --pheno ", 
                 pheno_file, 
                 " --covar ", covar_file, 
@@ -61,11 +61,11 @@ GWEIS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
 
 PRS_binary <- function(b_file){
   # Run plink code to obtain polygenic risk scores
-  system(paste0("plink2 --bfile ", b_file, 
+  system(paste0("./plink2 --bfile ", b_file, 
                 " --score B_trd.sum 3 6 10 header --out B_trd"))
-  system(paste0("plink2 --bfile ", b_file, 
+  system(paste0("./plink2 --bfile ", b_file, 
                 " --score B_add.sum 3 6 10 header --out B_add"))
-  system(paste0("plink2 --bfile ", b_file, 
+  system(paste0("./plink2 --bfile ", b_file, 
                 " --score B_gxe.sum 3 6 10 header --out B_gxe"))
 }
 
