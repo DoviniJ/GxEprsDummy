@@ -24,9 +24,10 @@ install.packages("GxEprs")
 # Quick start
 We will illustrate the usage of **GxEprs** using a few example datasets downloaded and white labelled from ukbiobank. Follow the step wise process:
 
-### Step 1: Download and install plink2.exe in your working directory. Link: https://www.cog-genomics.org/plink/2.0/
+##### Step 1: Download and install plink2.exe in your working directory. 
+Link: https://www.cog-genomics.org/plink/2.0/
 
-### Step 2: Download all the provided data files (in **DoviniJ/GxEprs/inst** directory) into the working directory:
+##### Step 2: Download all the provided data files (in **DoviniJ/GxEprs/inst** directory) into the working directory:
 1) DummyData.fam
 2) DummyData.bim
 3) DummyData.bed
@@ -39,7 +40,7 @@ We will illustrate the usage of **GxEprs** using a few example datasets download
 10) Qcov_target.txt
 11) Qphe_target.txt
 
-### Step 3.1: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using regular model for binary outcome):
+##### Step 3.1: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using regular model for binary outcome):
 ```
 DummyData <- "DummyData"
 Bphe_discovery <- "Bphe_discovery.txt"
@@ -56,7 +57,7 @@ summary_regular_binary(n_confounders)
 summary_permuted_binary(n_confounders)
 results_regular_binary(n_confounders)
 ```
-### Step 3.2: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using permuted model for binary outcome):
+##### Step 3.2: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using permuted model for binary outcome):
 ```
 results_permuted_binary(n_confounders)
 ```
@@ -64,7 +65,7 @@ results_permuted_binary(n_confounders)
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(n_confounders)``` and ```summary_permuted_binary(n_confounders)```. If the 'PRS_gxe x E' term is significant of insignificant in both the models, any model could be used to obtain results (i.e. ```results_regular_binary(n_confounders)``` or ```results_permuted_binary(n_confounders)```). If the 'PRS_gxe x E' term is significant in one model, and insignificant in other model, it is advised to use the permuted model to obtain results (i.e. ```results_permuted_binary(n_confounders)```).
 
 
-### Step 3.3: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is quantitative (using regular model for quantitative outcome):
+##### Step 3.3: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is quantitative (using regular model for quantitative outcome):
 ```
 DummyData <- "DummyData"
 Qphe_discovery <- "Qphe_discovery.txt"
@@ -81,7 +82,7 @@ summary_regular_quantitative(n_confounders)
 summary_permuted_quantitative(n_confounders)
 results_regular_quantitative(n_confounders)
 ```
-### Step 3.4: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is quantitative (using permuted model for quantitative outcome):
+##### Step 3.4: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is quantitative (using permuted model for quantitative outcome):
 ```
 results_permuted_quantitative(n_confounders)
 ```
