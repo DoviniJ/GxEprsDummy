@@ -43,7 +43,7 @@ results_binary <- function(n_confounders){
   
   out = fam$PHENOTYPE[m1]
   
-  cov=dat$V3[m1]
+  cov=scale(dat$V3[m1])
   ps0=scale(prs0$V5)
   ps1=scale(prs1$V5)
   ps2=scale(prs2$V5)
