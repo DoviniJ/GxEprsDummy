@@ -4,7 +4,7 @@
 #' 
 #' @param n_confounders Number of confounding variables in the target dataset
 #' 
-#' @keywords risk scores, risk values, individual risk, disease risk
+#' @keywords regression summary
 #' 
 #' @export 
 #' 
