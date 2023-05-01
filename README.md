@@ -68,7 +68,10 @@ results_binary(n_confounders)
 1) GWAS_binary: This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects
 2) GWEIS_binary: This performs GWEIS and outputs the files B_add.sum and G_gxe.sum which contain GWEIS summary statistics of all additive and interaction SNP effects
 3) PRS_binary: This computes polygenic risk scores for each individual in the target dataset and outputs the files B_trd.sscore, B_trd.sscore and B_trd.sscore  
-4) results_binary: This outputs the file Individual_risk_values_without_confounders.txt or Individual_risk_values.txt (depending on the number of confounders given as argument)containing all the calculated individual risk scores using the relevant genomic prediction model
+4) summary1_binary: This outputs the file Bsummary.txt which gives the summary of the fitted **regular** model for **binary** outcome
+5) summary2_binary: This outputs the file Bsummary.txt which gives the summary of the fitted **permuted** model for **binary** outcome
+6) results1_binary: This outputs the file Individual_risk_values.txt containing all the calculated individual risk scores using the **regular** genomic prediction model for **binary** outcome
+7) results2_binary: This outputs the file Individual_risk_values.txt containing all the calculated individual risk scores using the **permuted** genomic prediction model for **binary** outcome
 
 
 # Contact 
