@@ -18,8 +18,8 @@
 #' \item{B_trd.sum} GWAS summary statistics file with additive SNP effects
 #' 
 #' @example 
-#' GWAS_binary(DummyData, Bphe_discovery.txt, Bcov_discovery.txt, 14, 20)
-#' GWAS_binary(DummyData, Bphe_discovery.txt, Bcov_discovery.txt, 0, 20)
+#' GWAS_binary("DummyData", "Bphe_discovery.txt", "Bcov_discovery.txt", 14, 20)
+#' GWAS_binary("DummyData", "Bphe_discovery.txt", "Bcov_discovery.txt", 0, 20)
 
 
 GWAS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
