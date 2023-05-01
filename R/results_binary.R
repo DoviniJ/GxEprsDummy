@@ -56,7 +56,7 @@ results_binary <- function(n_confounders){
   if(n_confounders == 0){
     m = glm(out ~ cov + cov2 + ps1 + ps2 + xv2, family = binomial(link = logit))
     m_fit <- fitted.values(m)
-    sink("Individual_risk_values_without_confounders.txt")
+    sink("Individual_risk_values.txt")
     write.table(cbind(fam$FID[m1], fam$IID[m1], m_fit), row.names = F, col.names = F, quote = F)
     sink()
   }else{
