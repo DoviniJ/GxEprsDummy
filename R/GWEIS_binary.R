@@ -19,8 +19,8 @@
 #' \item{B_gxe.sum} GWEIS summary statistics file with interaction SNP effects
 #' 
 #' @example 
-#' GWEIS_binary(DummyData, Bphe_discovery.txt, Bcov_discovery.txt, 14, 20)
-#' GWEIS_binary(DummyData, Bphe_discovery.txt, Bcov_discovery.txt, 0, 20)
+#' GWEIS_binary("DummyData", "Bphe_discovery.txt", "Bcov_discovery.txt", 14, 20)
+#' GWEIS_binary("DummyData", "Bphe_discovery.txt", "Bcov_discovery.txt", 0, 20)
 
 
 GWEIS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
