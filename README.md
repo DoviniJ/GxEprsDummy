@@ -25,7 +25,7 @@ Step 5: See the output files generated in the same working directory
 2) Bphe_discovery <- "Bphe_discovery.txt" #File format: FID, IID, PHE (1 = controls, 2 = cases)
 3) Bcov_discovery <- "Bcov_discovery.txt" #File format: FID, IID, scaled_COV, scaled_COV_sq, all the confounders as separate columns
 4) Bphe_target <- "Bphe_target.txt" #File format: FID, IID, PHE (0 = controls, 1 = cases)
-5) Bcov_target <- "Bcov_target.txt" #File format: FID, IID, scaled_COV, scaled_COV_sq, all the confounders as separate columns
+5) Bcov_target <- "Bcov_target.txt" #File format: FID, IID, COV, COV_sq, all the confounders as separate columns
 
 #Tasks of each function
 1) GWAS_binary: This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects
