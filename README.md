@@ -20,14 +20,14 @@ Step 4: Open GxEprs.R in from working directory. It contains the following R fun
 
 Step 5: See the output files generated in the same working directory
 
-#File formats
+## File formats
 1) DummyData <- "DummyData" #binary file name (DummyData.fam, DummyData.bim, DummyData.bed)
 2) Bphe_discovery <- "Bphe_discovery.txt" #File format: FID, IID, PHE (1 = controls, 2 = cases)
 3) Bcov_discovery <- "Bcov_discovery.txt" #File format: FID, IID, scaled_COV, scaled_COV_sq, all the confounders as separate columns
 4) Bphe_target <- "Bphe_target.txt" #File format: FID, IID, PHE (0 = controls, 1 = cases)
 5) Bcov_target <- "Bcov_target.txt" #File format: FID, IID, COV, COV_sq, all the confounders as separate columns
 
-#Tasks of each function
+## Tasks of each function
 1) GWAS_binary: This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects
 2) GWEIS_binary: This performs GWEIS and outputs the files B_add.sum and G_gxe.sum which contain GWEIS summary statistics of all additive and interaction SNP effects
 3) PRS_binary: This computes polygenic risk scores for each individual in the target dataset and outputs the files B_trd.sscore, B_trd.sscore and B_trd.sscore  
