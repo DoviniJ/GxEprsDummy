@@ -1,4 +1,4 @@
-#' results_binary function
+#' results_regular_binary function
 #' 
 #' This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 #' 
@@ -15,11 +15,11 @@
 #' \item{Individual_risk_values.txt} Risk values for each target individual using when there are confounders
 #' 
 #' @example 
-#' results_binary(0)
-#' results_binary(14)
+#' results_regular_binary(0)
+#' results_regular_binary(14)
 
 
-results_binary <- function(n_confounders){
+results_regular_binary <- function(n_confounders){
   
   fam=read.table("Bphe_target.txt",header=F) 
   colnames(fam) <- c("FID", "IID", "PHENOTYPE")

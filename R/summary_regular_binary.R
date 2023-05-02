@@ -1,4 +1,4 @@
-#' summary_binary function
+#' summary_regular_binary function
 #' 
 #' This function uses plink2 and outputs the summary of model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 #' 
@@ -14,11 +14,11 @@
 #' \item{Bsummary.txt} the summary of the fitted model
 #' 
 #' @example 
-#' summary_binary(0)
-#' summary_binary(14)
+#' summary_regular_binary(0)
+#' summary_regular_binary(14)
 
 
-summary_binary <- function(n_confounders){
+summary_regular_binary <- function(n_confounders){
   
   fam=read.table("Bphe_target.txt",header=F) 
   colnames(fam) <- c("FID", "IID", "PHENOTYPE")

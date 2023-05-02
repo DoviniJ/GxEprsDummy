@@ -19,14 +19,19 @@
 #' \item{B_gxe.sum} GWEIS summary statistics file with interaction SNP effects
 #' 
 #' @example 
+#' DummyData <- "<path>/GxEprsDummy/inst/DummyData"
+#' Bphe_discovery <- "<path>/GxEprsDummy/inst/Bphe_discovery.txt"
+#' Bcov_discovery <- "<path>/GxEprsDummy/inst/Bcov_discovery.txt"
 #' GWEIS_binary("DummyData", "Bphe_discovery.txt", "Bcov_discovery.txt", 14, 20)
 #' GWEIS_binary("DummyData", "Bphe_discovery.txt", "Bcov_discovery.txt", 0, 20)
-
 
 GWEIS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
   
   parameters <- c(1, 2, 3, (1:(n_confounders+1))+3)
   param_vec <- paste0(parameters, collapse = ", ")
+  
+  #covar_file$V3 <- scale(covar_file$V3)
+  #covar_file$V4 <- (covar_file$V3)^2
   
   system(paste0("./plink2 --bfile ", b_file, 
                 " --glm interaction --pheno ", 
@@ -52,3 +57,4 @@ GWEIS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
   sink()
   
 }
+

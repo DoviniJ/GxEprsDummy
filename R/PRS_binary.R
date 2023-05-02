@@ -16,6 +16,7 @@
 #' \item{B_gxe.sscore} PRSs for each target individual using GWEIS interaction effects
 #' 
 #' @example 
+#' DummyData <- "<path>/GxEprsDummy/inst/DummyData"
 #' PRS_binary("DummyData")
 
 
