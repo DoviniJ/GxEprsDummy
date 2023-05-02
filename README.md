@@ -28,7 +28,7 @@ Link: https://www.cog-genomics.org/plink/2.0/
 ##### Step 3.1: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using regular model for binary outcome):
 ```
 plink_path <- "<plink_path>/plink2"
-inst_path <- system.file("inst", package = "GxEprsDummy")
+inst_path <- system.file(package = "GxEprsDummy")
 DummyData <- paste0(inst_path, "/DummyData")
 Bphe_discovery <- paste0(inst_path, "/Bphe_discovery.txt")
 Bcov_discovery <- paste0(inst_path, "/Bcov_discovery.txt")
