@@ -24,16 +24,18 @@
 #' Bphe_discovery <- "<path>/GxEprsDummy/inst/Bphe_discovery.txt"
 #' Bcov_discovery <- "<path>/GxEprsDummy/inst/Bcov_discovery.txt"
 #' GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 14, 20)
-#' GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 0, 20)
 
 GWEIS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounders, thread){
   
-  parameters <- c(1, 2, 3, (1:(n_confounders+1))+3)
-  param_vec <- paste0(parameters, collapse = ", ")
+  if(n_confounders > 0){
+    parameters <- c(1, 2, 3, (1:(n_confounders+1))+3)
+  }
+  else{
+    parameters <- c(1, 2, 3, 4)
+  }
   
-  parameters <- c(1, (1:n_confounders)+3)
   param_vec <- paste0(parameters, collapse = ", ")
-  
+
   runPLINK <- function(PLINKoptions = "") system(paste(plink_path, PLINKoptions))
   
   runPLINK(paste0(" --bfile ", b_file,

@@ -8,7 +8,7 @@
 #' 
 #' @export 
 #' 
-#' @importFrom 
+#' @importFrom D cor
 #' 
 #' @return This function will output
 #' \item{B_trd.sscore} PRSs for each target individual using GWAS additive effects

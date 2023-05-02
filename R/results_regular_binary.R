@@ -15,15 +15,16 @@
 #' \item{Individual_risk_values.txt} Risk values for each target individual using when there are confounders
 #' 
 #' @example 
-#' results_regular_binary(0)
-#' results_regular_binary(14)
+#' Bphe_target <- "<path>/GxEprsDummy/inst/Bphe_target.txt"
+#' Bcov_target <- "<path>/GxEprsDummy/inst/Bcov_target.txt"
+#' results_regular_binary(Bphe_target, Bcov_target, 14)
 
 
-results_regular_binary <- function(n_confounders){
+results_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
   
-  fam=read.table("Bphe_target.txt",header=F) 
+  fam=read.table(Bphe_target, header=F)
   colnames(fam) <- c("FID", "IID", "PHENOTYPE")
-  dat=read.table("Bcov_target.txt",header=F)
+  dat=read.table(Bcov_target, header=F)
   colnames(dat)[1] <- "FID"
   colnames(dat)[2] <- "IID"
   prs0_all=read.table("B_trd.sscore")
