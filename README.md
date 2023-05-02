@@ -36,6 +36,7 @@ Bphe_target <- paste0(inst_path, "/Bphe_target.txt")
 Bcov_target <- paste0(inst_path, "/Bcov_target.txt")
 n_confounders = 14
 thread = 20
+setwd(<path to directory>) #give the file path to the working directory where you need to save the output files
 GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
 GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
 PRS_binary(plink_path, DummyData)
