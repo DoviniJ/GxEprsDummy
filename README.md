@@ -29,11 +29,11 @@ Link: https://www.cog-genomics.org/plink/2.0/
 ```
 plink_path <- "<plink_path>/plink2"
 inst_path <- system.file("inst", package = "GxEprsDummy")
-DummyData <- paste0(inst_path, "DummyData")
-Bphe_discovery <- paste0(inst_path, "Bphe_discovery.txt")
-Bcov_discovery <- paste0(inst_path, "Bcov_discovery.txt")
-Bphe_target <- paste0(inst_path, "Bphe_target.txt")
-Bcov_target <- paste0(inst_path, "Bcov_target.txt")
+DummyData <- paste0(inst_path, "/DummyData")
+Bphe_discovery <- paste0(inst_path, "/Bphe_discovery.txt")
+Bcov_discovery <- paste0(inst_path, "/Bcov_discovery.txt")
+Bphe_target <- paste0(inst_path, "/Bphe_target.txt")
+Bcov_target <- paste0(inst_path, "/Bcov_target.txt")
 n_confounders = 14
 thread = 20
 GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
