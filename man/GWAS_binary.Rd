@@ -7,6 +7,8 @@
 GWAS_binary(plink_path, b_file, pheno_file, covar_file, n_confounders, thread)
 }
 \arguments{
+\item{plink_path}{Path to the PLINK executable application}
+
 \item{b_file}{Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix}
 
 \item{pheno_file}{Name (with file extension) of the phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading}
@@ -23,5 +25,8 @@ This function will perform GWAS and output
 }
 \description{
 This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_trd.sum
+}
+\examples{
+
 }
 \keyword{gwas}

@@ -7,11 +7,15 @@
 summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
 }
 \arguments{
+\item{Bphe_target}{Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading}
+
+\item{Bcov_target}{Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading}
+
 \item{n_confounders}{Number of confounding variables in the target dataset}
 }
 \value{
 This function will output
-\item{Bsummary.txt} the summary of the fitted model
+\item{B_permuted_p.txt} the p value of the permuted model
 }
 \description{
 This function uses plink2 and outputs the p value of permuted model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum

@@ -7,11 +7,13 @@
 GWEIS_binary(plink_path, b_file, pheno_file, covar_file, n_confounders, thread)
 }
 \arguments{
+\item{plink_path}{Path to the PLINK executable application}
+
 \item{b_file}{Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix}
 
-\item{pheno_file}{Name (with file extension) of the phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading}
+\item{pheno_file}{Phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading}
 
-\item{covar_file}{Name (with file extension) of the covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading}
+\item{covar_file}{Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading}
 
 \item{n_confounders}{Number of confounding variables in the discovery dataset}
 

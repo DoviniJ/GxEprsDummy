@@ -7,6 +7,8 @@
 PRS_binary(plink_path, b_file)
 }
 \arguments{
+\item{plink_path}{Path to the PLINK executable application}
+
 \item{b_file}{Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix}
 }
 \value{

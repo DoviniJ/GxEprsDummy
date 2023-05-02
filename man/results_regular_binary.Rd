@@ -7,12 +7,15 @@
 results_regular_binary(Bphe_target, Bcov_target, n_confounders)
 }
 \arguments{
+\item{Bphe_target}{Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading}
+
+\item{Bcov_target}{Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading}
+
 \item{n_confounders}{Number of confounding variables in the target dataset}
 }
 \value{
 This function will output
-\item{Individual_risk_values_without_confounders.txt} Risk values for each target individual using when there are no confounders
-\item{Individual_risk_values.txt} Risk values for each target individual using when there are confounders
+\item{Individual_risk_values.txt} Risk values for each target individual
 }
 \description{
 This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
