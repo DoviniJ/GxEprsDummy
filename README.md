@@ -14,11 +14,7 @@ The 'GxEprs' is an R package for **genomic prediction** that uses a sophisticate
 The current github version of **GxEprs** can be installed via:
 ```
 library(devtools)
-install_github("DoviniJ/GxEprs") 
-```
-The current CRAN version of **GxEprs** can be installed via:
-```
-install.packages("GxEprs")
+install_github("DoviniJ/GxEprs_Dummy") 
 ```
 
 # Quick start
