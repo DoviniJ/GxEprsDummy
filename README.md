@@ -27,7 +27,7 @@ Link: https://www.cog-genomics.org/plink/2.0/
 
 ##### Step 3.1: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using regular model for binary outcome):
 ```
-plink_path <- "<plink_path>/plink2"
+plink_path <- "<plink_path>/plink2" #gie the path where plink executable file is located
 inst_path <- system.file(package = "GxEprsDummy")
 DummyData <- paste0(inst_path, "/DummyData")
 Bphe_discovery <- paste0(inst_path, "/Bphe_discovery.txt")
@@ -36,7 +36,7 @@ Bphe_target <- paste0(inst_path, "/Bphe_target.txt")
 Bcov_target <- paste0(inst_path, "/Bcov_target.txt")
 n_confounders = 14
 thread = 20
-setwd(<path to directory>) #give the file path to the working directory where you need to save the output files
+setwd("<path to working directory>") #set the working directory where you need to save the output files
 GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
 GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
 PRS_binary(plink_path, DummyData)
