@@ -18,19 +18,22 @@
 #' \item{B_trd.sum} GWAS summary statistics file with additive SNP effects
 #' 
 #' @example 
+#' plink_path <- "<path>/plink2"
 #' DummyData <- "<path>/GxEprsDummy/inst/DummyData"
 #' Bphe_discovery <- "<path>/GxEprsDummy/inst/Bphe_discovery.txt"
 #' Bcov_discovery <- "<path>/GxEprsDummy/inst/Bcov_discovery.txt"
-#' GWAS_binary(DummyData, Bphe_discovery, Bcov_discovery, 14, 20)
-#' GWAS_binary(DummyData, Bphe_discovery, Bcov_discovery, 0, 20)
+#' GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 14, 20)
+#' GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 0, 20)
 
 
-GWAS_binary <- function(b_file, pheno_file, covar_file, n_confounders, thread){
+GWAS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounders, thread){
   
   parameters <- c(1, (1:n_confounders)+3)
   param_vec <- paste0(parameters, collapse = ", ")
+  
+  runPLINK <- function(PLINKoptions = "") system(paste(plink_path, PLINKoptions))
 
-  system(paste0("./plink2 --bfile ", b_file, 
+  runPLINK(paste0(" --bfile ", b_file, 
                 " --glm --pheno ", 
                 pheno_file, 
                 " --covar ", covar_file, 
