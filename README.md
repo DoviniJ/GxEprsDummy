@@ -38,15 +38,14 @@ n_confounders = 14
 thread = 20
 GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
 GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
-summary_binary(n_confounders)
 PRS_binary(plink_path, DummyData)
-summary_regular_binary(n_confounders)
-summary_permuted_binary(n_confounders)
-results_regular_binary(n_confounders)
+summary_regular_binary(Bphe_target, Bcov_target, n_confounders)
+summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
+results_regular_binary(Bphe_target, Bcov_target, n_confounders)
 ```
 ##### Step 3.2: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using permuted model for binary outcome):
 ```
-results_permuted_binary(n_confounders)
+results_permuted_binary(Bphe_target, Bcov_target, n_confounders)
 ```
 
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(n_confounders)``` and ```summary_permuted_binary(n_confounders)```. If the 'PRS_gxe x E' term is significant of insignificant in both the models, any model could be used to obtain results (i.e. ```results_regular_binary(n_confounders)``` or ```results_permuted_binary(n_confounders)```). If the 'PRS_gxe x E' term is significant in one model, and insignificant in other model, it is advised to use the permuted model to obtain results (i.e. ```results_permuted_binary(n_confounders)```).
