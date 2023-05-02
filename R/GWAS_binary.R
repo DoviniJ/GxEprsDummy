@@ -13,17 +13,11 @@
 #' 
 #' @export 
 #' 
-#' @importFrom 
 #' 
 #' @return This function will perform GWAS and output
 #' \item{B_trd.sum} GWAS summary statistics file with additive SNP effects
 #' 
-#' @example 
-#' plink_path <- "<path>/plink2"
-#' DummyData <- "<path>/GxEprsDummy/inst/DummyData"
-#' Bphe_discovery <- "<path>/GxEprsDummy/inst/Bphe_discovery.txt"
-#' Bcov_discovery <- "<path>/GxEprsDummy/inst/Bcov_discovery.txt"
-#' GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 14, 20)
+#' @example GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 14, 20)
 
 
 GWAS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounders, thread){

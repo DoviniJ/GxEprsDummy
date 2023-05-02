@@ -10,15 +10,11 @@
 #' 
 #' @export 
 #' 
-#' @importFrom 
 #' 
 #' @return This function will output
 #' \item{Individual_risk_values.txt} Risk values for each target individual
 #' 
-#' @example 
-#' Bphe_target <- "<path>/GxEprsDummy/inst/Bphe_target.txt"
-#' Bcov_target <- "<path>/GxEprsDummy/inst/Bcov_target.txt"
-#' results_regular_binary(Bphe_target, Bcov_target, 14)
+#' @example results_regular_binary(Bphe_target, Bcov_target, 14)
 
 
 results_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){

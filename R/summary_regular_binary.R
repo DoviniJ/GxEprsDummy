@@ -10,15 +10,11 @@
 #' 
 #' @export 
 #' 
-#' @importFrom 
 #' 
 #' @return This function will output
 #' \item{Bsummary.txt} the summary of the fitted model
 #' 
-#' @example 
-#' Bphe_target <- "<path>/GxEprsDummy/inst/Bphe_target.txt"
-#' Bcov_target <- "<path>/GxEprsDummy/inst/Bcov_target.txt"
-#' summary_regular_binary(Bphe_target, Bcov_target, 14)
+#' @example summary_regular_binary(Bphe_target, Bcov_target, 14)
 
 
 summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){

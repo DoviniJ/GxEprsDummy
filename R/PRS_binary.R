@@ -9,7 +9,6 @@
 #' 
 #' @export 
 #' 
-#' @importFrom D cor
 #' 
 #' @return This function will output
 #' \item{B_trd.sscore} PRSs for each target individual using GWAS additive effects
@@ -17,8 +16,6 @@
 #' \item{B_gxe.sscore} PRSs for each target individual using GWEIS interaction effects
 #' 
 #' @example 
-#' plink_path <- "<path>/plink2"
-#' DummyData <- "<path>/GxEprsDummy/inst/DummyData"
 #' PRS_binary(plink_path, DummyData)
 
 
