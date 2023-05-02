@@ -2,9 +2,10 @@
 #' 
 #' This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_add.sum and interaction SNP effects named B_gxe.sum
 #' 
+#' @param plink_path Path to the PLINK executable application
 #' @param b_file Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix
-#' @param pheno_file Name (with file extension) of the phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading
-#' @param covar_file Name (with file extension) of the covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading
+#' @param pheno_file Phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading
+#' @param covar_file Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading
 #' @param n_confounders Number of confounding variables in the discovery dataset
 #' @param thread Number of threads used
 #' 
@@ -26,18 +27,14 @@
 #' GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 14, 20)
 
 GWEIS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounders, thread){
-  
   if(n_confounders > 0){
     parameters <- c(1, 2, 3, (1:(n_confounders+1))+3)
   }
   else{
     parameters <- c(1, 2, 3, 4)
   }
-  
   param_vec <- paste0(parameters, collapse = ", ")
-
   runPLINK <- function(PLINKoptions = "") system(paste(plink_path, PLINKoptions))
-  
   runPLINK(paste0(" --bfile ", b_file,
                 " --glm interaction --pheno ", 
                 pheno_file, 
@@ -46,20 +43,16 @@ GWEIS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounde
                 " --allow-no-sex --threads ", 
                 thread,
                 " --out B_gweis"))
-  
   plink_output <- read.table("B_gweis.PHENO1.glm.logistic.hybrid", header = FALSE)
   filtered_output <- as.data.frame(plink_output[(plink_output$V8=="ADD"),])
   filtered_output$V10 = log(filtered_output$V10)
   filtered_output2 <- plink_output[(plink_output$V8=="ADDxCOVAR1"),]
   filtered_output2$V10 <- log(filtered_output2$V10)
-  
   sink("B_add.sum")
   write.table(filtered_output, sep = " ", row.names = FALSE, quote = FALSE)
   sink()
-
   sink("B_gxe.sum")
   write.table(filtered_output2, sep = " ", row.names = FALSE, quote = FALSE)
   sink()
-  
 }
 

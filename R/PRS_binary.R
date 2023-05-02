@@ -2,6 +2,7 @@
 #' 
 #' This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 #' 
+#' @param plink_path Path to the PLINK executable application
 #' @param b_file Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix
 #' 
 #' @keywords prs, profile scores
@@ -22,14 +23,11 @@
 
 
 PRS_binary <- function(plink_path, b_file){
-
   runPLINK <- function(PLINKoptions = "") system(paste(plink_path, PLINKoptions))
-  
   runPLINK(paste0(" --bfile ", b_file, 
                 " --score B_trd.sum 3 6 10 header --out B_trd"))
   runPLINK(paste0(" --bfile ", b_file, 
                 " --score B_add.sum 3 6 10 header --out B_add"))
   runPLINK(paste0(" --bfile ", b_file,
                 " --score B_gxe.sum 3 6 10 header --out B_gxe"))
-  
 }

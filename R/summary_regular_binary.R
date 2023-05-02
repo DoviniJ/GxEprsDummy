@@ -2,6 +2,8 @@
 #' 
 #' This function uses plink2 and outputs the summary of regular model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 #' 
+#' @param Bphe_target Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading
+#' @param Bcov_target Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading
 #' @param n_confounders Number of confounding variables in the target dataset
 #' 
 #' @keywords regression summary
@@ -20,7 +22,6 @@
 
 
 summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
-  
   fam=read.table(Bphe_target ,header=F) 
   colnames(fam) <- c("FID", "IID", "PHENOTYPE")
   dat=read.table(Bcov_target ,header=F)
@@ -38,11 +39,8 @@ summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
   colnames(prs2_all)[1] <- "FID"
   colnames(prs2_all)[2] <- "IID"
   prs2=merge(fam, prs2_all, by = "FID")
-  
   m1 <- match(prs0$IID.x, dat$IID)
-  
   out = fam$PHENOTYPE[m1]
-  
   cov=scale(dat$V3[m1])
   ps0=scale(prs0$V5)
   ps1=scale(prs1$V5)
@@ -50,9 +48,7 @@ summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
   xv0=scale(prs0$V5*cov)
   xv1=scale(prs1$V5*cov)
   xv2=scale(prs2$V5*cov)
-  
   cov2=scale(cov^2)
-  
   if(n_confounders == 0){
     df_new <- as.data.frame(cbind(out, cov, cov2, ps1, ps2, xv2))
     colnames(df_new)[2] <- "E"
@@ -81,5 +77,4 @@ summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
     print(summary(m))
     sink()
   }
-  
 }
