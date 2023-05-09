@@ -27,9 +27,6 @@ This function will perform GWEIS and output
 \description{
 This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_add.sum and interaction SNP effects named B_gxe.sum
 }
-\examples{
-
-}
 \keyword{gwies,}
 \keyword{gxe}
 \keyword{interaction,}

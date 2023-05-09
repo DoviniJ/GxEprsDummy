@@ -63,7 +63,7 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, n_confounders){
     if (regular_p < summary(m)$coefficients[6,4]) pp_gxe_x_E=pp_gxe_x_E+1
     }
     sink("B_permuted_p.txt")
-    print(pp_gxe_x_E)
+    print(pp_gxe_x_E/pn)
     sink()}else{
     pn=1000; pp_gxe_x_E=0
     df_regular_new <- as.data.frame(cbind(out, cov, cov2, ps1, ps2, xv2))
@@ -87,7 +87,7 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, n_confounders){
       if (regular_p < summary(m)$coefficients[6,4]) pp_gxe_x_E=pp_gxe_x_E+1
     }
     sink("B_permuted_p.txt")
-    print(pp_gxe_x_E)
+    print(pp_gxe_x_E/pn)
     sink()
   }
 }
