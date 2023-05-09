@@ -30,16 +30,44 @@ Link: https://www.cog-genomics.org/plink/2.0/
 ##### Set 2: Obtain the path to the executable plink application <plink_path>
 
 ##### Step 3.1: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using regular model for binary outcome):
+
+###### Step 3.1.1 Give the path where plink executable file is located
 ```
-plink_path <- "<plink_path>/plink2" #give the path where plink executable file is located
-inst_path <- system.file(package = "GxEprsDummy")
-DummyData <- paste0(inst_path, "/DummyData")
+plink_path <- "<plink_path>/plink2" 
+```
+###### Step 3.1.2 If you choose to use the data files saved in "inst" directory, you may follow the following code to read each data file. 
+```
+inst_path <- system.file(package = "GxEprsDummy") 
+DummyData <- paste0(inst_path, "/DummyData") #this contains all .fam, .bed and .bim files. They can be accessed by a direct call of prefix "DummyData"
 Bphe_discovery <- paste0(inst_path, "/Bphe_discovery.txt")
 Bcov_discovery <- paste0(inst_path, "/Bcov_discovery.txt")
 Bphe_target <- paste0(inst_path, "/Bphe_target.txt")
 Bcov_target <- paste0(inst_path, "/Bcov_target.txt")
+```
+OR, you may directly use the data files embedded in the package as it is. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. i.e.:
+```
+#argument of the function = data file as an object
+DummyData = DummyData 
+Bphe_discovery = Bphe_discovery
+Bcov_discovery = Bcov_discovery
+Bphe_target = Bphe_target
+Bcov_target = Bcov_target
+```
+
+###### Step 3.1.3 It is always recommended to check how the files look like before using them in functions, for better understanding. Therefore, you can check 
+```
+head(Bphe_discovery)
+head(Bcov_discovery)
+head(Bphe_target)
+head(Bcov_target)
+```
+###### Step 3.1.4 Set the number of confounders as 14 and number of threads (CPUs) as 20
+```
 n_confounders = 14
 thread = 20
+```
+###### Step 3.1.5 Set the working directory and run the following R functions in the given order
+```
 setwd("<path to working directory>") #set the working directory where you need to save the output files
 GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
 GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
@@ -48,7 +76,7 @@ summary_regular_binary(Bphe_target, Bcov_target, n_confounders)
 summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
 results_regular_binary(Bphe_target, Bcov_target, n_confounders)
 ```
-##### Step 3.2: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using permuted model for binary outcome):
+##### Step 3.2: Run the following code line to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using permuted model for binary outcome):
 ```
 results_permuted_binary(Bphe_target, Bcov_target, n_confounders)
 ```
