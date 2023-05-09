@@ -120,11 +120,12 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. 
 2) B_add.sum - This contains GWEIS summary statistics of all additive SNP effects, when the outcome is binary.
 3) B_gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is binary.
-4) B_trd.sscore - This contains
-5) B_add.sscore - This contains
-6) B_gxe.sscore - This contains
-7) Bsummary.txt - This contains the target model (either regular model or permuted model) summary output, when the outcome is binary.
-8) Individual_risk_values.txt - This contains all the calculated individual risk scores using the target model (either regular model or permuted model), when the outcome is binary.
+4) B_trd.sscore - This contains the FID, IID, number of alleles across scored variants (ALLELE_CT) and polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics.
+5) B_add.sscore - This contains the FID, IID, ALLELE_CT and polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset.
+6) B_gxe.sscore - This contains the FID, IID, ALLELE_CT and polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset.
+7) Bsummary.txt - This contains the target regular model summary output, when the outcome is binary.
+8) B_permuted_p.txt - This contains the p-value of the permuted model, when the outcome is binary. Since the permutation is random at each time, we did not include an example here.
+9) Individual_risk_values.txt - This contains all the calculated individual risk scores using the target model (either regular model or permuted model), when the outcome is binary. For demonstration, we include the results of regular model below.
 
 ## Tasks of each function
 1) GWAS_binary - This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects
