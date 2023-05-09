@@ -132,6 +132,7 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 ![image](https://user-images.githubusercontent.com/131835334/236994019-1ef3609a-4142-4fda-a89b-e05c81fc6d32.png)
 
 5) B_add.sscore - This contains the FID, IID, ALLELE_CT and polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset. 
+
 ![image](https://user-images.githubusercontent.com/131835334/236994081-d346ae48-d22a-4a35-a608-e4ed7535ec6c.png)
 
 6) B_gxe.sscore - This contains the FID, IID, ALLELE_CT and polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset. 
