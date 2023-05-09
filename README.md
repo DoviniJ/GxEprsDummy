@@ -35,7 +35,15 @@ Link: https://www.cog-genomics.org/plink/2.0/
 ```
 plink_path <- "<plink_path>/plink2" 
 ```
-###### Step 3.1.2 If you choose to use the data files saved in "inst" directory, you may follow the following code to read each data file. 
+###### Step 3.1.2 It is always recommended to check how the files look like before using them in functions, for better understanding. You may directly use the data files embedded in the package. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. You can check the top proportion of each datafile using the following code:
+```
+head(Bphe_discovery)
+head(Bcov_discovery)
+head(Bphe_target)
+head(Bcov_target)
+```
+
+###### Step 3.1.3 To use the data files saved in "inst" directory, you can follow the following code to obtain the path of each data file. 
 ```
 inst_path <- system.file(package = "GxEprsDummy") 
 DummyData <- paste0(inst_path, "/DummyData") #this contains all .fam, .bed and .bim files. They can be accessed by a direct call of prefix "DummyData"
@@ -44,23 +52,7 @@ Bcov_discovery <- paste0(inst_path, "/Bcov_discovery.txt")
 Bphe_target <- paste0(inst_path, "/Bphe_target.txt")
 Bcov_target <- paste0(inst_path, "/Bcov_target.txt")
 ```
-OR, you may directly use the data files embedded in the package as it is. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. i.e.:
-```
-#argument of the function = data file as an object
-DummyData = DummyData 
-Bphe_discovery = Bphe_discovery
-Bcov_discovery = Bcov_discovery
-Bphe_target = Bphe_target
-Bcov_target = Bcov_target
-```
 
-###### Step 3.1.3 It is always recommended to check how the files look like before using them in functions, for better understanding. Therefore, you can check 
-```
-head(Bphe_discovery)
-head(Bcov_discovery)
-head(Bphe_target)
-head(Bcov_target)
-```
 ###### Step 3.1.4 Set the number of confounders as 14 and number of threads (CPUs) as 20
 ```
 n_confounders = 14
