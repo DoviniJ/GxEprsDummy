@@ -26,7 +26,4 @@ This function will perform GWAS and output
 \description{
 This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_trd.sum
 }
-\examples{
-
-}
 \keyword{gwas}

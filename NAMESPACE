@@ -3,6 +3,7 @@
 export(GWAS_binary)
 export(GWEIS_binary)
 export(PRS_binary)
+export(results_permuted_binary)
 export(results_regular_binary)
 export(summary_permuted_binary)
 export(summary_regular_binary)

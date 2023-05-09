@@ -1,0 +1,11 @@
+#' Phenotype data file of the target dataset when the outcome is binary
+#' 
+#' This contains phenotype information of the individuals in the target dataset 
+#' 
+#' @format A dataframe with 1939 rows and 3 columns
+#' \describe{
+#' \item Family ID
+#' \item Individual ID
+#' \item phenotype (0=controls, 1=cases)
+#' }
+"Bphe_target"
