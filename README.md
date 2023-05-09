@@ -118,7 +118,7 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 
 
 ### Output files
-1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. 
+1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 contains chromosome, base pair position, SNP ID, reference allele, alternate allele, counted allele A1 (in regression), firth regression status, test identifier, number of samples in regression, odds ratio for A1 allele, standard error of log odds, test statistic, p-value and error code respectively. Note that all .sum files have the same structure.
 ![image](https://user-images.githubusercontent.com/131835334/236993782-75e2d666-5b83-4348-80fc-994801c406a4.png)
 
 2) B_add.sum - This contains GWEIS summary statistics of all additive SNP effects, when the outcome is binary. 
