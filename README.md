@@ -112,15 +112,14 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 
 ## File formats
 ### Input files
-1) DummyData.fam - This is one of the binary files which contains  
-* family ID (FID), 
-* individual ID (IID), 
-* father's ID, 
-* mother's ID, 
-* sex and
-* phenotype 
+1) DummyData.fam - This is one of the binary files which contains the following columns in order. The example dataset has 10,000 individuals. Note that the file has no column headings.
+* family ID (FID) 
+* individual ID (IID) 
+* father's ID 
+* mother's ID 
+* sex 
+* phenotype value
 
-value as columns. The example dataset has 10,000 individuals. Note that the file has no column headings.   
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236634478-99a10ec5-2e05-4259-981e-d67562b1a06a.png) -->
 ```
 1001019 1001019 0 0 2 -9
@@ -130,15 +129,14 @@ value as columns. The example dataset has 10,000 individuals. Note that the file
 1001078 1001078 0 0 2 -9
 ```
   
-2) DummyData.bim - This is one of the binary files which contains 
-* chromosome code, 
-* SNP ID, 
-* position of centimorgans, 
-* base-pair coordinate, 
-* minor allele and 
+2) DummyData.bim - This is one of the binary files which contains the following columns in order. The example dataset has 10,000 SNPs. Note that the file has no column headings. 
+* chromosome code 
+* SNP ID 
+* position of centimorgans 
+* base-pair coordinate 
+* minor allele  
 * reference allele 
 
-as columns. The example dataset has 10,000 SNPs. Note that the file has no column headings. 
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236634694-5dbe6a29-5ae0-44c9-b076-b80fcabb7144.png) -->
 ```
 1	  snp_53131969	0	754182	A	G
@@ -149,12 +147,11 @@ as columns. The example dataset has 10,000 SNPs. Note that the file has no colum
 ```
 
 3) DummyData.bed - This is also a binary file which cannot be read by humans.
-4) Bphe_discovery.txt - This is a .txt file which contains 
-* FID, 
-* IID and 
-* binary phenotype (1=controls, 2=cases) 
+4) Bphe_discovery.txt - This is a .txt file which contains the following columns in order. The discovery dataset has 7916 individuals. Note that the file has no column headings.
+* FID 
+* IID  
+* binary phenotype (1=controls, 2=cases) of the discovery sample
 
-of the discovery sample as columns. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236635016-88560176-a22a-4863-b200-4ddca8ca6980.png) -->
 ```
 1050405 1050405 1
@@ -164,14 +161,13 @@ of the discovery sample as columns. The discovery dataset has 7916 individuals. 
 1056980 1056980 1
 ```
 
-5) Bcov_discovery.txt - This is a .txt file which contains 
-* FID, 
-* IID, 
-* standardized covariate, 
-* square of the standardized covariate and 
-* 14 confounders 
+5) Bcov_discovery.txt - This is a .txt file which contains the following columns in order. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
+* FID 
+* IID 
+* standardized covariate 
+* square of the standardized covariate  
+* 14 confounders of the discovery sample
 
-of the discovery sample as columns. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236635276-7e1c6d92-3a84-4f9e-b68b-a171d9684da3.png) -->
 ```
 1050405 1050405 0.787403812314451 0.620004763647331 -3.04026 45 -12.048 2.17634 -0.940322 -0.446351 -5.45685 -2.53161 -2.13435 -1.95623 -3.82792 -0.380636 0 10
@@ -181,12 +177,11 @@ of the discovery sample as columns. The discovery dataset has 7916 individuals. 
 1056980 1056980 3.69300366651739 13.6382760809109 -3.15649 69 -8.56737 4.78248 -1.49547 -7.49413 -5.39887 1.85316 4.07476 1.05351 0.825942 -2.09669 1 20
 ```
 
-6) Bphe_target.txt - This is a .txt file which contains 
-* FID, 
-* IID and 
-* binary phenotype (0=controls, 1=cases) 
+6) Bphe_target.txt - This is a .txt file which contains the following columns in order. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
+* FID 
+* IID  
+* binary phenotype (0=controls, 1=cases) of the target sample
 
-of the target sample as columns. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236635388-53c3ff05-ae8b-498c-8354-0e1419aaf56f.png) -->
 ```
 1001035 1001035 0
@@ -196,14 +191,13 @@ of the target sample as columns. The target dataset has 1939 individuals who are
 1001323 1001323 0
 ```
 
-7) Bcov_target.txt - This is a .txt file which contains 
-* FID, 
-* IID, 
-* standardized covariate, 
-* square of the standardized covariate and 
-* 14 confounders 
+7) Bcov_target.txt - This is a .txt file which contains the following columns in order. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
+* FID 
+* IID 
+* standardized covariate 
+* square of the standardized covariate  
+* 14 confounders of the target sample
 
-of the target sample as columns. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236635508-d08cec8f-38bb-4008-8bc5-18ad87c8eece.png) -->
 ```
 1001035 1001035 -0.420822976931972 0.177091977913887 -4.12263 57 -13.5185 5.40198 -4.81994 0.664494 -4.92217 -0.451329 3.14677 0.42704 0.821306 -2.77705 1 7
@@ -214,23 +208,22 @@ of the target sample as columns. The target dataset has 1939 individuals who are
 ```
 
 ### Output files
-1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 contains 
-* chromosome, 
-* base pair position, 
-* SNP ID, 
-* reference allele, 
-* alternate allele, 
-* counted allele A1 (in regression), 
-* firth regression status, 
-* test identifier, 
-* number of samples in regression, 
-* odds ratio for A1 allele, 
-* standard error of log odds, 
-* test statistic, 
-* p-value and 
+1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 contains the following columns in order. Note that all .sum files have the same structure.
+* chromosome 
+* base pair position 
+* SNP ID 
+* reference allele 
+* alternate allele 
+* counted allele A1 (in regression) 
+* firth regression status 
+* test identifier 
+* number of samples in regression 
+* odds ratio for A1 allele 
+* standard error of log odds 
+* test statistic 
+* p-value  
 * error code 
 
-respectively. Note that all .sum files have the same structure.
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236993782-75e2d666-5b83-4348-80fc-994801c406a4.png) -->
 ```
 V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
@@ -260,11 +253,11 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 779322 snp_54040617 A G G N ADDxCOVAR1 7916 0.0132222001691214 0.0938807 0.140788 0.888037 .
 ```
 
-4) B_trd.sscore - This contains the 
-* FID, 
-* IID, 
-* number of alleles across scored variants (ALLELE_CT) and 
-* polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics, of the full dataset.
+4) B_trd.sscore - This contains the following columns in order.
+* FID 
+* IID 
+* number of alleles across scored variants (ALLELE_CT)  
+* polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics, of the full dataset
 
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994019-1ef3609a-4142-4fda-a89b-e05c81fc6d32.png) -->
 ```
@@ -275,11 +268,11 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1001054	1001054	19868	4552	-0.00163487
 ```
 
-5) B_add.sscore - This contains the 
-* FID, 
-* IID, 
-* ALLELE_CT and 
-* polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset. 
+5) B_add.sscore - This contains the the following columns in order.
+* FID 
+* IID 
+* ALLELE_CT  
+* polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset 
 
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994081-d346ae48-d22a-4a35-a608-e4ed7535ec6c.png) -->
 ```
@@ -290,11 +283,11 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1001054	1001054	19868	4552	-0.00294334
 ```
 
-6) B_gxe.sscore - This contains the 
-* FID, 
-* IID, 
-* ALLELE_CT and 
-* polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset. 
+6) B_gxe.sscore - This contains the the following columns in order.
+* FID 
+* IID 
+* ALLELE_CT  
+* polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset
 
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994128-e8e58f0e-6e0c-4494-ad58-5dc9f765f6e9.png) -->
 ```
@@ -351,9 +344,9 @@ Number of Fisher Scoring iterations: 7
 ```
 
 8) B_permuted_p.txt - This contains the p-value of the permuted model, when the outcome is binary. Since the permutation is random at each time, we did not include an example here.
-9) Individual_risk_values.txt - This contains all the calculated individual risk scores using the target model (either regular model or permuted model), when the outcome is binary. The columns denote 
+9) Individual_risk_values.txt - This contains all the calculated individual risk scores using the target model (either regular model or permuted model), when the outcome is binary. The columns denote the following in order.
 * FID
-* IID and
+* IID 
 * estimated risk value
  
 For demonstration, we include the results of regular model below. 
