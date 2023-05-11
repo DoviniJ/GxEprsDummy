@@ -6,11 +6,11 @@ output: pdf_document
 ---
 
 # GxEprs
-The 'GxEprs' is an R package for **genomic prediction** that uses a sophisticated method that has been enhanced for its prediction accuracy. It performs Genome Wide Assosciation Studies (GWAS) and Genome Wide Envinonment Interaction Studies (GWEIS) using plink2 which is easily accessible from within R.
+The 'GxEprs' is an R package for **genomic prediction** that uses a sophisticated method that has been enhanced for its prediction accuracy. It performs Genome Wide Association Studies (GWAS) and Genome Wide Environment Interaction Studies (GWEIS) using plink2 which is easily accessible from within R.
 
 
 # Package installation
-The current github version of **GxEprs** can be installed via:
+The current GitHub version of **GxEprs** can be installed via:
 ```
 library(devtools)
 install_github("DoviniJ/GxEprsDummy") 
@@ -21,7 +21,7 @@ library(GxEprsDummy)
 ```
 
 # Quick start
-We will illustrate the usage of **GxEprs** using a few example datasets downloaded and white labelled from ukbiobank. Follow the step wise process:
+We will illustrate the usage of **GxEprs** using a few example datasets downloaded and white labelled from UK biobank. Follow the step wise process:
 
 ##### Step 1: Download and install plink2.exe in your machine. The package supports both Linux and Windows version.
 Link: https://www.cog-genomics.org/plink/2.0/
