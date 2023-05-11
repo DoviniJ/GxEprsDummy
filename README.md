@@ -1,6 +1,6 @@
 ---
 title: "GxEprs"
-author: "Dovini Jayasinghe and Hong Lee"
+author: "Dovini Jayasinghe, Md Moksedul Momin and Hong Lee"
 date: "01/05/2023" #to be edited
 output: pdf_document
 ---
