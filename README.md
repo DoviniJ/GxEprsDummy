@@ -5,7 +5,6 @@ date: "01/05/2023" #to be edited
 output: pdf_document
 ---
 
-
 # GxEprs
 The 'GxEprs' is an R package for **genomic prediction** that uses a sophisticated method that has been enhanced for its prediction accuracy. It performs Genome Wide Assosciation Studies (GWAS) and Genome Wide Envinonment Interaction Studies (GWEIS) using plink2 which is easily accessible from within R.
 
@@ -109,36 +108,88 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 -->
 
 
-
-
-
 # Data preparation
 
 ## File formats
 ### Input files
-1) DummyData.fam - This is one of the binary files which contains family ID (FID), individual ID (IID), father's ID, mother's ID, sex and phenotype value as columns. The example dataset has 10,000 individuals. Note that the file has no column headings.   
+1) DummyData.fam - This is one of the binary files which contains  
+* famil ID (FID), 
+* individual ID (IID), 
+* father's ID, 
+* mother's ID, 
+* sex and
+* phenotype 
+
+value as columns. The example dataset has 10,000 individuals. Note that the file has no column headings.   
 ![image](https://user-images.githubusercontent.com/131835334/236634478-99a10ec5-2e05-4259-981e-d67562b1a06a.png)
   
-2) DummyData.bim - This is one of the binary files which contains chromosome code, SNP ID, position of centimorgans, base-pair coordinate, minor allele and reference allele as columns. The example dataset has 10,000 SNPs. Note that the file has no column headings. 
+2) DummyData.bim - This is one of the binary files which contains 
+* chromosome code, 
+* SNP ID, 
+* position of centimorgans, 
+* base-pair coordinate, 
+* minor allele and 
+* reference allele 
 
+as columns. The example dataset has 10,000 SNPs. Note that the file has no column headings. 
 ![image](https://user-images.githubusercontent.com/131835334/236634694-5dbe6a29-5ae0-44c9-b076-b80fcabb7144.png)
 
 3) DummyData.bed - This is also a binary file which cannot be read by humans.
-4) Bphe_discovery.txt - This is a .txt file which contains FID, IID and binary phenotype (1=controls, 2=cases) of the discovery sample as columns. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
+4) Bphe_discovery.txt - This is a .txt file which contains 
+* FID, 
+* IID and 
+* binary phenotype (1=controls, 2=cases) 
+
+of the discovery sample as columns. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
 ![image](https://user-images.githubusercontent.com/131835334/236635016-88560176-a22a-4863-b200-4ddca8ca6980.png)
 
-5) Bcov_discovery.txt - This is a .txt file which contains FID, IID, standardized covariate, square of the standardized covariate and 14 confounders of the discovery sample as columns. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
+5) Bcov_discovery.txt - This is a .txt file which contains 
+* FID, 
+* IID, 
+* standardized covariate, 
+* square of the standardized covariate and 
+* 14 confounders 
+
+of the discovery sample as columns. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
 ![image](https://user-images.githubusercontent.com/131835334/236635276-7e1c6d92-3a84-4f9e-b68b-a171d9684da3.png)
 
-6) Bphe_target.txt - This is a .txt file which contains FID, IID and binary phenotype (0=controls, 1=cases) of the target sample as columns. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
+6) Bphe_target.txt - This is a .txt file which contains 
+* FID, 
+* IID and 
+* binary phenotype (0=controls, 1=cases) 
+
+of the target sample as columns. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
 ![image](https://user-images.githubusercontent.com/131835334/236635388-53c3ff05-ae8b-498c-8354-0e1419aaf56f.png)
 
-7) Bcov_target.txt - This is a .txt file which contains FID, IID, standardized covariate, square of the standardized covariate and 14 confounders of the target sample as columns. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
+7) Bcov_target.txt - This is a .txt file which contains 
+* FID, 
+* IID, 
+* standardized covariate, 
+* square of the standardized covariate and 
+* 14 confounders 
+
+of the target sample as columns. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
 ![image](https://user-images.githubusercontent.com/131835334/236635508-d08cec8f-38bb-4008-8bc5-18ad87c8eece.png)
 
 
 ### Output files
-1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 contains chromosome, base pair position, SNP ID, reference allele, alternate allele, counted allele A1 (in regression), firth regression status, test identifier, number of samples in regression, odds ratio for A1 allele, standard error of log odds, test statistic, p-value and error code respectively. Note that all .sum files have the same structure.
+1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 contains 
+* chromosome, 
+* base pair position, 
+* SNP ID, 
+* reference allele, 
+* alternate allele, 
+* counted allele A1 (in regression), 
+* firth regression status, 
+* test identifier, 
+* number of samples in regression, 
+* odds ratio for A1 allele, 
+* standard error of log odds, 
+* test statistic, 
+* p-value and 
+* error code 
+
+respectively. Note that all .sum files have the same structure.
 ![image](https://user-images.githubusercontent.com/131835334/236993782-75e2d666-5b83-4348-80fc-994801c406a4.png)
 
 2) B_add.sum - This contains GWEIS summary statistics of all additive SNP effects, when the outcome is binary. 
@@ -147,15 +198,27 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 3) B_gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is binary. 
 ![image](https://user-images.githubusercontent.com/131835334/236993968-f07a1493-4d11-494e-b7f5-8b4747641207.png)
 
-4) B_trd.sscore - This contains the FID, IID, number of alleles across scored variants (ALLELE_CT) and polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics. 
+4) B_trd.sscore - This contains the 
+* FID, 
+* IID, 
+* number of alleles across scored variants (ALLELE_CT) and 
+* polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics, of the full dataset.
 
 ![image](https://user-images.githubusercontent.com/131835334/236994019-1ef3609a-4142-4fda-a89b-e05c81fc6d32.png)
 
-5) B_add.sscore - This contains the FID, IID, ALLELE_CT and polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset. 
+5) B_add.sscore - This contains the 
+* FID, 
+* IID, 
+* ALLELE_CT and 
+* polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset. 
 
 ![image](https://user-images.githubusercontent.com/131835334/236994081-d346ae48-d22a-4a35-a608-e4ed7535ec6c.png)
 
-6) B_gxe.sscore - This contains the FID, IID, ALLELE_CT and polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset. 
+6) B_gxe.sscore - This contains the 
+* FID, 
+* IID, 
+* ALLELE_CT and 
+* polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset. 
 
 ![image](https://user-images.githubusercontent.com/131835334/236994128-e8e58f0e-6e0c-4494-ad58-5dc9f765f6e9.png)
 
@@ -163,7 +226,12 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 ![image](https://user-images.githubusercontent.com/131835334/236994166-c7abfafc-51e2-40c0-a240-6715aa04a457.png)
 
 8) B_permuted_p.txt - This contains the p-value of the permuted model, when the outcome is binary. Since the permutation is random at each time, we did not include an example here.
-9) Individual_risk_values.txt - This contains all the calculated individual risk scores using the target model (either regular model or permuted model), when the outcome is binary. For demonstration, we include the results of regular model below. 
+9) Individual_risk_values.txt - This contains all the calculated individual risk scores using the target model (either regular model or permuted model), when the outcome is binary. The columns denote 
+* FID
+* IID and
+* estimated risk value
+ 
+For demonstration, we include the results of regular model below. 
 
 ![image](https://user-images.githubusercontent.com/131835334/236994221-e61723a3-23f5-4e75-9144-252f3950795b.png)
 
