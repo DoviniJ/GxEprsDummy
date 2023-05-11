@@ -113,7 +113,7 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 ## File formats
 ### Input files
 1) DummyData.fam - This is one of the binary files which contains  
-* famil ID (FID), 
+* family ID (FID), 
 * individual ID (IID), 
 * father's ID, 
 * mother's ID, 
