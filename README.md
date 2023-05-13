@@ -372,4 +372,4 @@ For demonstration, we include the results of regular model below.
 
 
 # Contact 
-Please contact Hong Lee (hong.lee@unisa.edu.au) or Dovini Jayasinghe (dovinij@gmail.com) for queries.
+Please contact Dovini Jayasinghe (dovinij@gmail.com) or Moksedul Momin (md_moksedul.momin@mymail.unisa.edu.au) or Hong Lee (hong.lee@unisa.edu.au) or for queries.
