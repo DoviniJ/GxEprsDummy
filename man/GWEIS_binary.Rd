@@ -2,9 +2,19 @@
 % Please edit documentation in R/GWEIS_binary.R
 \name{GWEIS_binary}
 \alias{GWEIS_binary}
-\title{GWEIS_binary function}
+\title{GWEIS_binary function
+This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_add.sum and interaction SNP effects named B_gxe.sum}
 \usage{
-GWEIS_binary(plink_path, b_file, pheno_file, covar_file, n_confounders, thread)
+GWEIS_binary(
+  plink_path,
+  b_file,
+  pheno_file,
+  covar_file,
+  n_confounders,
+  thread,
+  summary_output1 = NULL,
+  summary_output2 = NULL
+)
 }
 \arguments{
 \item{plink_path}{Path to the PLINK executable application}
@@ -25,6 +35,7 @@ This function will perform GWEIS and output
 \item{B_gxe.sum} GWEIS summary statistics file with interaction SNP effects
 }
 \description{
+GWEIS_binary function
 This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_add.sum and interaction SNP effects named B_gxe.sum
 }
 \keyword{gwies,}

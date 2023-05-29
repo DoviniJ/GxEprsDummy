@@ -2,7 +2,8 @@
 % Please edit documentation in R/summary_regular_binary.R
 \name{summary_regular_binary}
 \alias{summary_regular_binary}
-\title{summary_regular_binary function}
+\title{summary_regular_binary function
+This function uses plink2 and outputs the summary of regular model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum}
 \usage{
 summary_regular_binary(Bphe_target, Bcov_target, n_confounders)
 }
@@ -18,6 +19,7 @@ This function will output
 \item{Bsummary.txt} the summary of the fitted model
 }
 \description{
+summary_regular_binary function
 This function uses plink2 and outputs the summary of regular model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 }
 \keyword{regression}

@@ -2,9 +2,19 @@
 % Please edit documentation in R/PRS_binary.R
 \name{PRS_binary}
 \alias{PRS_binary}
-\title{PRS_binary function}
+\title{PRS_binary function
+This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum}
 \usage{
-PRS_binary(plink_path, b_file)
+PRS_binary(
+  plink_path,
+  b_file,
+  summary_input1 = "B_trd.sum",
+  summary_input2 = "B_add.sum",
+  summary_input3 = "B_gxe.sum",
+  summary_output1 = NULL,
+  summary_output2 = NULL,
+  summary_output3 = NULL
+)
 }
 \arguments{
 \item{plink_path}{Path to the PLINK executable application}
@@ -18,6 +28,7 @@ This function will output
 \item{B_gxe.sscore} PRSs for each target individual using GWEIS interaction effects
 }
 \description{
+PRS_binary function
 This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 }
 \keyword{profile}

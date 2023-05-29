@@ -2,9 +2,18 @@
 % Please edit documentation in R/summary_permuted_binary.R
 \name{summary_permuted_binary}
 \alias{summary_permuted_binary}
-\title{summary_permuted_binary function}
+\title{summary_permuted_binary function
+This function uses plink2 and outputs the p value of permuted model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum}
 \usage{
-summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
+summary_permuted_binary(
+  Bphe_target,
+  Bcov_target,
+  n_confounders,
+  iterations = 1000,
+  input_score1 = "B_trd.sscore",
+  input_score2 = "B_add.sscore",
+  input_score3 = "B_gxe.sscore"
+)
 }
 \arguments{
 \item{Bphe_target}{Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading}
@@ -18,6 +27,7 @@ This function will output
 \item{B_permuted_p.txt} the p value of the permuted model
 }
 \description{
+summary_permuted_binary function
 This function uses plink2 and outputs the p value of permuted model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 }
 \keyword{regression}

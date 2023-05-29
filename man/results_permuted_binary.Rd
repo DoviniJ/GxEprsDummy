@@ -2,7 +2,8 @@
 % Please edit documentation in R/results_permuted_binary.R
 \name{results_permuted_binary}
 \alias{results_permuted_binary}
-\title{results_permuted_binary function}
+\title{results_permuted_binary function
+This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum}
 \usage{
 results_permuted_binary(Bphe_target, Bcov_target, n_confounders)
 }
@@ -18,6 +19,7 @@ This function will output
 \item{Individual_risk_values.txt} Risk values for each target individual
 }
 \description{
+results_permuted_binary function
 This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 }
 \keyword{disease}

@@ -3,7 +3,8 @@
 \docType{data}
 \name{Qcov_discovery}
 \alias{Qcov_discovery}
-\title{Covariate data file of the discovery dataset when the outcome is quantitative}
+\title{Covariate data file of the discovery dataset when the outcome is quantitative
+This contains covariate information of the individuals in the discovery dataset following confounders}
 \format{
 A dataframe with 6426 rows and 18 columns
 \describe{
@@ -31,6 +32,7 @@ A dataframe with 6426 rows and 18 columns
 Qcov_discovery
 }
 \description{
+Covariate data file of the discovery dataset when the outcome is quantitative
 This contains covariate information of the individuals in the discovery dataset following confounders
 }
 \keyword{datasets}

@@ -2,9 +2,18 @@
 % Please edit documentation in R/GWAS_binary.R
 \name{GWAS_binary}
 \alias{GWAS_binary}
-\title{GWAS_binary function}
+\title{GWAS_binary function
+This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_trd.sum}
 \usage{
-GWAS_binary(plink_path, b_file, pheno_file, covar_file, n_confounders, thread)
+GWAS_binary(
+  plink_path,
+  b_file,
+  pheno_file,
+  covar_file,
+  n_confounders,
+  thread,
+  summary_output = NULL
+)
 }
 \arguments{
 \item{plink_path}{Path to the PLINK executable application}
@@ -24,6 +33,7 @@ This function will perform GWAS and output
 \item{B_trd.sum} GWAS summary statistics file with additive SNP effects
 }
 \description{
+GWAS_binary function
 This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_trd.sum
 }
 \keyword{gwas}

@@ -3,7 +3,8 @@
 \docType{data}
 \name{Qphe_discovery}
 \alias{Qphe_discovery}
-\title{Phenotype data file of the discovery dataset when the outcome is quantitative}
+\title{Phenotype data file of the discovery dataset when the outcome is quantitative
+This contains phenotype information of the individuals in the discovery dataset}
 \format{
 A dataframe with 6426 rows and 3 columns
 \describe{
@@ -16,6 +17,7 @@ A dataframe with 6426 rows and 3 columns
 Qphe_discovery
 }
 \description{
+Phenotype data file of the discovery dataset when the outcome is quantitative
 This contains phenotype information of the individuals in the discovery dataset
 }
 \keyword{datasets}

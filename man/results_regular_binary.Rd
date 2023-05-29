@@ -2,9 +2,17 @@
 % Please edit documentation in R/results_regular_binary.R
 \name{results_regular_binary}
 \alias{results_regular_binary}
-\title{results_regular_binary function}
+\title{results_regular_binary function
+This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum}
 \usage{
-results_regular_binary(Bphe_target, Bcov_target, n_confounders)
+results_regular_binary(
+  Bphe_target,
+  Bcov_target,
+  n_confounders,
+  input_score1 = "B_trd.sscore",
+  input_score2 = "B_add.sscore",
+  input_score3 = "B_gxe.sscore"
+)
 }
 \arguments{
 \item{Bphe_target}{Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading}
@@ -18,6 +26,7 @@ This function will output
 \item{Individual_risk_values.txt} Risk values for each target individual
 }
 \description{
+results_regular_binary function
 This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 }
 \keyword{disease}
