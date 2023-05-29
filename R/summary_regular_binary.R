@@ -8,7 +8,7 @@
 #' @importFrom stats D cor dnorm
 #' @return This function will output
 #' \item{Bsummary.txt} the summary of the fitted model
-#' @example x <- summary_regular_binary(Bphe_target, Bcov_target, 14, input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore")
+#' @example x <- summary_regular_binary(Bphe_target, Bcov_target, 14)
 #' @example x[[1]]
 #' @example x[[2]]
 #' @example x[[3]]
@@ -27,7 +27,7 @@
 #' @example x[[16]]
 #' @example x[[17]]
 #' @example x[[18]]
-summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
+summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders, input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore"){
   fam=read.table(Bphe_target ,header=F) 
   colnames(fam) <- c("FID", "IID", "PHENOTYPE")
   dat=read.table(Bcov_target ,header=F)

@@ -5,7 +5,14 @@
 \title{summary_regular_binary function
 This function uses plink2 and outputs the summary of regular model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum}
 \usage{
-summary_regular_binary(Bphe_target, Bcov_target, n_confounders)
+summary_regular_binary(
+  Bphe_target,
+  Bcov_target,
+  n_confounders,
+  input_score1 = "B_trd.sscore",
+  input_score2 = "B_add.sscore",
+  input_score3 = "B_gxe.sscore"
+)
 }
 \arguments{
 \item{Bphe_target}{Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading}
