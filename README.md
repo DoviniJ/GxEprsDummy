@@ -23,7 +23,7 @@ library(GxEprsDummy)
 # Quick start
 We will illustrate the usage of **GxEprs** using a few example datasets downloaded and white labelled from UK biobank. Follow the step wise process:
 
-##### Step 1: Download and install plink2.exe in your machine. The package supports both Linux and Windows version.
+##### Step 1: Download and install plink2 in your machine. The package supports both Linux and Windows version.
 Link: https://www.cog-genomics.org/plink/2.0/
 
 ##### Set 2: Obtain the path to the executable plink application <plink_path>
@@ -34,15 +34,15 @@ Link: https://www.cog-genomics.org/plink/2.0/
 ```
 plink_path <- "<plink_path>/plink2" 
 ```
-###### Step 3.1.2 It is always recommended to check how the files look like before using them in functions, for better understanding. You may directly use the data files embedded in the package. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. You can check the top proportion of each datafile using the following code:
+###### Step 3.1.2 It is always recommended to check how the files look like before using them in functions, for better understanding. You may directly use the data files embedded in the package. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. Refere to input file format section for more details. You can check the top proportion of each datafile using the following code:
 ```
-head(Bphe_discovery)
-head(Bcov_discovery)
-head(Bphe_target)
-head(Bcov_target)
+head(Bphe_discovery) #phenotype file of the discovery sample
+head(Bcov_discovery) #covariate file of the discovery sample
+head(Bphe_target) #phenotype file of the target sample
+head(Bcov_target) #covariate file of the target sample
 ```
 
-###### Step 3.1.3 To use the data files saved in "inst" directory, you can follow the following code to obtain the path of each data file. 
+###### Step 3.1.3 To use the data files saved in "inst" directory, you can follow the following code to obtain the path of each data file. Refere to input file format section for more details.
 ```
 inst_path <- system.file(package = "GxEprsDummy") 
 DummyData <- paste0(inst_path, "/DummyData") #this contains all .fam, .bed and .bim files. They can be accessed by a direct call of prefix "DummyData"
