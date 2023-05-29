@@ -1,37 +1,30 @@
 #' results_regular_binary function
-#' 
 #' This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
-#' 
 #' @param Bphe_target Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading
 #' @param Bcov_target Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading
 #' @param n_confounders Number of confounding variables in the target dataset
-#' 
 #' @keywords risk scores, risk values, individual risk, disease risk
-#' 
 #' @export 
-#' 
-#' 
+#' @importFrom stats D cor dnorm
 #' @return This function will output
 #' \item{Individual_risk_values.txt} Risk values for each target individual
-#' 
-#' @example results_regular_binary(Bphe_target, Bcov_target, 14)
-
-
-results_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
+#' @example x <- results_regular_binary(Bphe_target, Bcov_target, 14)
+#' @example head(x)
+results_regular_binary <- function(Bphe_target, Bcov_target, n_confounders, input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore"){
   fam=read.table(Bphe_target, header=F)
   colnames(fam) <- c("FID", "IID", "PHENOTYPE")
   dat=read.table(Bcov_target, header=F)
   colnames(dat)[1] <- "FID"
   colnames(dat)[2] <- "IID"
-  prs0_all=read.table("B_trd.sscore")
+  prs0_all=read.table(input_score1)
   colnames(prs0_all)[1] <- "FID"
   colnames(prs0_all)[2] <- "IID"
   prs0=merge(fam, prs0_all, by = "FID")
-  prs1_all=read.table("B_add.sscore")
+  prs1_all=read.table(input_score2)
   colnames(prs1_all)[1] <- "FID"
   colnames(prs1_all)[2] <- "IID"
   prs1=merge(fam, prs1_all, by = "FID")
-  prs2_all=read.table("B_gxe.sscore")
+  prs2_all=read.table(input_score3)
   colnames(prs2_all)[1] <- "FID"
   colnames(prs2_all)[2] <- "IID"
   prs2=merge(fam, prs2_all, by = "FID")
@@ -64,4 +57,6 @@ results_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
     write.table(cbind(fam$FID[m1], fam$IID[m1], m_fit), row.names = F, col.names = F, quote = F)
     sink()
   }
+  out <- cbind(fam$FID[m1], fam$IID[m1], m_fit)
+  return(out)
 }

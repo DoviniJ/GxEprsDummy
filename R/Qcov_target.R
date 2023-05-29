@@ -1,7 +1,5 @@
 #' Covariate data file of the target dataset when the outcome is quantitative
-#' 
 #' This contains covariate information of the individuals in the target dataset following confounders
-#' 
 #' @format A dataframe with 1579 rows and 18 columns
 #' \describe{
 #' \item Family ID

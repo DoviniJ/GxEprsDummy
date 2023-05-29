@@ -1,37 +1,47 @@
 #' summary_regular_binary function
-#' 
 #' This function uses plink2 and outputs the summary of regular model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
-#' 
 #' @param Bphe_target Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading
 #' @param Bcov_target Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading
 #' @param n_confounders Number of confounding variables in the target dataset
-#' 
 #' @keywords regression summary
-#' 
 #' @export 
-#' 
-#' 
+#' @importFrom stats D cor dnorm
 #' @return This function will output
 #' \item{Bsummary.txt} the summary of the fitted model
-#' 
-#' @example summary_regular_binary(Bphe_target, Bcov_target, 14)
-
-
+#' @example x <- summary_regular_binary(Bphe_target, Bcov_target, 14, input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore")
+#' @example x[[1]]
+#' @example x[[2]]
+#' @example x[[3]]
+#' @example x[[4]]
+#' @example x[[5]]
+#' @example x[[6]]
+#' @example x[[7]]
+#' @example x[[8]]
+#' @example x[[9]]
+#' @example x[[10]]
+#' @example x[[11]]
+#' @example x[[12]]
+#' @example x[[13]]
+#' @example x[[14]]
+#' @example x[[15]]
+#' @example x[[16]]
+#' @example x[[17]]
+#' @example x[[18]]
 summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
   fam=read.table(Bphe_target ,header=F) 
   colnames(fam) <- c("FID", "IID", "PHENOTYPE")
   dat=read.table(Bcov_target ,header=F)
   colnames(dat)[1] <- "FID"
   colnames(dat)[2] <- "IID"
-  prs0_all=read.table("B_trd.sscore")
+  prs0_all=read.table(input_score1)
   colnames(prs0_all)[1] <- "FID"
   colnames(prs0_all)[2] <- "IID"
   prs0=merge(fam, prs0_all, by = "FID")
-  prs1_all=read.table("B_add.sscore")
+  prs1_all=read.table(input_score2)
   colnames(prs1_all)[1] <- "FID"
   colnames(prs1_all)[2] <- "IID"
   prs1=merge(fam, prs1_all, by = "FID")
-  prs2_all=read.table("B_gxe.sscore")
+  prs2_all=read.table(input_score3)
   colnames(prs2_all)[1] <- "FID"
   colnames(prs2_all)[2] <- "IID"
   prs2=merge(fam, prs2_all, by = "FID")
@@ -73,4 +83,9 @@ summary_regular_binary <- function(Bphe_target, Bcov_target, n_confounders){
     print(summary(m))
     sink()
   }
+  s <- summary(m)
+  out <- list(s, s$call, s$terms, s$family, s$deviance, s$aic, s$contrasts, 
+              s$df.residual, s$null.deviance, s$df.null, s$iter, s$deviance.resid, 
+              s$coefficients, s$aliesed, s$dispersion, s$df, s$cov.unscaled, s$cov.scaled)
+  return(out)
 }
