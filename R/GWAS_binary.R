@@ -29,7 +29,7 @@ GWAS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounder
                     " --parameters ", param_vec, 
                     " --allow-no-sex --threads ", 
                     thread,
-                    " --out B_trd.sum"))
+                    " --out B_gwas"))
     plink_output <- read.table("B_gwas.PHENO1.glm.logistic.hybrid", header = FALSE)
     filtered_output <- plink_output[(plink_output$V8=="ADD"),]
     filtered_output$V10 = log(filtered_output$V10)
