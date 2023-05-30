@@ -26,20 +26,24 @@ We will illustrate the usage of **GxEprs** using a few example datasets download
 ##### Step 1: Download and install plink2 in your machine. The package supports both Linux and Windows version.
 Link: https://www.cog-genomics.org/plink/2.0/
 
-##### Set 2: Obtain the path to the executable plink application <plink_path>
+##### Step 2: Obtain the path to the executable plink application <plink_path>
 
-##### Step 3.1: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using regular model for binary outcome):
+##### Step 3.1: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset:
 
 ###### Step 3.1.1 Give the path where plink executable file is located
 ```
 plink_path <- "<plink_path>/plink2" 
 ```
-###### Step 3.1.2 It is always recommended to check how the files look like before using them in functions, for better understanding. You may directly use the data files embedded in the package. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. Refere to input file format section for more details. You can check the top proportion of each datafile using the following code:
+###### Step 3.1.2 It is always recommended to check how the files look like before using them in functions, for better understanding. You may directly use the data files embedded in the package. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. Refere to input file format section for more details. You can check the top proportion of each data file using the following code:
 ```
-head(Bphe_discovery) #phenotype file of the discovery sample
-head(Bcov_discovery) #covariate file of the discovery sample
-head(Bphe_target) #phenotype file of the target sample
-head(Bcov_target) #covariate file of the target sample
+head(Bphe_discovery) #phenotype file of the discovery sample when the outcome is binary
+head(Bcov_discovery) #covariate file of the discovery sample when the outcome is binary
+head(Bphe_target) #phenotype file of the target sample when the outcome is binary
+head(Bcov_target) #covariate file of the target sample when the outcome is binary
+head(Qphe_discovery) #phenotype file of the discovery sample when the outcome is quantitative
+head(Qcov_discovery) #covariate file of the discovery sample when the outcome is quantitative
+head(Qphe_target) #phenotype file of the target sample when the outcome is quantitative
+headQBcov_target) #covariate file of the target sample when the outcome is quantitative
 ```
 
 ###### Step 3.1.3 To use the data files saved in "inst" directory, you can follow the following code to obtain the path of each data file. Refere to input file format section for more details.
@@ -50,16 +54,48 @@ Bphe_discovery <- paste0(inst_path, "/Bphe_discovery.txt")
 Bcov_discovery <- paste0(inst_path, "/Bcov_discovery.txt")
 Bphe_target <- paste0(inst_path, "/Bphe_target.txt")
 Bcov_target <- paste0(inst_path, "/Bcov_target.txt")
+Qphe_discovery <- paste0(inst_path, "/Qphe_discovery.txt")
+Qcov_discovery <- paste0(inst_path, "/Qcov_discovery.txt")
+Qphe_target <- paste0(inst_path, "/Qphe_target.txt")
+Qcov_target <- paste0(inst_path, "/Qcov_target.txt")
 ```
+Note that the step 3.1.3 described above is to call the embedded data files in this package itself. However, when the users have to call their own data, they can follow the same approach. It is more convenient if the users can store all their data files in the same working directory. For example, assume that the file names are as follows: 
+* binary files: mydata.fam, mydata.bim and mydata.bed
+* phenotype file of discovery sample (binary outcome): Bpd.txt 
+* covariate file of discovery sample (binary outcome): Bcd.txt 
+* phenotype file of target sample (binary outcome): Bpt.txt
+* covariate file of the target sample (binary outcome): Bct.txt
+* phenotype file of discovery sample (quantitative outcome): Qpd.txt 
+* covariate file of discovery sample (quantitative outcome): Qcd.txt 
+* phenotype file of target sample (quantitative outcome): Qpt.txt
+* covariate file of the target sample (quantitative outcome): Qct.txt
+
+Then, you can use the following command to call the files:
+```
+setwd("<path to working directory>") #set the working directory where all the data files are located
+DummyData <- "mydata"
+Bphe_discovery <- "Bpd.txt"
+Bcov_discovery <- "Bcd.txt"
+Bphe_target <- "Bpt.txt"
+Bcov_target <- "Bct.txt"
+Qphe_discovery <- "Qpd.txt"
+Qcov_discovery <- "Qcd.txt"
+Qphe_target <- "Qpt.txt"
+Qcov_target <- "Qct.txt"
+```
+Note that, all these files can be placed in a separate location. It is always upto the users choice. In that case remember to give the full path to the file location since R identifies files by name, only when they are in the same directory.
 
 ###### Step 3.1.4 Set the number of confounders as 14 and number of threads (CPUs) as 20
 ```
-n_confounders = 14
-thread = 20
+n_confounders = 14 #this is the number of confounders in the covariate files of the embedded example datasets. Users can change this value according to the number of confounders they use in their covariate files.
+thread = 20 #this is the number of threads specified for this example. Users can change this value according to their preference.
 ```
 ###### Step 3.1.5 Set the working directory and run the following R functions in the given order
 ```
 setwd("<path to working directory>") #set the working directory where you need to save the output files
+```
+When the outcome variable is binary
+```
 GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
 GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
 PRS_binary(plink_path, DummyData)
@@ -67,7 +103,17 @@ summary_regular_binary(Bphe_target, Bcov_target, n_confounders)
 summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
 results_regular_binary(Bphe_target, Bcov_target, n_confounders)
 ```
-##### Step 3.2: Run the following code line to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using permuted model for binary outcome):
+When the outcome variable is quantitative (NOT ADDED TO THE PACKAGE YET)
+```
+GWAS_quantitative(DummyData, Qphe_discovery, Qcov_discovery, n_confounders, thread)
+GWEIS_quantitative(DummyData, Qphe_discovery, Qcov_discovery, n_confounders, thread)
+PRS_quantitative(DummyData)
+summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)
+summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
+results_regular_quantitative(Qphe_target, Qcov_target, n_confounders)
+```
+
+##### Step 3.2.1: Run the following code line to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using permuted model for binary outcome):
 ```
 results_permuted_binary(Bphe_target, Bcov_target, n_confounders)
 ```
@@ -75,7 +121,12 @@ results_permuted_binary(Bphe_target, Bcov_target, n_confounders)
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(n_confounders)``` and ```summary_permuted_binary(n_confounders)```. If the 'PRS_gxe x E' term is significant of insignificant in both the models, any model could be used to obtain results (i.e. ```results_regular_binary(n_confounders)``` or ```results_permuted_binary(n_confounders)```). If the 'PRS_gxe x E' term is significant in one model, and insignificant in other model, it is advised to use the permuted model to obtain results (i.e. ```results_permuted_binary(n_confounders)```).
 
 
+##### Step 3.2.2: Run the following code line to obtain the risk scores of individuals in the target dataset, when the outcome variable is quantitative (using permuted model for quantitative outcome): (NOT ADDED TO THE PACKAGE YET)
+```
+results_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
+```
 
+Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(n_confounders)``` and ```summary_permuted_quantitative(n_confounders)```. If the 'PRS_gxe x E' term is significant of insignificant in both the models, any model could be used to obtain results (i.e. ```results_regular_quantitative(n_confounders)``` or ```results_permuted_quantitative(n_confounders)```). If the 'PRS_gxe x E' term is significant in one model, and insignificant in other model, it is advised to use the permuted model to obtain results (i.e. ```results_permuted_quantitative(n_confounders)```). 
 
 
 <!--- 
@@ -90,8 +141,8 @@ Qphe_target <- "Qphe_target.txt"
 Qcov_target <- "Qcov_target.txt"
 n_confounders = 14
 thread = 20
-GWAS_quantitative(DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
-GWEIS_quantitative(DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
+GWAS_quantitative(DummyData, Qphe_discovery, Qcov_discovery, n_confounders, thread)
+GWEIS_quantitative(DummyData, Qphe_discovery, Qcov_discovery, n_confounders, thread)
 PRS_quantitative(DummyData)
 summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)
 summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
