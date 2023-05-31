@@ -8,6 +8,104 @@ output: pdf_document
 # GxEprs
 The 'GxEprs' is an R package for **genomic prediction** that uses a sophisticated method that has been enhanced for its prediction accuracy. It performs Genome Wide Association Studies (GWAS) and Genome Wide Environment Interaction Studies (GWEIS) using plink2 which is easily accessible from within R.
 
+# Data preparation
+
+## File formats
+### Input files
+1) mydata.fam - This is one of the binary files which contains the following columns in order. The example dataset has 10,000 individuals. Note that the file has no column headings.
+* family ID (FID) 
+* individual ID (IID) 
+* father's ID 
+* mother's ID 
+* sex 
+* phenotype value
+
+<!--- ![image](https://user-images.githubusercontent.com/131835334/236634478-99a10ec5-2e05-4259-981e-d67562b1a06a.png) -->
+```
+1001019 1001019 0 0 2 -9
+1001022 1001022 0 0 2 -9
+1001035 1001035 0 0 1 -9
+1001054 1001054 0 0 2 -9
+1001078 1001078 0 0 2 -9
+```
+  
+2) mydata.bim - This is one of the binary files which contains the following columns in order. The example dataset has 10,000 SNPs. Note that the file has no column headings. 
+* chromosome code 
+* SNP ID 
+* position of centimorgans 
+* base-pair coordinate 
+* minor allele  
+* reference allele 
+
+<!--- ![image](https://user-images.githubusercontent.com/131835334/236634694-5dbe6a29-5ae0-44c9-b076-b80fcabb7144.png) -->
+```
+1	  snp_53131969	0	754182	A	G
+1	  snp_52286139	0	761732	C	T
+1	  snp_512562034	0	768448	A	G
+1	  snp_54040617	0	779322	G	A
+1	  snp_52980300	0	785989	T	C
+```
+
+3) mydata.bed - This is also a binary file which cannot be read by humans.
+4) Bpd.txt - This is a .txt file which contains the following columns in order. The discovery dataset has 7916 individuals. Note that the file has no column headings.
+* FID 
+* IID  
+* binary phenotype (1=controls, 2=cases) of the discovery sample
+
+<!--- ![image](https://user-images.githubusercontent.com/131835334/236635016-88560176-a22a-4863-b200-4ddca8ca6980.png) -->
+```
+1050405 1050405 1
+1036224 1036224 2
+1168718 1168718 1
+1033226 1033226 1
+1056980 1056980 1
+```
+
+5) Bcd.txt - This is a .txt file which contains the following columns in order. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
+* FID 
+* IID 
+* standardized covariate 
+* square of the standardized covariate  
+* 14 confounders of the discovery sample
+
+<!--- ![image](https://user-images.githubusercontent.com/131835334/236635276-7e1c6d92-3a84-4f9e-b68b-a171d9684da3.png) -->
+```
+1050405 1050405 0.787403812314451 0.620004763647331 -3.04026 45 -12.048 2.17634 -0.940322 -0.446351 -5.45685 -2.53161 -2.13435 -1.95623 -3.82792 -0.380636 0 10
+1036224 1036224 -0.119722138532781 0.0143333904548625 -5.1054 64 -14.5169 6.01889 -3.85803 3.62625 5.10717 -3.54574 0.393994 3.64275 4.42975 -2.26704 1 19
+1168718 1168718 0.173372721351375 0.0300581005087816 -1.91044 59 -12.7462 5.95244 0.0738914 1.80523 4.76284 0.130369 -1.05615 0.316777 0.988783 -1.76502 1 7
+1033226 1033226 -0.699321184695051 0.48905011936329 -1.83526 68 -10.3349 4.71264 -1.84521 -0.524855 -3.80275 0.837965 0.265233 2.10903 -0.210259 0.71504 0 20
+1056980 1056980 3.69300366651739 13.6382760809109 -3.15649 69 -8.56737 4.78248 -1.49547 -7.49413 -5.39887 1.85316 4.07476 1.05351 0.825942 -2.09669 1 20
+```
+
+6) Bpt.txt - This is a .txt file which contains the following columns in order. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
+* FID 
+* IID  
+* binary phenotype (0=controls, 1=cases) of the target sample
+
+<!--- ![image](https://user-images.githubusercontent.com/131835334/236635388-53c3ff05-ae8b-498c-8354-0e1419aaf56f.png) -->
+```
+1001035 1001035 0
+1001105 1001105 0
+1001129 1001129 0
+1001210 1001210 0
+1001323 1001323 0
+```
+
+7) Bct.txt - This is a .txt file which contains the following columns in order. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
+* FID 
+* IID 
+* standardized covariate 
+* square of the standardized covariate  
+* 14 confounders of the target sample
+
+<!--- ![image](https://user-images.githubusercontent.com/131835334/236635508-d08cec8f-38bb-4008-8bc5-18ad87c8eece.png) -->
+```
+1001035 1001035 -0.420822976931972 0.177091977913887 -4.12263 57 -13.5185 5.40198 -4.81994 0.664494 -4.92217 -0.451329 3.14677 0.42704 0.821306 -2.77705 1 7
+1001105 1001105 -0.0805583280660987 0.00648964422080519 2.92534 56 -13.6236 3.21643 -0.856048 0.750187 -2.01798 -0.350832 5.10141 2.1807 -6.04343 1.78928 1 19
+1001129 1001129 -1.32752644870189 1.76232647200306 -3.09118 61 -9.94475 3.60562 -0.917639 0.905664 -5.09843 -1.16329 -1.88102 -1.24154 0.699574 2.2442 0 20
+1001210 1001210 0.698007239555549 0.487214106471958 4.58829 49 -12.5471 4.09467 -2.58951 6.06898 12.9822 -0.704179 2.90357 -0.334968 5.04274 0.66175 0 10
+1001323 1001323 -0.657981606980219 0.432939795124272 -3.53948 56 -12.795 2.91524 -2.72794 3.61555 3.92957 -2.93899 -0.454737 2.31013 2.51783 -4.15592 0 7
+```
 
 # Package installation
 The current GitHub version of **GxEprs** can be installed via:
@@ -34,7 +132,7 @@ Link: https://www.cog-genomics.org/plink/2.0/
 ```
 plink_path <- "<plink_path>/plink2" 
 ```
-###### Step 3.1.2 It is always recommended to check how the files look like before using them in functions, for better understanding. You may directly use the data files embedded in the package. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. Refere to input file format section for more details. You can check the top proportion of each data file using the following code:
+###### Step 3.1.2 It is always recommended to check how the files look like before using them in functions, for better understanding. You may directly use the data files embedded in the package as a trial. Note that, for convenience, we have used identical names for the embedded data object, and for the corresponding function argument. You can check the top proportion of each data file using the following code:
 ```
 head(Bphe_discovery) #phenotype file of the discovery sample when the outcome is binary
 head(Bcov_discovery) #covariate file of the discovery sample when the outcome is binary
@@ -46,7 +144,7 @@ head(Qphe_target) #phenotype file of the target sample when the outcome is quant
 headQBcov_target) #covariate file of the target sample when the outcome is quantitative
 ```
 
-###### Step 3.1.3 To use the data files saved in "inst" directory, you can follow the following code to obtain the path of each data file. Refere to input file format section for more details.
+###### Step 3.1.3 To call the data files saved in "inst" directory, you can follow the following code to obtain the path of each data file. 
 ```
 inst_path <- system.file(package = "GxEprsDummy") 
 DummyData <- paste0(inst_path, "/DummyData") #this contains all .fam, .bed and .bim files. They can be accessed by a direct call of prefix "DummyData"
@@ -59,7 +157,8 @@ Qcov_discovery <- paste0(inst_path, "/Qcov_discovery.txt")
 Qphe_target <- paste0(inst_path, "/Qphe_target.txt")
 Qcov_target <- paste0(inst_path, "/Qcov_target.txt")
 ```
-Note that the step 3.1.3 described above is to call the embedded data files in this package itself. However, when the users have to call their own data, they can follow the same approach. It is more convenient if the users can store all their data files in the same working directory. For example, assume that the file names are as follows: 
+Note that the step 3.1.3 described above is to call the embedded data files in this package itself. However, when the users have to call their own data, they can follow the same approach. It is more convenient if the users can store all their data files in the same working directory. For example, assume that the file names are as follows 
+(Refer to 'File Formats' section of this document to view the format details of each of the following input file): 
 * binary files: mydata.fam, mydata.bim and mydata.bed
 * phenotype file of discovery sample (binary outcome): Bpd.txt 
 * covariate file of discovery sample (binary outcome): Bcd.txt 
@@ -70,20 +169,18 @@ Note that the step 3.1.3 described above is to call the embedded data files in t
 * phenotype file of target sample (quantitative outcome): Qpt.txt
 * covariate file of the target sample (quantitative outcome): Qct.txt
 
-Then, you can use the following command to call the files:
-```
-setwd("<path to working directory>") #set the working directory where all the data files are located
-DummyData <- "mydata"
-Bphe_discovery <- "Bpd.txt"
-Bcov_discovery <- "Bcd.txt"
-Bphe_target <- "Bpt.txt"
-Bcov_target <- "Bct.txt"
-Qphe_discovery <- "Qpd.txt"
-Qcov_discovery <- "Qcd.txt"
-Qphe_target <- "Qpt.txt"
-Qcov_target <- "Qct.txt"
-```
 Note that, all these files can be placed in a separate location. It is always upto the users choice. In that case remember to give the full path to the file location since R identifies files by name, only when they are in the same directory.
+```
+b_file <- "<path>/mydata"
+Bphe_discovery <- "<path>/Bpd.txt"
+Bcov_discovery <- "<path>/Bcd.txt"
+Bphe_target <- "<path>/Bpt.txt"
+Bcov_target <- "<path>/Bct.txt"
+Qphe_discovery <- "<path>/Qpd.txt"
+Qcov_discovery <- "<path>/Qcd.txt"
+Qphe_target <- "<path>/Qpt.txt"
+Qcov_target <- "<path>/Qct.txt"
+```
 
 ###### Step 3.1.4 Set the number of confounders as 14 and number of threads (CPUs) as 20
 ```
@@ -96,167 +193,51 @@ setwd("<path to working directory>") #set the working directory where you need t
 ```
 When the outcome variable is binary
 ```
-GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
-GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, n_confounders, thread)
-PRS_binary(plink_path, DummyData)
-summary_regular_binary(Bphe_target, Bcov_target, n_confounders)
-summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
-results_regular_binary(Bphe_target, Bcov_target, n_confounders)
+GWAS_binary(plink_path, mydata, "Bpd.txt", "Bcd.txt", n_confounders, thread)
+GWEIS_binary(plink_path, mydata, "Bpd.txt", "Bcd.txt", n_confounders, thread)
+PRS_binary(plink_path, mydata)
+summary_regular_binary("Bpt.txt", "Bct.txt", n_confounders)
 ```
 When the outcome variable is quantitative (NOT ADDED TO THE PACKAGE YET)
 ```
-GWAS_quantitative(DummyData, Qphe_discovery, Qcov_discovery, n_confounders, thread)
-GWEIS_quantitative(DummyData, Qphe_discovery, Qcov_discovery, n_confounders, thread)
-PRS_quantitative(DummyData)
-summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)
+GWAS_quantitative(mydata, "Qpd.txt", "Qcd.txt", n_confounders, thread)
+GWEIS_quantitative(mydata, "Qpd.txt", "Qcd.txt", n_confounders, thread)
+PRS_quantitative(plink_path, mydata)
+summary_regular_quantitative("Qpt.txt", "Qct.txt", n_confounders)
+```
+
+Here, the fitted models in ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` or ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` are as follows:
+
+* Model 1: y = PRS_trd + E + PRS_trd x E + confounders
+* Model 2: y = PRS_add + E + PRS_add x E + confounders
+* Model 3: y = PRS_add + E + PRS_gxe x E + confounders
+* Model 4: y = PRS_add + E + PRS_gxe + PRS_gxe x E + confounders
+* Model 4*: permuted Model 4
+* Model 5: y = PRS_add + E + E^2 + PRS_gxe + PRS_gxe x E + confounders
+* Model 5*: permuted Model 5
+
+where y is the outcome variable, E is the covariate of interest, PRS_trd and PRS_add are the polygenic risk scores computed using additive SNP effects of GWAS and GWEIS summary statistics respectively, and PRS_gxe is the polygenic risk scores computed using GxE interaction SNP effects of GWEIS summary statistics.
+
+
+##### Step 3.2: Run the following code line to check the significance of the interaction term ('PRS_gxe x E'):
+
+When the outcome variable is binary:
+```
+summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
+```
+Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` and ```summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 5, and insignificant in Model 5* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
+
+
+When the outcome variable is quantitative:
+```
 summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
-results_regular_quantitative(Qphe_target, Qcov_target, n_confounders)
 ```
 
-##### Step 3.2.1: Run the following code line to obtain the risk scores of individuals in the target dataset, when the outcome variable is binary (using permuted model for binary outcome):
-```
-results_permuted_binary(Bphe_target, Bcov_target, n_confounders)
-```
-
-Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(n_confounders)``` and ```summary_permuted_binary(n_confounders)```. If the 'PRS_gxe x E' term is significant of insignificant in both the models, any model could be used to obtain results (i.e. ```results_regular_binary(n_confounders)``` or ```results_permuted_binary(n_confounders)```). If the 'PRS_gxe x E' term is significant in one model, and insignificant in other model, it is advised to use the permuted model to obtain results (i.e. ```results_permuted_binary(n_confounders)```).
+Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` and ```summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 4, and insignificant in Model 4* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
 
 
-##### Step 3.2.2: Run the following code line to obtain the risk scores of individuals in the target dataset, when the outcome variable is quantitative (using permuted model for quantitative outcome): (NOT ADDED TO THE PACKAGE YET)
-```
-results_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
-```
-
-Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(n_confounders)``` and ```summary_permuted_quantitative(n_confounders)```. If the 'PRS_gxe x E' term is significant of insignificant in both the models, any model could be used to obtain results (i.e. ```results_regular_quantitative(n_confounders)``` or ```results_permuted_quantitative(n_confounders)```). If the 'PRS_gxe x E' term is significant in one model, and insignificant in other model, it is advised to use the permuted model to obtain results (i.e. ```results_permuted_quantitative(n_confounders)```). 
 
 
-<!--- 
-
-
-##### Step 3.3: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is quantitative (using regular model for quantitative outcome):
-```
-DummyData <- "DummyData"
-Qphe_discovery <- "Qphe_discovery.txt"
-Qcov_discovery <- "Qcov_discovery.txt"
-Qphe_target <- "Qphe_target.txt"
-Qcov_target <- "Qcov_target.txt"
-n_confounders = 14
-thread = 20
-GWAS_quantitative(DummyData, Qphe_discovery, Qcov_discovery, n_confounders, thread)
-GWEIS_quantitative(DummyData, Qphe_discovery, Qcov_discovery, n_confounders, thread)
-PRS_quantitative(DummyData)
-summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)
-summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
-results_regular_quantitative(Qphe_target, Qcov_target, n_confounders)
-```
-##### Step 3.4: Run the following code (functions should be run in the given order) to obtain the risk scores of individuals in the target dataset, when the outcome variable is quantitative (using permuted model for quantitative outcome):
-```
-results_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
-```
-
-Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(n_confounders)``` and ```summary_permuted_quantitative(n_confounders)```. If the 'PRS_gxe x E' term is significant of insignificant in both the models, any model could be used to obtain results (i.e. ```results_regular_quantitative(n_confounders)``` or ```results_permuted_quantitative(n_confounders)```). If the 'PRS_gxe x E' term is significant in one model, and insignificant in other model, it is advised to use the permuted model to obtain results (i.e. ```results_permuted_quantitative(n_confounders)```). 
-
-
--->
-
-
-# Data preparation
-
-## File formats
-### Input files
-1) DummyData.fam - This is one of the binary files which contains the following columns in order. The example dataset has 10,000 individuals. Note that the file has no column headings.
-* family ID (FID) 
-* individual ID (IID) 
-* father's ID 
-* mother's ID 
-* sex 
-* phenotype value
-
-<!--- ![image](https://user-images.githubusercontent.com/131835334/236634478-99a10ec5-2e05-4259-981e-d67562b1a06a.png) -->
-```
-1001019 1001019 0 0 2 -9
-1001022 1001022 0 0 2 -9
-1001035 1001035 0 0 1 -9
-1001054 1001054 0 0 2 -9
-1001078 1001078 0 0 2 -9
-```
-  
-2) DummyData.bim - This is one of the binary files which contains the following columns in order. The example dataset has 10,000 SNPs. Note that the file has no column headings. 
-* chromosome code 
-* SNP ID 
-* position of centimorgans 
-* base-pair coordinate 
-* minor allele  
-* reference allele 
-
-<!--- ![image](https://user-images.githubusercontent.com/131835334/236634694-5dbe6a29-5ae0-44c9-b076-b80fcabb7144.png) -->
-```
-1	  snp_53131969	0	754182	A	G
-1	  snp_52286139	0	761732	C	T
-1	  snp_512562034	0	768448	A	G
-1	  snp_54040617	0	779322	G	A
-1	  snp_52980300	0	785989	T	C
-```
-
-3) DummyData.bed - This is also a binary file which cannot be read by humans.
-4) Bphe_discovery.txt - This is a .txt file which contains the following columns in order. The discovery dataset has 7916 individuals. Note that the file has no column headings.
-* FID 
-* IID  
-* binary phenotype (1=controls, 2=cases) of the discovery sample
-
-<!--- ![image](https://user-images.githubusercontent.com/131835334/236635016-88560176-a22a-4863-b200-4ddca8ca6980.png) -->
-```
-1050405 1050405 1
-1036224 1036224 2
-1168718 1168718 1
-1033226 1033226 1
-1056980 1056980 1
-```
-
-5) Bcov_discovery.txt - This is a .txt file which contains the following columns in order. The discovery dataset has 7916 individuals. Note that the file has no column headings.    
-* FID 
-* IID 
-* standardized covariate 
-* square of the standardized covariate  
-* 14 confounders of the discovery sample
-
-<!--- ![image](https://user-images.githubusercontent.com/131835334/236635276-7e1c6d92-3a84-4f9e-b68b-a171d9684da3.png) -->
-```
-1050405 1050405 0.787403812314451 0.620004763647331 -3.04026 45 -12.048 2.17634 -0.940322 -0.446351 -5.45685 -2.53161 -2.13435 -1.95623 -3.82792 -0.380636 0 10
-1036224 1036224 -0.119722138532781 0.0143333904548625 -5.1054 64 -14.5169 6.01889 -3.85803 3.62625 5.10717 -3.54574 0.393994 3.64275 4.42975 -2.26704 1 19
-1168718 1168718 0.173372721351375 0.0300581005087816 -1.91044 59 -12.7462 5.95244 0.0738914 1.80523 4.76284 0.130369 -1.05615 0.316777 0.988783 -1.76502 1 7
-1033226 1033226 -0.699321184695051 0.48905011936329 -1.83526 68 -10.3349 4.71264 -1.84521 -0.524855 -3.80275 0.837965 0.265233 2.10903 -0.210259 0.71504 0 20
-1056980 1056980 3.69300366651739 13.6382760809109 -3.15649 69 -8.56737 4.78248 -1.49547 -7.49413 -5.39887 1.85316 4.07476 1.05351 0.825942 -2.09669 1 20
-```
-
-6) Bphe_target.txt - This is a .txt file which contains the following columns in order. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
-* FID 
-* IID  
-* binary phenotype (0=controls, 1=cases) of the target sample
-
-<!--- ![image](https://user-images.githubusercontent.com/131835334/236635388-53c3ff05-ae8b-498c-8354-0e1419aaf56f.png) -->
-```
-1001035 1001035 0
-1001105 1001105 0
-1001129 1001129 0
-1001210 1001210 0
-1001323 1001323 0
-```
-
-7) Bcov_target.txt - This is a .txt file which contains the following columns in order. The target dataset has 1939 individuals who are independent from the discovery dataset. Note that the file has no column headings.   
-* FID 
-* IID 
-* standardized covariate 
-* square of the standardized covariate  
-* 14 confounders of the target sample
-
-<!--- ![image](https://user-images.githubusercontent.com/131835334/236635508-d08cec8f-38bb-4008-8bc5-18ad87c8eece.png) -->
-```
-1001035 1001035 -0.420822976931972 0.177091977913887 -4.12263 57 -13.5185 5.40198 -4.81994 0.664494 -4.92217 -0.451329 3.14677 0.42704 0.821306 -2.77705 1 7
-1001105 1001105 -0.0805583280660987 0.00648964422080519 2.92534 56 -13.6236 3.21643 -0.856048 0.750187 -2.01798 -0.350832 5.10141 2.1807 -6.04343 1.78928 1 19
-1001129 1001129 -1.32752644870189 1.76232647200306 -3.09118 61 -9.94475 3.60562 -0.917639 0.905664 -5.09843 -1.16329 -1.88102 -1.24154 0.699574 2.2442 0 20
-1001210 1001210 0.698007239555549 0.487214106471958 4.58829 49 -12.5471 4.09467 -2.58951 6.06898 12.9822 -0.704179 2.90357 -0.334968 5.04274 0.66175 0 10
-1001323 1001323 -0.657981606980219 0.432939795124272 -3.53948 56 -12.795 2.91524 -2.72794 3.61555 3.92957 -2.93899 -0.454737 2.31013 2.51783 -4.15592 0 7
-```
 
 ### Output files
 1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 denotes the following columns in order. Note that all .sum files follow the same structure.
