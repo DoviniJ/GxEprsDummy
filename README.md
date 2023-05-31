@@ -141,7 +141,7 @@ head(Bcov_target) #covariate file of the target sample when the outcome is binar
 head(Qphe_discovery) #phenotype file of the discovery sample when the outcome is quantitative
 head(Qcov_discovery) #covariate file of the discovery sample when the outcome is quantitative
 head(Qphe_target) #phenotype file of the target sample when the outcome is quantitative
-headQBcov_target) #covariate file of the target sample when the outcome is quantitative
+head(Qcov_target) #covariate file of the target sample when the outcome is quantitative
 ```
 
 ###### Step 3.1.3 To call the data files saved in "inst" directory, you can follow the following code to obtain the path of each data file. 
@@ -158,7 +158,7 @@ Qphe_target <- paste0(inst_path, "/Qphe_target.txt")
 Qcov_target <- paste0(inst_path, "/Qcov_target.txt")
 ```
 Note that the step 3.1.3 described above is to call the embedded data files in this package itself. However, when the users have to call their own data, they can follow the same approach. It is more convenient if the users can store all their data files in the same working directory. For example, assume that the file names are as follows 
-(Refer to 'File Formats' section of this document to view the format details of each of the following input file): 
+(Refer to 'File formats' section of this document to view the formating details of each of the following input file): 
 * binary files: mydata.fam, mydata.bim and mydata.bed
 * phenotype file of discovery sample (binary outcome): Bpd.txt 
 * covariate file of discovery sample (binary outcome): Bcd.txt 
@@ -191,56 +191,23 @@ thread = 20 #this is the number of threads specified for this example. Users can
 ```
 setwd("<path to working directory>") #set the working directory where you need to save the output files
 ```
-When the outcome variable is binary
+###### When the outcome variable is binary
+**Command**
 ```
-GWAS_binary(plink_path, mydata, "Bpd.txt", "Bcd.txt", n_confounders, thread)
-GWEIS_binary(plink_path, mydata, "Bpd.txt", "Bcd.txt", n_confounders, thread)
-PRS_binary(plink_path, mydata)
-summary_regular_binary("Bpt.txt", "Bct.txt", n_confounders)
+GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", n_confounders, thread)
 ```
-When the outcome variable is quantitative (NOT ADDED TO THE PACKAGE YET)
+This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects.
+
+**Output**
+<!--- ![image](https://user-images.githubusercontent.com/131835334/236993782-75e2d666-5b83-4348-80fc-994801c406a4.png) -->
 ```
-GWAS_quantitative(mydata, "Qpd.txt", "Qcd.txt", n_confounders, thread)
-GWEIS_quantitative(mydata, "Qpd.txt", "Qcd.txt", n_confounders, thread)
-PRS_quantitative(plink_path, mydata)
-summary_regular_quantitative("Qpt.txt", "Qct.txt", n_confounders)
+V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
+1 754182 snp_53131969 G A A N ADD 7867 0.10380130071374 0.112336 0.923983 0.355495 .
+1 761732 snp_52286139 T C C N ADD 7583 0.119914096665338 0.111597 1.07452 0.282589 .
+1 768448 snp_512562034 G A A N ADD 7916 0.223183550514231 0.11595 1.92486 0.0542468 .
+1 779322 snp_54040617 A G G N ADD 7916 0.0978342643483546 0.111966 0.873763 0.382247 .
 ```
-
-Here, the fitted models in ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` or ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` are as follows:
-
-* Model 1: y = PRS_trd + E + PRS_trd x E + confounders
-* Model 2: y = PRS_add + E + PRS_add x E + confounders
-* Model 3: y = PRS_add + E + PRS_gxe x E + confounders
-* Model 4: y = PRS_add + E + PRS_gxe + PRS_gxe x E + confounders
-* Model 4*: permuted Model 4
-* Model 5: y = PRS_add + E + E^2 + PRS_gxe + PRS_gxe x E + confounders
-* Model 5*: permuted Model 5
-
-where y is the outcome variable, E is the covariate of interest, PRS_trd and PRS_add are the polygenic risk scores computed using additive SNP effects of GWAS and GWEIS summary statistics respectively, and PRS_gxe is the polygenic risk scores computed using GxE interaction SNP effects of GWEIS summary statistics.
-
-
-##### Step 3.2: Run the following code line to check the significance of the interaction term ('PRS_gxe x E'):
-
-When the outcome variable is binary:
-```
-summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
-```
-Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` and ```summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 5, and insignificant in Model 5* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
-
-
-When the outcome variable is quantitative:
-```
-summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
-```
-
-Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` and ```summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 4, and insignificant in Model 4* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
-
-
-
-
-
-### Output files
-1) B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 denotes the following columns in order. Note that all .sum files follow the same structure.
+B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 denotes the following columns in order. Note that all .sum files follow the same structure.
 * chromosome 
 * base pair position 
 * SNP ID 
@@ -256,16 +223,13 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 * p-value  
 * error code 
 
-<!--- ![image](https://user-images.githubusercontent.com/131835334/236993782-75e2d666-5b83-4348-80fc-994801c406a4.png) -->
+**Command**
 ```
-V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
-1 754182 snp_53131969 G A A N ADD 7867 0.10380130071374 0.112336 0.923983 0.355495 .
-1 761732 snp_52286139 T C C N ADD 7583 0.119914096665338 0.111597 1.07452 0.282589 .
-1 768448 snp_512562034 G A A N ADD 7916 0.223183550514231 0.11595 1.92486 0.0542468 .
-1 779322 snp_54040617 A G G N ADD 7916 0.0978342643483546 0.111966 0.873763 0.382247 .
+GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", n_confounders, thread)
 ```
+This performs GWEIS and outputs the files B_add.sum and B_gxe.sum which contain GWEIS summary statistics of all additive and interaction SNP effects.
 
-2) B_add.sum - This contains GWEIS summary statistics of all additive SNP effects, when the outcome is binary. 
+**Output**
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236993906-1ea97b12-af9e-4693-96a2-aff2128d1eb7.png) -->
 ```
 V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
@@ -274,8 +238,9 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 768448 snp_512562034 G A A N ADD 7916 0.14841138439146 0.149001 0.996065 0.319219 .
 1 779322 snp_54040617 A G G N ADD 7916 0.0952647242257811 0.142304 0.669477 0.503192 .
 ```
+B_add.sum - This contains GWEIS summary statistics of all additive SNP effects, when the outcome is binary. 
 
-3) B_gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is binary. 
+
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236993968-f07a1493-4d11-494e-b7f5-8b4747641207.png) -->
 ```
 V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
@@ -284,13 +249,15 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 768448 snp_512562034 G A A N ADDxCOVAR1 7916 0.0201849071590975 0.0863014 0.233834 0.815114 .
 1 779322 snp_54040617 A G G N ADDxCOVAR1 7916 0.0132222001691214 0.0938807 0.140788 0.888037 .
 ```
+B_gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is binary. 
 
-4) B_trd.sscore - This contains the following columns in order.
-* FID 
-* IID 
-* number of alleles across scored variants (ALLELE_CT)  
-* polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics, of the full dataset
+**Command**
+```
+PRS_binary(plink_path, "mydata")
+```
+This computes polygenic risk scores for each individual in the target dataset and outputs the files B_trd.sscore, B_trd.sscore and B_trd.sscore.
 
+**Output**
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994019-1ef3609a-4142-4fda-a89b-e05c81fc6d32.png) -->
 ```
 #FID	IID	ALLELE_CT	NAMED_ALLELE_DOSAGE_SUM	SCORE1_AVG
@@ -299,12 +266,11 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1001035	1001035	19856	4648	-0.00277161
 1001054	1001054	19868	4552	-0.00163487
 ```
-
-5) B_add.sscore - This contains the the following columns in order.
+B_trd.sscore - This contains the following columns in order.
 * FID 
 * IID 
-* ALLELE_CT  
-* polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset 
+* number of alleles across scored variants (ALLELE_CT)  
+* polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics, of the full dataset
 
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994081-d346ae48-d22a-4a35-a608-e4ed7535ec6c.png) -->
 ```
@@ -314,12 +280,11 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1001035	1001035	19856	4648	-0.00417207
 1001054	1001054	19868	4552	-0.00294334
 ```
-
-6) B_gxe.sscore - This contains the the following columns in order.
+B_add.sscore - This contains the the following columns in order.
 * FID 
 * IID 
 * ALLELE_CT  
-* polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset
+* polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset 
 
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994128-e8e58f0e-6e0c-4494-ad58-5dc9f765f6e9.png) -->
 ```
@@ -329,8 +294,23 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1001035	1001035	19856	4648	0.00188325
 1001054	1001054	19868	4552	0.00115625
 ```
+B_gxe.sscore - This contains the the following columns in order.
+* FID 
+* IID 
+* ALLELE_CT  
+* polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset
 
-7) Bsummary.txt - This contains the target regular model summary output, when the outcome is binary. 
+**Command**
+```
+summary_regular_binary("Bpt.txt", "Bct.txt", n_confounders)
+```
+This outputs 2 files. The first file, Bsummary.txt gives the summary of the fitted **regular** model for **binary** outcome. The second file, Individual_risk_values.txt contains all the calculated individual risk scores of the fitted **regular** model for **binary** outcome. 
+
+_**Refer to the section 'IMPORTANT!' at the end of this document for details about models fitted at this step.**_
+
+Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` and ```summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 5, and insignificant in Model 5* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
+
+**Output**
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994166-c7abfafc-51e2-40c0-a240-6715aa04a457.png) -->
 ```
 
@@ -374,14 +354,7 @@ AIC: 722.31
 
 Number of Fisher Scoring iterations: 7
 ```
-
-8) B_permuted_p.txt - This contains the p-value of the permuted model, when the outcome is binary. Since the permutation is random at each time, we did not include an example here.
-9) Individual_risk_values.txt - This contains all the calculated individual risk scores using the target model (either regular model or permuted model), when the outcome is binary. The columns denote the following in order.
-* FID
-* IID 
-* estimated risk value
- 
-For demonstration, we include the results of regular model below. 
+Bsummary.txt - This contains the target regular model summary output, when the outcome is binary. 
 
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994221-e61723a3-23f5-4e75-9144-252f3950795b.png) -->
 ```
@@ -391,16 +364,43 @@ For demonstration, we include the results of regular model below.
 1001210 1001210 0.057008389028729
 1001323 1001323 0.0106231802372828
 ```
+Individual_risk_values.txt - This contains all the calculated individual risk scores using the target model (either regular model or permuted model), when the outcome is binary. The columns denote the following in order.
+* FID
+* IID 
+* estimated risk value
+
+**Command**
+```
+summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
+```
+This outputs the p value of the fitted **permuted** model for **binary** outcome.
 
 
-## Tasks of each function
-1) GWAS_binary - This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects
-2) GWEIS_binary - This performs GWEIS and outputs the files B_add.sum and B_gxe.sum which contain GWEIS summary statistics of all additive and interaction SNP effects
-3) PRS_binary - This computes polygenic risk scores for each individual in the target dataset and outputs the files B_trd.sscore, B_trd.sscore and B_trd.sscore  
-4) summary_regular_binary - This outputs the file Bsummary.txt which gives the summary of the fitted **regular** model for **binary** outcome
-5) summary_permuted_binary - This outputs the file Bsummary.txt which gives the summary of the fitted **permuted** model for **binary** outcome
-6) results_regular_binary - This outputs the file Individual_risk_values.txt containing all the calculated individual risk scores using the **regular** genomic prediction model for **binary** outcome
-7) results_permuted_binary - This outputs the file Individual_risk_values.txt containing all the calculated individual risk scores using the **permuted** genomic prediction model for **binary** outcome
+
+###### When the outcome variable is quantitative (NOT ADDED TO THE PACKAGE YET)
+```
+GWAS_quantitative("mydata", "Qpd.txt", "Qcd.txt", n_confounders, thread)
+GWEIS_quantitative("mydata", "Qpd.txt", "Qcd.txt", n_confounders, thread)
+PRS_quantitative(plink_path, "mydata")
+summary_regular_quantitative("Qpt.txt", "Qct.txt", n_confounders)
+summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
+```
+Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` and ```summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 4, and insignificant in Model 4* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
+
+## IMPORTANT!
+Here, the fitted models in ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` or ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` are as follows:
+
+* Model 1: y = PRS_trd + E + PRS_trd x E + confounders
+* Model 2: y = PRS_add + E + PRS_add x E + confounders
+* Model 3: y = PRS_add + E + PRS_gxe x E + confounders
+* Model 4: y = PRS_add + E + PRS_gxe + PRS_gxe x E + confounders
+* Model 4*: permuted Model 4
+* Model 5: y = PRS_add + E + E^2 + PRS_gxe + PRS_gxe x E + confounders
+* Model 5*: permuted Model 5
+
+where y is the outcome variable, E is the covariate of interest, PRS_trd and PRS_add are the polygenic risk scores computed using additive SNP effects of GWAS and GWEIS summary statistics respectively, and PRS_gxe is the polygenic risk scores computed using GxE interaction SNP effects of GWEIS summary statistics.
+
+
 
 
 # Contact 
