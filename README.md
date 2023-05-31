@@ -192,6 +192,8 @@ thread = 20 #this is the number of threads specified for this example. Users can
 ```
 setwd("<path to working directory>") #set the working directory where you need to save the output files
 ```
+**NOTE:** Read **manual.pdf** document for descriptions of arguments passed for each function.
+
 ###### When the outcome variable is binary
 **Command**
 ```
@@ -303,7 +305,7 @@ B_gxe.sscore - This contains the the following columns in order.
 
 **Command**
 ```
-summary_regular_binary("Bpt.txt", "Bct.txt", n_confounders)
+summary_regular_binary("Bpt.txt", "Bct.txt", n_confounders, input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore")
 ```
 This outputs 2 files. The first file, Bsummary.txt gives the summary of the fitted **regular** model for **binary** outcome. The second file, Individual_risk_values.txt contains all the calculated individual risk scores of the fitted **regular** model for **binary** outcome. 
 
