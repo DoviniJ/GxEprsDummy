@@ -159,17 +159,18 @@ Qcov_target <- paste0(inst_path, "/Qcov_target.txt")
 ```
 Note that the step 3.1.3 described above is to call the embedded data files in this package itself. However, when the users have to call their own data, they can follow the same approach. It is more convenient if the users can store all their data files in the same working directory. For example, assume that the file names are as follows 
 (Refer to 'File formats' section of this document to view the formating details of each of the following input file): 
-* binary files: mydata.fam, mydata.bim and mydata.bed
-* phenotype file of discovery sample (binary outcome): Bpd.txt 
-* covariate file of discovery sample (binary outcome): Bcd.txt 
-* phenotype file of target sample (binary outcome): Bpt.txt
-* covariate file of the target sample (binary outcome): Bct.txt
-* phenotype file of discovery sample (quantitative outcome): Qpd.txt 
-* covariate file of discovery sample (quantitative outcome): Qcd.txt 
-* phenotype file of target sample (quantitative outcome): Qpt.txt
-* covariate file of the target sample (quantitative outcome): Qct.txt
+* binary files: **mydata.fam**, **mydata.bim** and **mydata.bed**
+* phenotype file of discovery sample (binary outcome): **Bpd.txt**
+* covariate file of discovery sample (binary outcome): **Bcd.txt**
+* phenotype file of target sample (binary outcome): **Bpt.txt**
+* covariate file of the target sample (binary outcome): **Bct.txt**
+* phenotype file of discovery sample (quantitative outcome): **Qpd.txt** 
+* covariate file of discovery sample (quantitative outcome): **Qcd.txt** 
+* phenotype file of target sample (quantitative outcome): **Qpt.txt**
+* covariate file of the target sample (quantitative outcome): **Qct.txt**
 
-Note that, all these files can be placed in a separate location. It is always upto the users choice. In that case remember to give the full path to the file location since R identifies files by name, only when they are in the same directory.
+###### Additional note:
+_Note that, all these files can be placed in a separate location. It is always upto the users choice. In that case remember to give the full path to the file location since R identifies files by name, only when they are in the same directory._
 ```
 b_file <- "<path>/mydata"
 Bphe_discovery <- "<path>/Bpd.txt"
