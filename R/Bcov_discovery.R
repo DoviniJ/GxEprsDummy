@@ -2,23 +2,23 @@
 #' This contains covariate information of the individuals in the discovery dataset following confounders
 #' @format A dataframe with 7916 rows and 18 columns
 #' \describe{
-#' \item Family ID
-#' \item Individual ID
-#' \item standardized covariate
-#' \item square of the standardized covariate
-#' \item confounder 1
-#' \item confounder 2
-#' \item confounder 3
-#' \item confounder 4
-#' \item confounder 5
-#' \item confounder 6
-#' \item confounder 7
-#' \item confounder 8
-#' \item confounder 9
-#' \item confounder 10
-#' \item confounder 11
-#' \item confounder 12
-#' \item confounder 13
-#' \item confounder 14
+#'  \item{Column 1}{Family ID}
+#'  \item{Column 2}{Individual ID}
+#'  \item{Column 3}{standardized covariate}
+#'  \item{Column 4}{square of the standardized covariate}
+#'  \item{Column 5}{confounder 1}
+#'  \item{Column 6}{confounder 2}
+#'  \item{Column 7}{confounder 3}
+#'  \item{Column 8}{confounder 4}
+#'  \item{Column 9}{confounder 5}
+#'  \item{Column 10}{confounder 6}
+#'  \item{Column 11}{confounder 7}
+#'  \item{Column 12}{confounder 8}
+#'  \item{Column 13}{confounder 9}
+#'  \item{Column 14}{confounder 10}
+#'  \item{Column 15}{confounder 11}
+#'  \item{Column 16}{confounder 12}
+#'  \item{Column 17}{confounder 13}
+#'  \item{Column 18}{confounder 14}
 #' }
 "Bcov_discovery"

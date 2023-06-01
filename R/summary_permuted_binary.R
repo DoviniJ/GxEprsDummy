@@ -2,39 +2,37 @@
 #' This function uses plink2 and outputs the p value of permuted model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 #' @param Bphe_target Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading
 #' @param Bcov_target Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading
-#' @param n_confounders Number of confounding variables in the target dataset
+#' @param iterations Number of iterations used in permutation
+#' @param input_score2 The .sscore file generated using additive SNP effects of GWEIS summary statistics
+#' @param input_score3 The .sscore file generated using interaction SNP effects of GWEIS summary statistics
 #' @keywords regression summary
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will output
 #' \item{B_permuted_p.txt} the p value of the permuted model
-#' @example x <- summary_permuted_binary(Bphe_target, Bcov_target, 14)
+#' @example x <- summary_permuted_binary(Bphe_target, Bcov_target)
 #' @example x
-summary_permuted_binary <- function(Bphe_target, Bcov_target, n_confounders, iterations = 1000, input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore"){
+summary_permuted_binary <- function(Bphe_target, Bcov_target, iterations = 1000, input_score1 = "B_add.sscore", input_score2 = "B_gxe.sscore"){
+  cov_file <- read.table(Bcov_target)
+  n_confounders = ncol(cov_file) - 4
   fam=read.table(Bphe_target, header=F) 
   colnames(fam) <- c("FID", "IID", "PHENOTYPE")
   dat=read.table(Bcov_target, header=F)
   colnames(dat)[1] <- "FID"
   colnames(dat)[2] <- "IID"
-  prs0_all=read.table(input_score1)
-  colnames(prs0_all)[1] <- "FID"
-  colnames(prs0_all)[2] <- "IID"
-  prs0=merge(fam, prs0_all, by = "FID")
-  prs1_all=read.table(input_score2)
+  prs1_all=read.table(input_score1)
   colnames(prs1_all)[1] <- "FID"
   colnames(prs1_all)[2] <- "IID"
   prs1=merge(fam, prs1_all, by = "FID")
-  prs2_all=read.table(input_score3)
+  prs2_all=read.table(input_score2)
   colnames(prs2_all)[1] <- "FID"
   colnames(prs2_all)[2] <- "IID"
   prs2=merge(fam, prs2_all, by = "FID")
-  m1 <- match(prs0$IID.x, dat$IID)
+  m1 <- match(prs1$IID.x, dat$IID)
   out = fam$PHENOTYPE[m1]
   cov=scale(dat$V3[m1])
-  ps0=scale(prs0$V5)
   ps1=scale(prs1$V5)
   ps2=scale(prs2$V5)
-  xv0=scale(prs0$V5*cov)
   xv1=scale(prs1$V5*cov)
   xv2=scale(prs2$V5*cov)
   cov2=scale(cov^2)
@@ -44,6 +42,9 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, n_confounders, ite
     regular_m = glm(out ~., data = df_regular_new, family = binomial(link = logit))
     regular_p = summary(regular_m)$coefficients[6,4]
     for(i in 1:pn){
+    percentage <- (i / iterations) * 100
+    percentage <- (i / iterations) * 100
+    cat(sprintf("\rProgress: %3.0f%%", percentage))
       sv2=sample(seq(1, length(out)))
       xv2=scale(prs2$V5[sv2]*cov)
     df_new <- as.data.frame(cbind(out, cov, cov2, ps1, ps2, xv2))
@@ -68,6 +69,8 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, n_confounders, ite
     }
     conf_var <- conf_var[m1,]
     for(i in 1:pn){
+    percentage <- (i / iterations) * 100
+    cat(sprintf("\rProgress: %3.0f%%", percentage))
       sv2=sample(seq(1, length(out)))
       xv2=scale(prs2$V5[sv2]*cov)
       df_new <- as.data.frame(cbind(out, cov, cov2, ps1, ps2, xv2, conf_var))
@@ -79,10 +82,7 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, n_confounders, ite
       m = glm(out ~., data = df_new, family = binomial(link = logit))
       if (regular_p < summary(m)$coefficients[6,4]) pp_gxe_x_E=pp_gxe_x_E+1
     }
-    sink("B_permuted_p.txt")
-    print(pp_gxe_x_E/pn)
-    sink()
   }
+  cat("\n")
   return(pp_gxe_x_E/pn)
 }
-

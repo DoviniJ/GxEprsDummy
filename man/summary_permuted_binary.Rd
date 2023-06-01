@@ -8,11 +8,9 @@ This function uses plink2 and outputs the p value of permuted model in the targe
 summary_permuted_binary(
   Bphe_target,
   Bcov_target,
-  n_confounders,
   iterations = 1000,
-  input_score1 = "B_trd.sscore",
-  input_score2 = "B_add.sscore",
-  input_score3 = "B_gxe.sscore"
+  input_score1 = "B_add.sscore",
+  input_score2 = "B_gxe.sscore"
 )
 }
 \arguments{
@@ -20,7 +18,11 @@ summary_permuted_binary(
 
 \item{Bcov_target}{Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading}
 
-\item{n_confounders}{Number of confounding variables in the target dataset}
+\item{iterations}{Number of iterations used in permutation}
+
+\item{input_score2}{The .sscore file generated using additive SNP effects of GWEIS summary statistics}
+
+\item{input_score3}{The .sscore file generated using interaction SNP effects of GWEIS summary statistics}
 }
 \value{
 This function will output

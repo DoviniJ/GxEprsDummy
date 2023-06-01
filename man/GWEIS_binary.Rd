@@ -8,12 +8,11 @@ This function performs GWEIS using plink2 and outputs the GWEIS summary statisti
 GWEIS_binary(
   plink_path,
   b_file,
-  pheno_file,
-  covar_file,
-  n_confounders,
-  thread,
-  summary_output1 = NULL,
-  summary_output2 = NULL
+  Bphe_discovery,
+  Bcov_discovery,
+  thread = 20,
+  summary_output1 = "B_add.sum",
+  summary_output2 = "B_gxe.sum"
 )
 }
 \arguments{
@@ -21,13 +20,15 @@ GWEIS_binary(
 
 \item{b_file}{Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix}
 
-\item{pheno_file}{Phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading}
+\item{Bphe_discovery}{Phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading}
 
-\item{covar_file}{Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading}
-
-\item{n_confounders}{Number of confounding variables in the discovery dataset}
+\item{Bcov_discovery}{Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading}
 
 \item{thread}{Number of threads used}
+
+\item{summary_output1}{Name of the additive SNP effects of the GWEIS summary statistics file specified by the user}
+
+\item{summary_output2}{Name of the interaction SNP effects of the GWEIS summary statistics file specified by the user}
 }
 \value{
 This function will perform GWEIS and output

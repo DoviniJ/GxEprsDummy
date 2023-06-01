@@ -8,10 +8,10 @@ This function uses plink2 and outputs the summary of regular model in the target
 summary_regular_binary(
   Bphe_target,
   Bcov_target,
-  n_confounders,
   input_score1 = "B_trd.sscore",
   input_score2 = "B_add.sscore",
-  input_score3 = "B_gxe.sscore"
+  input_score3 = "B_gxe.sscore",
+  Model
 )
 }
 \arguments{
@@ -19,11 +19,18 @@ summary_regular_binary(
 
 \item{Bcov_target}{Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading}
 
-\item{n_confounders}{Number of confounding variables in the target dataset}
+\item{input_score1}{The .sscore file generated using additive SNP effects of GWAS summary statistics}
+
+\item{input_score2}{The .sscore file generated using additive SNP effects of GWEIS summary statistics}
+
+\item{input_score3}{The .sscore file generated using interaction SNP effects of GWEIS summary statistics}
+
+\item{Model}{Specify the model number (1: y = PRS_trd + E + PRS_trd x E + confounders, 2: y = PRS_add + E + PRS_add x E + confounders, 3: y = PRS_add + E + PRS_gxe x E + confounders, 4: y = PRS_add + E + PRS_gxe + PRS_gxe x E + confounders, 5: y = PRS_add + E + E^2 + PRS_gxe + PRS_gxe x E + confounders, where y is the outcome variable, E is the covariate of interest, PRS_trd and PRS_add are the polygenic risk scores computed using additive SNP effects of GWAS and GWEIS summary statistics respectively, and PRS_gxe is the polygenic risk scores computed using GxE interaction SNP effects of GWEIS summary statistics.)}
 }
 \value{
 This function will output
 \item{Bsummary.txt} the summary of the fitted model
+\item{Individual_risk_values.txt} the estimated risk values of individuals in the target sample
 }
 \description{
 summary_regular_binary function

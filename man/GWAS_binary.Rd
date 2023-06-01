@@ -8,11 +8,10 @@ This function performs GWAS using plink2 and outputs the GWAS summary statistics
 GWAS_binary(
   plink_path,
   b_file,
-  pheno_file,
-  covar_file,
-  n_confounders,
-  thread,
-  summary_output = NULL
+  Bphe_discovery,
+  Bcov_discovery,
+  thread = 20,
+  summary_output = "B_trd.sum"
 )
 }
 \arguments{
@@ -20,13 +19,13 @@ GWAS_binary(
 
 \item{b_file}{Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix}
 
-\item{pheno_file}{Name (with file extension) of the phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading}
+\item{Bphe_discovery}{Name (with file extension) of the phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading}
 
-\item{covar_file}{Name (with file extension) of the covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading}
-
-\item{n_confounders}{Number of confounding variables in the discovery dataset}
+\item{Bcov_discovery}{Name (with file extension) of the covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading}
 
 \item{thread}{Number of threads used}
+
+\item{summary_output}{Name of the SNP effects of the GWAS summary statistics file specified by the user}
 }
 \value{
 This function will perform GWAS and output

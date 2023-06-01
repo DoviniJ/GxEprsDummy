@@ -2,20 +2,23 @@
 #' This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_add.sum and interaction SNP effects named B_gxe.sum
 #' @param plink_path Path to the PLINK executable application
 #' @param b_file Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix
-#' @param pheno_file Phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading
-#' @param covar_file Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading
-#' @param n_confounders Number of confounding variables in the discovery dataset
+#' @param Bphe_discovery Phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading
+#' @param Bcov_discovery Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the discovery dataset as columns, without heading
 #' @param thread Number of threads used
+#' @param summary_output1 Name of the additive SNP effects of the GWEIS summary statistics file specified by the user
+#' @param summary_output2 Name of the interaction SNP effects of the GWEIS summary statistics file specified by the user
 #' @keywords gwies, interaction, gxe
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will perform GWEIS and output
 #' \item{B_add.sum} GWEIS summary statistics file with additive SNP effects
 #' \item{B_gxe.sum} GWEIS summary statistics file with interaction SNP effects
-#' @example x <- GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 14, 20)
+#' @example x <- GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery)
 #' @example head(x[[1]])
 #' @example head(x[[2]])
-GWEIS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounders, thread, summary_output1 = NULL, summary_output2 = NULL){
+GWEIS_binary <- function(plink_path, b_file, Bphe_discovery, Bcov_discovery, thread = 20, summary_output1 = "B_add.sum", summary_output2 = "B_gxe.sum"){
+  cov_file <- read.table(Bcov_discovery)
+  n_confounders = ncol(cov_file) - 4
   if(n_confounders > 0){
     parameters <- c(1, 2, 3, (1:(n_confounders+1))+3)
   }
@@ -26,8 +29,8 @@ GWEIS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounde
   runPLINK <- function(PLINKoptions = "") system(paste(plink_path, PLINKoptions))
   runPLINK(paste0(" --bfile ", b_file,
                 " --glm interaction --pheno ", 
-                pheno_file, 
-                " --covar ", covar_file, 
+                Bphe_discovery, 
+                " --covar ", Bcov_discovery, 
                 " --parameters ", param_vec, 
                 " --allow-no-sex --threads ", 
                 thread,
@@ -37,26 +40,12 @@ GWEIS_binary <- function(plink_path, b_file, pheno_file, covar_file, n_confounde
   filtered_output$V10 = log(filtered_output$V10)
   filtered_output2 <- plink_output[(plink_output$V8=="ADDxCOVAR1"),]
   filtered_output2$V10 <- log(filtered_output2$V10)
-  if(missing(summary_output1)){
-  	sink("B_add.sum")
-  	write.table(filtered_output, sep = " ", row.names = FALSE, quote = FALSE)
-  	sink()
-  }
-  else{
-  	sink(summary_output1)
-  	write.table(filtered_output, sep = " ", row.names = FALSE, quote = FALSE)
-  	sink()
-  }
-  if(missing(summary_output2)){
-  	sink("B_gxe.sum")
-  	write.table(filtered_output2, sep = " ", row.names = FALSE, quote = FALSE)
-  	sink()
-  }
-  else{
-  	sink(summary_output2)
-  	write.table(filtered_output2, sep = " ", row.names = FALSE, quote = FALSE)
-  	sink()
-  }
+  sink(summary_output1)
+  write.table(filtered_output, sep = " ", row.names = FALSE, quote = FALSE)
+  sink()
+  sink(summary_output2)
+  write.table(filtered_output2, sep = " ", row.names = FALSE, quote = FALSE)
+  sink()
  out <- list(filtered_output, filtered_output2)
  return(out)
  }

@@ -8,24 +8,22 @@ This function uses plink2 and outputs PRSs of each individual in the target data
 PRS_binary(
   plink_path,
   b_file,
-  summary_input1 = "B_trd.sum",
-  summary_input2 = "B_add.sum",
-  summary_input3 = "B_gxe.sum",
-  summary_output1 = NULL,
-  summary_output2 = NULL,
-  summary_output3 = NULL
+  summary_input = "B_trd.sum",
+  summary_output = "B_trd"
 )
 }
 \arguments{
 \item{plink_path}{Path to the PLINK executable application}
 
 \item{b_file}{Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix}
+
+\item{summary_input}{Name of the summary statistics file specified by the user}
+
+\item{summary_output}{Name of the PRS file generated using provided summary statistics file specified by the user}
 }
 \value{
 This function will output
 \item{B_trd.sscore} PRSs for each target individual using GWAS additive effects
-\item{B_add.sscore} PRSs for each target individual using GWEIS additive effects
-\item{B_gxe.sscore} PRSs for each target individual using GWEIS interaction effects
 }
 \description{
 PRS_binary function
