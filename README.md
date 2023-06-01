@@ -308,8 +308,6 @@ This outputs 2 files. The first file, Bsummary.txt gives the summary of the fitt
 
 ##### Refer to the section $\color{red}{IMPORTANT}$ at the end of this document for details about models fitted at this step.
 
-Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` and ```summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 5, and insignificant in Model 5* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
-
 **Output**
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994166-c7abfafc-51e2-40c0-a240-6715aa04a457.png) -->
 ```
@@ -369,6 +367,8 @@ Individual_risk_values.txt - This contains all the calculated individual risk sc
 * IID 
 * estimated risk value
 
+Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary("Bpt.txt", "Bct.txt", input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore", Model = 5)``` and ```summary_permuted_binary("Bpt.txt", "Bct.txt", iterations = 1000, input_score1 = "B_add.sscore", input_score2 = "B_gxe.sscore")```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 5, and insignificant in Model 5* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
+
 **Command**
 ```
 summary_permuted_binary("Bpt.txt", "Bct.txt", iterations = 1000, input_score1 = "B_add.sscore", input_score2 = "B_gxe.sscore")
@@ -389,7 +389,6 @@ PRS_quantitative(plink_path, "mydata")
 summary_regular_quantitative("Qpt.txt", "Qct.txt", n_confounders)
 summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
 ```
-Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` and ```summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 4, and insignificant in Model 4* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
 -->
 
 
@@ -399,7 +398,7 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 
 
 ## $$\color{red}{IMPORTANT}$$
-Here, the fitted models in ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` or ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` are as follows:
+Here, the fitted models in ```summary_regular_binary("Bpt.txt", "Bct.txt", input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore", Model)``` or ```summary_regular_quantitative("Qpt.txt", "Qct.txt", input_score1 = "Q_trd.sscore", input_score2 = "Q_add.sscore", input_score3 = "Q_gxe.sscore", Model)``` are as follows:
 
 * Model 1: y = PRS_trd + E + PRS_trd x E + confounders
 * Model 2: y = PRS_add + E + PRS_add x E + confounders
