@@ -382,6 +382,10 @@ This outputs the p value of the fitted **permuted** model for **binary** outcome
 
 
 
+
+
+
+<!--- 
 ###### When the outcome variable is quantitative (NOT ADDED TO THE PACKAGE YET)
 ```
 GWAS_quantitative("mydata", "Qpd.txt", "Qcd.txt", n_confounders, thread)
@@ -391,6 +395,13 @@ summary_regular_quantitative("Qpt.txt", "Qct.txt", n_confounders)
 summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
 ```
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` and ```summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 4, and insignificant in Model 4* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
+-->
+
+
+
+
+
+
 
 ## $$\color{red}{IMPORTANT}$$
 Here, the fitted models in ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` or ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` are as follows:
