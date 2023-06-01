@@ -197,7 +197,7 @@ setwd("<path to working directory>") #set the working directory where you need t
 ###### When the outcome variable is binary
 **Command**
 ```
-GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", n_confounders, thread)
+GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", n_confounders, thread, summary_output = "B_trd.sum")
 ```
 This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects.
 
@@ -228,7 +228,7 @@ B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, w
 
 **Command**
 ```
-GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", n_confounders, thread)
+GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", n_confounders, thread, summary_output1 = "B_add.sum", summary_output2 = "B_gxe.sum")
 ```
 This performs GWEIS and outputs the files B_add.sum and B_gxe.sum which contain GWEIS summary statistics of all additive and interaction SNP effects.
 
@@ -256,9 +256,11 @@ B_gxe.sum - This contains GWEIS summary statistics of all interaction SNP effect
 
 **Command**
 ```
-PRS_binary(plink_path, "mydata")
+PRS_binary(plink_path, "mydata", summary_input = "B_trd.sum", summary_output = "B_trd")
+PRS_binary(plink_path, "mydata", summary_input = "B_add.sum", summary_output = "B_add")
+PRS_binary(plink_path, "mydata", summary_input = "B_gxe.sum", summary_output = "B_gxe")
 ```
-This computes polygenic risk scores for each individual in the target dataset and outputs the files B_trd.sscore, B_trd.sscore and B_trd.sscore.
+These commands compute polygenic risk scores for each individual in the target dataset and outputs the files B_trd.sscore, B_trd.sscore and B_trd.sscore respecively.
 
 **Output**
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994019-1ef3609a-4142-4fda-a89b-e05c81fc6d32.png) -->
