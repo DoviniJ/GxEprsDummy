@@ -183,12 +183,7 @@ Qphe_target <- "<path>/Qpt.txt"
 Qcov_target <- "<path>/Qct.txt"
 ```
 
-###### Step 3.1.4 Set the number of confounders as 14 and number of threads (CPUs) as 20
-```
-n_confounders = 14 #this is the number of confounders in the covariate files of the embedded example datasets. Users can change this value according to the number of confounders they use in their covariate files.
-thread = 20 #this is the number of threads specified for this example. Users can change this value according to their preference.
-```
-###### Step 3.1.5 Set the working directory and run the following R functions in the given order
+###### Step 3.1.4 Set the working directory and run the following R functions in the given order
 ```
 setwd("<path to working directory>") #set the working directory where you need to save the output files
 ```
@@ -197,7 +192,7 @@ $\color{red}{NOTE:}$ Read **manual.pdf** document for descriptions of arguments 
 ###### When the outcome variable is binary
 **Command**
 ```
-GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", n_confounders, thread, summary_output = "B_trd.sum")
+GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")
 ```
 This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects.
 
@@ -228,7 +223,7 @@ B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, w
 
 **Command**
 ```
-GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", n_confounders, thread, summary_output1 = "B_add.sum", summary_output2 = "B_gxe.sum")
+GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output1 = "B_add.sum", summary_output2 = "B_gxe.sum")
 ```
 This performs GWEIS and outputs the files B_add.sum and B_gxe.sum which contain GWEIS summary statistics of all additive and interaction SNP effects.
 
@@ -307,7 +302,7 @@ B_gxe.sscore - This contains the the following columns in order.
 
 **Command**
 ```
-summary_regular_binary("Bpt.txt", "Bct.txt", n_confounders, input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore")
+summary_regular_binary("Bpt.txt", "Bct.txt", input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore", Model = 5)
 ```
 This outputs 2 files. The first file, Bsummary.txt gives the summary of the fitted **regular** model for **binary** outcome. The second file, Individual_risk_values.txt contains all the calculated individual risk scores of the fitted **regular** model for **binary** outcome. 
 
@@ -376,7 +371,7 @@ Individual_risk_values.txt - This contains all the calculated individual risk sc
 
 **Command**
 ```
-summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)
+summary_permuted_binary("Bpt.txt", "Bct.txt", iterations = 1000, input_score1 = "B_add.sscore", input_score2 = "B_gxe.sscore")
 ```
 This outputs the p value of the fitted **permuted** model for **binary** outcome.
 
