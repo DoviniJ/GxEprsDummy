@@ -192,7 +192,7 @@ thread = 20 #this is the number of threads specified for this example. Users can
 ```
 setwd("<path to working directory>") #set the working directory where you need to save the output files
 ```
-**NOTE:** Read **manual.pdf** document for descriptions of arguments passed for each function.
+$\color{red}{NOTE:}$ Read **manual.pdf** document for descriptions of arguments passed for each function.
 
 ###### When the outcome variable is binary
 **Command**
@@ -311,7 +311,7 @@ summary_regular_binary("Bpt.txt", "Bct.txt", n_confounders, input_score1 = "B_tr
 ```
 This outputs 2 files. The first file, Bsummary.txt gives the summary of the fitted **regular** model for **binary** outcome. The second file, Individual_risk_values.txt contains all the calculated individual risk scores of the fitted **regular** model for **binary** outcome. 
 
-_**Refer to the section 'IMPORTANT!' at the end of this document for details about models fitted at this step.**_
+##### Refer to the section $\color{red}{IMPORTANT}$ at the end of this document for details about models fitted at this step.
 
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` and ```summary_permuted_binary(Bphe_target, Bcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 5, and insignificant in Model 5* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
 
@@ -392,7 +392,7 @@ summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
 ```
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` and ```summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 4, and insignificant in Model 4* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
 
-## IMPORTANT!
+## $$\color{red}{IMPORTANT}$$
 Here, the fitted models in ```summary_regular_binary(Bphe_target, Bcov_target, n_confounders)``` or ```summary_regular_quantitative(Qphe_target, Qcov_target, n_confounders)``` are as follows:
 
 * Model 1: y = PRS_trd + E + PRS_trd x E + confounders
