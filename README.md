@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 # GxEprs
-The 'GxEprs' is an R package for **genomic prediction** that uses a sophisticated method that has been enhanced for its prediction accuracy. It performs Genome Wide Association Studies (GWAS) and Genome Wide Environment Interaction Studies (GWEIS) using plink2 which is easily accessible from within R.
+The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS model that can enhanced the prediction accuracy by utilising GxE effects. Firstly it performs Genome Wide Association Studies (GWAS)  and Genome Wide Environment Interaction Studies (GWEIS) using the discovery sample (see functions ```GWAS_binary()```,```GWAS_quantitative()```, ```GWEIS_binary()```, ```GWEIS_quantitative()```). See the section $\color{red}{IMPORTANT}$ for the discovery models used. Secondly, it uses the generated summary statistics file(s) to obtain polygenic risk scores (PRSs) (see functions ```PRS_binary()``` and ```PRS_quantitative()```) for the target sample. Finally it predicts the risk values of each individual in the target sample (see functions ```summary_regular_binary()``` and ```summary_regular_quantitative()```). Note that the users can fit 5 different models when the outcome is binary, and 4 different models when the outcome is quantitative. See the section $\color{red} {IMPORTANT}$ for the target models used. It is recommended to check the p-value from the permuted model if the users choose to fit Model 5 for binary and Model 4 for quantitative outcomes.
 
 # Data preparation
 
