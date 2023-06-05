@@ -6,13 +6,13 @@ output: pdf_document
 ---
 
 # GxEprs
-The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS model that can enhanced the prediction accuracy by utilising GxE effects. Firstly it performs Genome Wide Association Studies (GWAS)  and Genome Wide Environment Interaction Studies (GWEIS) using the discovery sample (see functions ```GWAS_binary()```,```GWAS_quantitative()```, ```GWEIS_binary()```, ```GWEIS_quantitative()```). See the section $\color{red}{IMPORTANT}$ for the discovery models used. Secondly, it uses the generated summary statistics file(s) to obtain polygenic risk scores (PRSs) (see functions ```PRS_binary()``` and ```PRS_quantitative()```) for the target sample. Finally it predicts the risk values of each individual in the target sample (see functions ```summary_regular_binary()``` and ```summary_regular_quantitative()```). Note that the users can fit 5 different models when the outcome is binary, and 4 different models when the outcome is quantitative. See the section $\color{red} {IMPORTANT}$ for the target models used. It is recommended to check the p-value from the permuted model if the users choose to fit Model 5 for binary and Model 4 for quantitative outcomes.
+The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS model that can enhanced the prediction accuracy by utilising GxE effects. Firstly it performs Genome Wide Association Studies (GWAS)  and Genome Wide Environment Interaction Studies (GWEIS) using the discovery sample (see functions ```GWAS_binary()```,```GWAS_quantitative()```, ```GWEIS_binary()```, ```GWEIS_quantitative()```). See the section $\color{red}{IMPORTANT}$ for the discovery models used. Secondly, it uses the generated summary statistics file(s) to obtain polygenic risk scores (PRSs) (see functions ```PRS_binary()``` and ```PRS_quantitative()```) for the target sample. Finally it predicts the risk values of each individual in the target sample (see functions ```summary_regular_binary()``` and ```summary_regular_quantitative()```). Note that the users can fit 5 different models when the outcome is binary, and 4 different models when the outcome is quantitative. See the section $\color{red} {IMPORTANT}$ for the target models used. It is recommended to check the p-value from the permuted model if the users choose to fit Model 5 for binary and Model 4 for quantitative outcomes (see functions ```summary_permuted_binary()``` and ```summary_permuted_quantitative()```).
 
 # Data preparation
 
 ## File formats
 ### Input files
-1) mydata.fam - This is one of the binary files which contains the following columns in order. The example dataset has 10,000 individuals. Note that the file has no column headings.
+1) mydata.fam - This is a file associated with the PLINK binary format file which contains the following columns in order. The example dataset has 10,000 individuals. Note that the file has no column headings. This follows the PLINK .fam file format.
 * family ID (FID) 
 * individual ID (IID) 
 * father's ID 
@@ -29,7 +29,7 @@ The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS mod
 1001078 1001078 0 0 2 -9
 ```
   
-2) mydata.bim - This is one of the binary files which contains the following columns in order. The example dataset has 10,000 SNPs. Note that the file has no column headings. 
+2) mydata.bim - This is is a file associated with the PLINK binary format file which contains the following columns in order. The example dataset has 10,000 SNPs. Note that the file has no column headings. This follows the PLINK .bim file format.
 * chromosome code 
 * SNP ID 
 * position of centimorgans 
@@ -46,7 +46,7 @@ The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS mod
 1	  snp_52980300	0	785989	T	C
 ```
 
-3) mydata.bed - This is also a binary file which cannot be read by humans.
+3) mydata.bed - This is the PLINK binary format file which includes genotype information. This follows the PLINK .bed file format.
 4) Bpd.txt - This is a .txt file which contains the following columns in order. The discovery dataset has 7916 individuals. Note that the file has no column headings.
 * FID 
 * IID  
@@ -157,8 +157,8 @@ Qcov_discovery <- paste0(inst_path, "/Qcov_discovery.txt")
 Qphe_target <- paste0(inst_path, "/Qphe_target.txt")
 Qcov_target <- paste0(inst_path, "/Qcov_target.txt")
 ```
-Note that the step 3.1.3 described above is to call the embedded data files in this package itself. However, when the users have to call their own data, they can follow the same approach. It is more convenient if the users can store all their data files in the same working directory. For example, assume that the file names are as follows 
-(Refer to 'File formats' section of this document to view the formating details of each of the following input file): 
+Note that the step 3.1.3 described above is to call the embedded data files in this package itself. However, when users have to call their own data, they can follow the same approach. It is more convenient if the users can store all their data files in the same working directory. For example, assume that the file names are as follows 
+(Refer to 'File formats' section of this document to view the formatting details of each of the following input file): 
 * binary files: **mydata.fam**, **mydata.bim** and **mydata.bed**
 * phenotype file of discovery sample (binary outcome): **Bpd.txt**
 * covariate file of discovery sample (binary outcome): **Bcd.txt**
