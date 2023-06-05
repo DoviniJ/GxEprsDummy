@@ -192,9 +192,9 @@ $\color{red}{NOTE:}$ Read **manual.pdf** document for descriptions of arguments 
 ###### When the outcome variable is binary
 **Command**
 ```
-GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")
+GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_out")
 ```
-This performs GWAS and outputs the file B_trd.sum which contains GWAS summary statistics of all additive SNP effects.
+As explained above, “mydata” is the prefix of the PLINK format files, “Bpd.txt” is binary phenotype file of the discovery sample, "Bcd.txt" is the covariate file of the discovery sample, thread indicates the number of CPUs used to run the command which can be optionally specified by the user (default is 20). Here summary_output is an output file name (also an optional argument) which can be defined by the user (default is "B_out" and the function will generate the suffix ".trd.sum") This command performs GWAS using a logistic regression, and outputs GWAS summary statistics of all additive SNP effects stored in the file "B_out.trd.sum".
 
 **Output**
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236993782-75e2d666-5b83-4348-80fc-994801c406a4.png) -->
@@ -205,7 +205,7 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 768448 snp_512562034 G A A N ADD 7916 0.223183550514231 0.11595 1.92486 0.0542468 .
 1 779322 snp_54040617 A G G N ADD 7916 0.0978342643483546 0.111966 0.873763 0.382247 .
 ```
-B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 denotes the following columns in order. Note that all .sum files follow the same structure.
+B_out.trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 denotes the following columns in order. Note that all .sum files follow the same structure.
 * chromosome 
 * base pair position 
 * SNP ID 
@@ -223,9 +223,9 @@ B_trd.sum - This contains GWAS summary statistics of all additive SNP effects, w
 
 **Command**
 ```
-GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output1 = "B_add.sum", summary_output2 = "B_gxe.sum")
+GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_out")
 ```
-This performs GWEIS and outputs the files B_add.sum and B_gxe.sum which contain GWEIS summary statistics of all additive and interaction SNP effects.
+This performs GWEIS using a logistic regression, and outputs GWEIS summary statistics of all additive and interaction SNP effects in the files "B_out.add.sum" and "B_out.gxe.sum", respectively. 
 
 **Output**
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236993906-1ea97b12-af9e-4693-96a2-aff2128d1eb7.png) -->
@@ -236,7 +236,7 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 768448 snp_512562034 G A A N ADD 7916 0.14841138439146 0.149001 0.996065 0.319219 .
 1 779322 snp_54040617 A G G N ADD 7916 0.0952647242257811 0.142304 0.669477 0.503192 .
 ```
-B_add.sum - This contains GWEIS summary statistics of all additive SNP effects, when the outcome is binary. 
+B_out.add.sum - This contains GWEIS summary statistics of all additive SNP effects, when the outcome is binary. 
 
 
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236993968-f07a1493-4d11-494e-b7f5-8b4747641207.png) -->
@@ -247,15 +247,15 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 768448 snp_512562034 G A A N ADDxCOVAR1 7916 0.0201849071590975 0.0863014 0.233834 0.815114 .
 1 779322 snp_54040617 A G G N ADDxCOVAR1 7916 0.0132222001691214 0.0938807 0.140788 0.888037 .
 ```
-B_gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is binary. 
+B_out.gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is binary. 
 
 **Command**
 ```
-PRS_binary(plink_path, "mydata", summary_input = "B_trd.sum", summary_output = "B_trd")
-PRS_binary(plink_path, "mydata", summary_input = "B_add.sum", summary_output = "B_add")
-PRS_binary(plink_path, "mydata", summary_input = "B_gxe.sum", summary_output = "B_gxe")
+PRS_binary(plink_path, "mydata", summary_input = "B_out.trd.sum", summary_output = "B_trd")
+PRS_binary(plink_path, "mydata", summary_input = "B_out.add.sum", summary_output = "B_add")
+PRS_binary(plink_path, "mydata", summary_input = "B_out.gxe.sum", summary_output = "B_gxe")
 ```
-These commands compute polygenic risk scores for each individual in the target dataset and outputs the files B_trd.sscore, B_trd.sscore and B_trd.sscore respecively.
+As explained above, “mydata” is the prefix of the PLINK format files, “B_out.trd.sum” is summary statistics generated from previous functions and used as an input for this function to construct PRS. Finally, "B_trd" is an output file name that can be defined by user. These commands compute polygenic risk scores for each individual in the target dataset and outputs the files B_trd.sscore, B_add.sscore and B_gxe.sscore respectively.
 
 **Output**
 <!--- ![image](https://user-images.githubusercontent.com/131835334/236994019-1ef3609a-4142-4fda-a89b-e05c81fc6d32.png) -->
@@ -302,9 +302,13 @@ B_gxe.sscore - This contains the the following columns in order.
 
 **Command**
 ```
-summary_regular_binary("Bpt.txt", "Bct.txt", input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore", Model = 5)
+summary_regular_binary("Bpt.txt", "Bct.txt", trd_score = "B_trd.sscore", Model = 1, summary_output = "Bsummary.txt", risk_output = "Individual_risk_values.txt")
+summary_regular_binary("Bpt.txt", "Bct.txt", add_score = "B_add.sscore", Model = 2, summary_output = "Bsummary.txt", risk_output = "Individual_risk_values.txt")
+summary_regular_binary("Bpt.txt", "Bct.txt", add_score = "B_add.sscore", gxe_score = "B_gxe.sscore", Model = 3, summary_output = "Bsummary.txt", risk_output = "Individual_risk_values.txt")
+summary_regular_binary("Bpt.txt", "Bct.txt", add_score = "B_add.sscore", gxe_score = "B_gxe.sscore", Model = 4, summary_output = "Bsummary.txt", risk_output = "Individual_risk_values.txt")
+summary_regular_binary("Bpt.txt", "Bct.txt", add_score = "B_add.sscore", gxe_score = "B_gxe.sscore", Model = 5, summary_output = "Bsummary.txt", risk_output = "Individual_risk_values.txt")
 ```
-This outputs 2 files. The first file, Bsummary.txt gives the summary of the fitted **regular** model for **binary** outcome. The second file, Individual_risk_values.txt contains all the calculated individual risk scores of the fitted **regular** model for **binary** outcome. 
+“Bpt.txt” is binary phenotype file of the target sample, "Bct.txt" is the covariate file of the target sample, "B_trd.sscore", "B_add.sscore" and "B_gxe.sscore" are the summary statistics output files generated at GWAS and GWEIS steps. Depending on the model used, the input file should be varied. (See section $\color{red}{IMPORTANT}$ for the target models.) This function outputs 2 files. The first file, Bsummary.txt gives the summary of the fitted **regular** model for **binary** outcome. The second file, Individual_risk_values.txt contains all the calculated individual risk scores of the fitted **regular** model for **binary** outcome. 
 
 ##### Refer to the section $\color{red}{IMPORTANT}$ at the end of this document for details about models fitted at this step.
 
@@ -371,7 +375,7 @@ Note: It is recommended to fit both regular and permuted models and obtain the s
 
 **Command**
 ```
-summary_permuted_binary("Bpt.txt", "Bct.txt", iterations = 1000, input_score1 = "B_add.sscore", input_score2 = "B_gxe.sscore")
+summary_permuted_binary("Bpt.txt", "Bct.txt", iterations = 1000, add_score = "B_add.sscore", gxe_score = "B_gxe.sscore")
 ```
 This outputs the p value of the fitted **permuted** model for **binary** outcome.
 
@@ -427,4 +431,4 @@ where y is the outcome variable, E is the covariate of interest, PRS_trd and PRS
 
 
 # Contact 
-Please contact Dovini Jayasinghe (dovinij@gmail.com) or Moksedul Momin (md_moksedul.momin@mymail.unisa.edu.au) or Hong Lee (hong.lee@unisa.edu.au) or for queries.
+Please contact Dovini Jayasinghe (dovinij@gmail.com) or Moksedul Momin (md_moksedul.momin@mymail.unisa.edu.au) or Hong Lee (hong.lee@unisa.edu.au) for queries.
