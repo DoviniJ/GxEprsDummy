@@ -398,14 +398,27 @@ summary_permuted_quantitative(Qphe_target, Qcov_target, n_confounders)
 
 
 ## $$\color{red}{IMPORTANT}$$
-Here, the fitted models in ```summary_regular_binary("Bpt.txt", "Bct.txt", input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore", Model)``` or ```summary_regular_quantitative("Qpt.txt", "Qct.txt", input_score1 = "Q_trd.sscore", input_score2 = "Q_add.sscore", input_score3 = "Q_gxe.sscore", Model)``` are as follows:
+The discovery model used in ```GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")``` or ```GWAS_quantitative(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")``` is as follows:
+* y = b_trd.W + error
+ where y is the outcome variable, b_trd is the estimated SNP effect and W is the SNP genotype.
+ 
+The discovery model used in ```GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")``` is as follows:
+ * y = b_add.W + b_cov.E + b_cov2.E^2 + b_gxe.(WxE) + error
+where y is the outcome variable, b_add is the estimated additive SNP effect, E is the covariate, W is the SNP genotype, b_cov is the estimated effect of the covariate, b_cov2 is the estimated effect of the squared covariate and b_gxe is the estimated effect of the Hadamard product of WxE.
 
-* Model 1: y = PRS_trd + E + PRS_trd x E + confounders
-* Model 2: y = PRS_add + E + PRS_add x E + confounders
-* Model 3: y = PRS_add + E + PRS_gxe x E + confounders
-* Model 4: y = PRS_add + E + PRS_gxe + PRS_gxe x E + confounders
+The discovery model used in ```GWEIS_quantitative(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")``` is as follows:
+ * y = b_add.W + b_cov.E + b_gxe.(WxE) + error
+where y is the outcome variable, b_add is the estimated additive SNP effect, E is the covariate, W is the SNP genotype, b_cov is the estimated effect of the covariate and b_gxe is the estimated effect of the Hadamard product of WxE.
+
+
+The fitted (target) models in ```summary_regular_binary("Bpt.txt", "Bct.txt", input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore", Model)``` or ```summary_regular_quantitative("Qpt.txt", "Qct.txt", input_score1 = "Q_trd.sscore", input_score2 = "Q_add.sscore", input_score3 = "Q_gxe.sscore", Model)``` are as follows:
+
+* Model 1: y = PRS_trd + E + PRS_trd x E + confounders + error
+* Model 2: y = PRS_add + E + PRS_add x E + confounders + error
+* Model 3: y = PRS_add + E + PRS_gxe x E + confounders + error
+* Model 4: y = PRS_add + E + PRS_gxe + PRS_gxe x E + confounders + error
 * Model 4*: permuted Model 4
-* Model 5: y = PRS_add + E + E^2 + PRS_gxe + PRS_gxe x E + confounders
+* Model 5: y = PRS_add + E + E^2 + PRS_gxe + PRS_gxe x E + confounders + error
 * Model 5*: permuted Model 5
 
 where y is the outcome variable, E is the covariate of interest, PRS_trd and PRS_add are the polygenic risk scores computed using additive SNP effects of GWAS and GWEIS summary statistics respectively, and PRS_gxe is the polygenic risk scores computed using GxE interaction SNP effects of GWEIS summary statistics.
