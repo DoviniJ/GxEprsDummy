@@ -254,7 +254,7 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 768448 snp_512562034 G A A N ADD 7916 0.223183550514231 0.11595 1.92486 0.0542468 .
 1 779322 snp_54040617 A G G N ADD 7916 0.0978342643483546 0.111966 0.873763 0.382247 .
 ```
-B_out.trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 denotes the following columns in order. Note that all .sum files follow the same structure.
+B_out.trd.sum - This contains GWAS summary statistics of all additive SNP effects, when the outcome is binary. V1 to V14 denote the following columns in order. Note that all .sum files follow the same structure.
 * chromosome 
 * base pair position 
 * SNP ID 
@@ -598,21 +598,8 @@ This outputs the p value of the fitted **permuted** model for **quantitative** o
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## $$\color{red}{IMPORTANT}$$
-The discovery model used in ```GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")``` or ```GWAS_quantitative(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")``` is as follows:
+The discovery model used in ```GWAS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")``` or ```GWAS_quantitative(plink_path, "mydata", "Qpd.txt", "Qcd.txt", thread = 20, summary_output = "Q_trd.sum")``` is as follows:
 * y = b_trd.W + error
  where y is the outcome variable, b_trd is the estimated SNP effect and W is the SNP genotype.
  
@@ -620,12 +607,12 @@ The discovery model used in ```GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bc
  * y = b_add.W + b_cov.E + b_cov2.E^2 + b_gxe.(WxE) + error
 where y is the outcome variable, b_add is the estimated additive SNP effect, E is the covariate, W is the SNP genotype, b_cov is the estimated effect of the covariate, b_cov2 is the estimated effect of the squared covariate and b_gxe is the estimated effect of the Hadamard product of WxE.
 
-The discovery model used in ```GWEIS_quantitative(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_trd.sum")``` is as follows:
+The discovery model used in ```GWEIS_quantitative(plink_path, "mydata", "Qpd.txt", "Qcd.txt", thread = 20, summary_output = "Q_trd.sum")``` is as follows:
  * y = b_add.W + b_cov.E + b_gxe.(WxE) + error
 where y is the outcome variable, b_add is the estimated additive SNP effect, E is the covariate, W is the SNP genotype, b_cov is the estimated effect of the covariate and b_gxe is the estimated effect of the Hadamard product of WxE.
 
 
-The fitted (target) models in ```summary_regular_binary("Bpt.txt", "Bct.txt", input_score1 = "B_trd.sscore", input_score2 = "B_add.sscore", input_score3 = "B_gxe.sscore", Model)``` or ```summary_regular_quantitative("Qpt.txt", "Qct.txt", input_score1 = "Q_trd.sscore", input_score2 = "Q_add.sscore", input_score3 = "Q_gxe.sscore", Model)``` are as follows:
+The fitted (target) models in ```summary_regular_binary("Bpt.txt", "Bct.txt", trd_score = "B_trd.sscore", add_score = "B_add.sscore", gxe_score = "B_gxe.sscore", Model)``` or ```summary_regular_quantitative("Qpt.txt", "Qct.txt", trd_score = "Q_trd.sscore", add_score = "Q_add.sscore", gxe_score = "Q_gxe.sscore", Model)``` are as follows:
 
 * Model 1: y = PRS_trd + E + PRS_trd x E + confounders + error
 * Model 2: y = PRS_add + E + PRS_add x E + confounders + error
