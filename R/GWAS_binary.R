@@ -1,5 +1,5 @@
 #' GWAS_binary function
-#' This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_trd.sum
+#' This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_out.trd.sum
 #' @param plink_path Path to the PLINK executable application
 #' @param b_file Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix
 #' @param Bphe_discovery Name (with file extension) of the phenotype file containing family ID, individual ID and phenotype of the discovery dataset as columns, without heading
@@ -10,10 +10,10 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will perform GWAS and output
-#' \item{B_trd.sum} GWAS summary statistics file with additive SNP effects
+#' \item{B_out.trd.sum} GWAS summary statistics file with additive SNP effects
 #' @example x <- GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery)
 #' @example head(x)
-GWAS_binary <- function(plink_path, b_file, Bphe_discovery, Bcov_discovery, thread = 20, summary_output = "B_trd.sum"){  
+GWAS_binary <- function(plink_path, b_file, Bphe_discovery, Bcov_discovery, thread = 20, summary_output = "B_out.trd.sum"){  
   cov_file <- read.table(Bcov_discovery)
   n_confounders = ncol(cov_file) - 4
   if(n_confounders > 0){

@@ -4,6 +4,6 @@
 #' \describe{
 #'  \item{Column 1}{Family ID}
 #'  \item{Column 2}{Individual ID}
-#'  \item{Column 3}{phenotype} 
+#'  \item{Column 3}{Phenotype} 
 #' }
 "Qphe_discovery"

@@ -3,12 +3,12 @@
 \name{PRS_binary}
 \alias{PRS_binary}
 \title{PRS_binary function
-This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum}
+This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_out.trd.sum, B_out.add.sum or B_out.gxe.sum}
 \usage{
 PRS_binary(
   plink_path,
   b_file,
-  summary_input = "B_trd.sum",
+  summary_input = "B_out.trd.sum",
   summary_output = "B_trd"
 )
 }
@@ -27,7 +27,7 @@ This function will output
 }
 \description{
 PRS_binary function
-This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
+This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_out.trd.sum, B_out.add.sum or B_out.gxe.sum
 }
 \keyword{profile}
 \keyword{prs,}

@@ -3,7 +3,7 @@
 \name{GWAS_binary}
 \alias{GWAS_binary}
 \title{GWAS_binary function
-This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_trd.sum}
+This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_out.trd.sum}
 \usage{
 GWAS_binary(
   plink_path,
@@ -11,7 +11,7 @@ GWAS_binary(
   Bphe_discovery,
   Bcov_discovery,
   thread = 20,
-  summary_output = "B_trd.sum"
+  summary_output = "B_out.trd.sum"
 )
 }
 \arguments{
@@ -29,10 +29,10 @@ GWAS_binary(
 }
 \value{
 This function will perform GWAS and output
-\item{B_trd.sum} GWAS summary statistics file with additive SNP effects
+\item{B_out.trd.sum} GWAS summary statistics file with additive SNP effects
 }
 \description{
 GWAS_binary function
-This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_trd.sum
+This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_out.trd.sum
 }
 \keyword{gwas}

@@ -3,8 +3,8 @@
 #' @param Bphe_target Phenotype file containing family ID, individual ID and phenotype of the target dataset as columns, without heading
 #' @param Bcov_target Covariate file containing family ID, individual ID, standardized covariate, square of standardized covariate, and/or confounders of the target dataset as columns, without heading
 #' @param iterations Number of iterations used in permutation
-#' @param input_score2 The .sscore file generated using additive SNP effects of GWEIS summary statistics
-#' @param input_score3 The .sscore file generated using interaction SNP effects of GWEIS summary statistics
+#' @param add_score The .sscore file generated using additive SNP effects of GWEIS summary statistics
+#' @param gxe_score The .sscore file generated using interaction SNP effects of GWEIS summary statistics
 #' @keywords regression summary
 #' @export 
 #' @importFrom stats D cor dnorm
@@ -12,7 +12,7 @@
 #' \item{B_permuted_p.txt} the p value of the permuted model
 #' @example x <- summary_permuted_binary(Bphe_target, Bcov_target)
 #' @example x
-summary_permuted_binary <- function(Bphe_target, Bcov_target, iterations = 1000, input_score1 = "B_add.sscore", input_score2 = "B_gxe.sscore"){
+summary_permuted_binary <- function(Bphe_target, Bcov_target, iterations = 1000, add_score = "B_add.sscore", gxe_score = "B_gxe.sscore"){
   cov_file <- read.table(Bcov_target)
   n_confounders = ncol(cov_file) - 4
   fam=read.table(Bphe_target, header=F) 
@@ -20,11 +20,11 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, iterations = 1000,
   dat=read.table(Bcov_target, header=F)
   colnames(dat)[1] <- "FID"
   colnames(dat)[2] <- "IID"
-  prs1_all=read.table(input_score1)
+  prs1_all=read.table(add_score)
   colnames(prs1_all)[1] <- "FID"
   colnames(prs1_all)[2] <- "IID"
   prs1=merge(fam, prs1_all, by = "FID")
-  prs2_all=read.table(input_score2)
+  prs2_all=read.table(gxe_score)
   colnames(prs2_all)[1] <- "FID"
   colnames(prs2_all)[2] <- "IID"
   prs2=merge(fam, prs2_all, by = "FID")
@@ -48,6 +48,7 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, iterations = 1000,
       sv2=sample(seq(1, length(out)))
       xv2=scale(prs2$V5[sv2]*cov)
     df_new <- as.data.frame(cbind(out, cov, cov2, ps1, ps2, xv2))
+    colnames(df_new)[1] <- "out"
     colnames(df_new)[2] <- "E"
     colnames(df_new)[3] <- "E squared"
     colnames(df_new)[4] <- "PRS_add"
@@ -74,6 +75,7 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, iterations = 1000,
       sv2=sample(seq(1, length(out)))
       xv2=scale(prs2$V5[sv2]*cov)
       df_new <- as.data.frame(cbind(out, cov, cov2, ps1, ps2, xv2, conf_var))
+      colnames(df_new)[1] <- "out"
       colnames(df_new)[2] <- "E"
       colnames(df_new)[3] <- "E squared"
       colnames(df_new)[4] <- "PRS_add"

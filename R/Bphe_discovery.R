@@ -4,6 +4,6 @@
 #' \describe{
 #'  \item{Column 1}{Family ID}
 #'  \item{Column 2}{Individual ID}
-#'  \item{Column 3}{phenotype (1=controls, 2=cases)} 
+#'  \item{Column 3}{Phenotype (1=controls, 2=cases)} 
 #' }
 "Bphe_discovery"

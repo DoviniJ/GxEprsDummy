@@ -9,8 +9,8 @@ summary_permuted_binary(
   Bphe_target,
   Bcov_target,
   iterations = 1000,
-  input_score1 = "B_add.sscore",
-  input_score2 = "B_gxe.sscore"
+  add_score = "B_add.sscore",
+  gxe_score = "B_gxe.sscore"
 )
 }
 \arguments{
@@ -20,9 +20,9 @@ summary_permuted_binary(
 
 \item{iterations}{Number of iterations used in permutation}
 
-\item{input_score2}{The .sscore file generated using additive SNP effects of GWEIS summary statistics}
+\item{add_score}{The .sscore file generated using additive SNP effects of GWEIS summary statistics}
 
-\item{input_score3}{The .sscore file generated using interaction SNP effects of GWEIS summary statistics}
+\item{gxe_score}{The .sscore file generated using interaction SNP effects of GWEIS summary statistics}
 }
 \value{
 This function will output

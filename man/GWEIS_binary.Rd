@@ -3,7 +3,7 @@
 \name{GWEIS_binary}
 \alias{GWEIS_binary}
 \title{GWEIS_binary function
-This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_add.sum and interaction SNP effects named B_gxe.sum}
+This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_out.add.sum and interaction SNP effects named B_out.gxe.sum}
 \usage{
 GWEIS_binary(
   plink_path,
@@ -11,8 +11,7 @@ GWEIS_binary(
   Bphe_discovery,
   Bcov_discovery,
   thread = 20,
-  summary_output1 = "B_add.sum",
-  summary_output2 = "B_gxe.sum"
+  summary_output = "B_out"
 )
 }
 \arguments{
@@ -26,18 +25,16 @@ GWEIS_binary(
 
 \item{thread}{Number of threads used}
 
-\item{summary_output1}{Name of the additive SNP effects of the GWEIS summary statistics file specified by the user}
-
-\item{summary_output2}{Name of the interaction SNP effects of the GWEIS summary statistics file specified by the user}
+\item{summary_output}{Name (prefix) of the additive or interaction SNP effects of the GWEIS summary statistics file specified by the user}
 }
 \value{
 This function will perform GWEIS and output
-\item{B_add.sum} GWEIS summary statistics file with additive SNP effects
-\item{B_gxe.sum} GWEIS summary statistics file with interaction SNP effects
+\item{B_out.add.sum} GWEIS summary statistics file with additive SNP effects
+\item{B_out.gxe.sum} GWEIS summary statistics file with interaction SNP effects
 }
 \description{
 GWEIS_binary function
-This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_add.sum and interaction SNP effects named B_gxe.sum
+This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_out.add.sum and interaction SNP effects named B_out.gxe.sum
 }
 \keyword{gwies,}
 \keyword{gxe}

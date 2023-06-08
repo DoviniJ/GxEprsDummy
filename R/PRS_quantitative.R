@@ -1,5 +1,5 @@
 #' PRS_binary function
-#' This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_out.trd.sum, B_out.add.sum or B_out.gxe.sum
+#' This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named Q_out.trd.sum, Q_out.add.sum or Q_out.gxe.sum
 #' @param plink_path Path to the PLINK executable application
 #' @param b_file Prefix of the binary files, where all .fam, .bed and .bim files have a common prefix
 #' @param summary_input Name of the summary statistics file specified by the user
@@ -8,15 +8,15 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will output
-#' \item{B_trd.sscore} PRSs for each target individual using GWAS additive effects
-#' @example x <- PRS_binary(plink_path, DummyData)
+#' \item{Q_trd.sscore} PRSs for each target individual using GWAS additive effects
+#' @example x <- PRS_quantitative(plink_path, DummyData)
 #' @example head(x[[1]])
 #' @example head(x[[2]])
 #' @example head(x[[3]])
-PRS_binary <- function(plink_path, b_file, summary_input = "B_out.trd.sum", summary_output = "B_trd"){               
+PRS_quantitative <- function(plink_path, b_file, summary_input = "Q_out.trd.sum", summary_output = "Q_trd"){               
   runPLINK <- function(PLINKoptions = "") system(paste(plink_path, PLINKoptions))
     runPLINK(paste0(" --bfile ", b_file, 
-                    " --score ", noquote(summary_input), " 3 6 10 header --out ", summary_output))
+                    " --score ", noquote(summary_input), " 3 6 9 header --out ", summary_output))
     summary_output_name <- paste0(noquote(summary_output), ".sscore")
     summary_output <- as.character(summary_output_name)
     out = read.table(summary_output, header = F)
