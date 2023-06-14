@@ -62,7 +62,7 @@ The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS mod
 * FID 
 * IID 
 * standardized covariate 
-* square of the standardized covariate  
+* square of the standardized covariate (Note: This column is required to address model misspecification, if present. See reference for details.) 
 * 14 confounders of the discovery sample
 
 ```
@@ -90,7 +90,7 @@ The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS mod
 * FID 
 * IID 
 * standardized covariate 
-* square of the standardized covariate  
+* square of the standardized covariate  (Note: This column is required to address model misspecification, if present. See reference for details.)
 * 14 confounders of the target sample
 
 ```
@@ -118,7 +118,7 @@ The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS mod
 * FID 
 * IID 
 * standardized covariate 
-* square of the standardized covariate  
+* square of the standardized covariate  (Note: Although squared covariate term is not involved when analyzing quantitative traits, this file can/may be used as the covariate file when modulating with a binary outcome. In that event, this column is required to address model misspecification, if present. See reference for details.)
 * 14 confounders of the discovery sample
 
 ```
@@ -146,7 +146,7 @@ The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS mod
 * FID 
 * IID 
 * standardized covariate 
-* square of the standardized covariate  
+* square of the standardized covariate (Note: Although squared covariate term is not involved when analyzing quantitative traits, this file can/may be used as the covariate file when modulating with a binary outcome. In that event, this column is required to address model misspecification, if present. See reference for details.) 
 * 14 confounders of the target sample
 
 ```
