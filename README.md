@@ -270,6 +270,8 @@ B_out.trd.sum - This contains GWAS summary statistics of all additive SNP effect
 * p-value  
 * error code 
 
+In addition to the output file, users can assign the function to an object and call each component in the output file separately. See manual.pdf for examples.
+
 **Command**
 ```
 GWEIS_binary(plink_path, "mydata", "Bpd.txt", "Bcd.txt", thread = 20, summary_output = "B_out")
@@ -286,7 +288,6 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 ```
 B_out.add.sum - This contains GWEIS summary statistics of all additive SNP effects, when the outcome is binary. 
 
-
 ```
 V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 754182 snp_53131969 G A A N ADDxCOVAR1 7867 0.0291703772997799 0.0941336 0.30992 0.756622 .
@@ -295,6 +296,8 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 1 779322 snp_54040617 A G G N ADDxCOVAR1 7916 0.0132222001691214 0.0938807 0.140788 0.888037 .
 ```
 B_out.gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is binary. 
+
+In addition to the output files, users can assign the function to an object and call each component in the output files separately. See manual.pdf for examples.
 
 **Command**
 ```
@@ -319,6 +322,7 @@ B_trd.sscore - This contains the following columns in order.
 * sum of named allele dosages (NAMED_ALLELE_DOSAGE_SUM)
 * SCORE1_AVG (polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics), of the full dataset
 
+
 ```
 #FID	IID	ALLELE_CT	NAMED_ALLELE_DOSAGE_SUM	SCORE1_AVG
 1001019	1001019	19814	4772	-0.000325805
@@ -333,6 +337,7 @@ B_add.sscore - This contains the the following columns in order.
 * NAMED_ALLELE_DOSAGE_SUM
 * SCORE1_AVG (polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics), of the full dataset 
 
+
 ```
 #FID	IID	ALLELE_CT	NAMED_ALLELE_DOSAGE_SUM	SCORE1_AVG
 1001019	1001019	19814	4772	-0.000316507
@@ -346,6 +351,8 @@ B_gxe.sscore - This contains the the following columns in order.
 * ALLELE_CT
 * NAMED_ALLELE_DOSAGE_SUM
 * SCORE1_AVG (polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics), of the full dataset
+
+In addition to the output file, users can assign the function to an object and call each component in the output file separately. See manual.pdf for examples.
 
 **Command**
 ```
@@ -417,6 +424,8 @@ Individual_risk_values.txt - This contains all the calculated individual risk sc
 
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary("Bpt.txt", "Bct.txt", add_score = "B_add.sscore", gxe_score = "B_gxe.sscore", Model = 5)``` and ```summary_permuted_binary("Bpt.txt", "Bct.txt", iterations = 1000, add_score = "B_add.sscore", gxe_score = "B_gxe.sscore")```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 5, and insignificant in Model 5* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
 
+In addition to the output files, users can assign the function to an object and call each component in the output files separately. See manual.pdf for examples.
+
 **Command**
 ```
 summary_permuted_binary("Bpt.txt", "Bct.txt", iterations = 1000, add_score = "B_add.sscore", gxe_score = "B_gxe.sscore")
@@ -481,6 +490,8 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13
 ```
 Q_out.gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is quantitative. 
 
+In addition to the output files, users can assign the function to an object and call each component in the output files separately. See manual.pdf for examples.
+
 **Command**
 ```
 PRS_quantitative(plink_path, "mydata", summary_input = "Q_out.trd.sum", summary_output = "Q_trd")
@@ -531,6 +542,9 @@ Q_gxe.sscore - This contains the the following columns in order.
 * ALLELE_CT
 * NAMED_ALLELE_DOSAGE_SUM
 * SCORE1_AVG (polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics), of the full dataset
+
+
+In addition to the output file, users can assign the function to an object and call each component in the output file separately. See manual.pdf for examples.
 
 **Command**
 ```
@@ -595,6 +609,8 @@ Individual_risk_values.txt - This contains all the calculated individual risk sc
 * estimated risk value
 
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative("Qpt.txt", "Qct.txt", add_score = "Q_add.sscore", gxe_score = "Q_gxe.sscore", Model = 4)``` and ```summary_permuted_quantitative("qpt.txt", "qct.txt", iterations = 1000, add_score = "Q_add.sscore", gxe_score = "Q_gxe.sscore")```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 4) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 4, and insignificant in Model 4* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
+
+In addition to the output files, users can assign the function to an object and call each component in the output files separately. See manual.pdf for examples.
 
 **Command**
 ```
