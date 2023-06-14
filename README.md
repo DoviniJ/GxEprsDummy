@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 # GxEprs
-The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS model that can enhanced the prediction accuracy by utilising GxE effects. Firstly it performs Genome Wide Association Studies (GWAS)  and Genome Wide Environment Interaction Studies (GWEIS) using the discovery sample (see functions ```GWAS_binary()```,```GWAS_quantitative()```, ```GWEIS_binary()```, ```GWEIS_quantitative()```). See the section $\color{red}{IMPORTANT}$ for the discovery models used. Secondly, it uses the generated summary statistics file(s) to obtain polygenic risk scores (PRSs) (see functions ```PRS_binary()``` and ```PRS_quantitative()```) for the target sample. Finally it predicts the risk values of each individual in the target sample (see functions ```summary_regular_binary()``` and ```summary_regular_quantitative()```). Note that the users can fit 5 different models when the outcome is binary, and 4 different models when the outcome is quantitative. See the section $\color{red} {IMPORTANT}$ for the target models used. It is recommended to check the p-value from the permuted model if the users choose to fit Model 5 for binary and Model 4 for quantitative outcomes (see functions ```summary_permuted_binary()``` and ```summary_permuted_quantitative()```).
+The 'GxEprs' is an R package to detect and estimate GxE. It uses a novel PRS model that can enhance the prediction accuracy by utilising GxE effects. Firstly it performs Genome Wide Association Studies (GWAS)  and Genome Wide Environment Interaction Studies (GWEIS) using the discovery dataset (see functions ```GWAS_binary()```,```GWAS_quantitative()```, ```GWEIS_binary()```, ```GWEIS_quantitative()```). See the section $\color{red}{IMPORTANT}$ for the discovery models used. Secondly, it uses the GWAS and GWEIS summary statistics generated from the fucntions above to obtain polygenic risk scores (PRSs) (see functions ```PRS_binary()``` and ```PRS_quantitative()```) for the target sample. Finally it predicts the risk values of each individual in the target sample (see functions ```summary_regular_binary()``` and ```summary_regular_quantitative()```). Note that the users can fit 4 different models when the outcome is a quantitative trait, and 5 different models when the outcome is a binary disease trait. See the section $\color{red} {IMPORTANT}$ for the target models used. Finally, it is recommended to check the p-value from permutations using Model 4 (see function ```summary_permuted_quantitative()```), and Model 5 (see function```summary_permuted_binary()```), to make sure that the significance of GxE is not spurious due to model misspecification (see references).
 
 # Data preparation
 
@@ -315,8 +315,9 @@ As explained above, “mydata” is the prefix of the PLINK format files, “B_o
 B_trd.sscore - This contains the following columns in order.
 * FID 
 * IID 
-* number of alleles across scored variants (ALLELE_CT)  
-* polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics, of the full dataset
+* number of alleles across scored variants (ALLELE_CT)
+* sum of named allele dosages (NAMED_ALLELE_DOSAGE_SUM)
+* SCORE1_AVG (polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics), of the full dataset
 
 ```
 #FID	IID	ALLELE_CT	NAMED_ALLELE_DOSAGE_SUM	SCORE1_AVG
@@ -328,8 +329,9 @@ B_trd.sscore - This contains the following columns in order.
 B_add.sscore - This contains the the following columns in order.
 * FID 
 * IID 
-* ALLELE_CT  
-* polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset 
+* ALLELE_CT
+* NAMED_ALLELE_DOSAGE_SUM
+* SCORE1_AVG (polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics), of the full dataset 
 
 ```
 #FID	IID	ALLELE_CT	NAMED_ALLELE_DOSAGE_SUM	SCORE1_AVG
@@ -341,8 +343,9 @@ B_add.sscore - This contains the the following columns in order.
 B_gxe.sscore - This contains the the following columns in order.
 * FID 
 * IID 
-* ALLELE_CT  
-* polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset
+* ALLELE_CT
+* NAMED_ALLELE_DOSAGE_SUM
+* SCORE1_AVG (polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics), of the full dataset
 
 **Command**
 ```
@@ -401,11 +404,11 @@ Number of Fisher Scoring iterations: 7
 Bsummary.txt - This contains the target regular model summary output, when the outcome is binary. 
 
 ```
-1001035 1001035 0.014485064706852
-1001105 1001105 0.0732548491904503
-1001129 1001129 0.00529571917986906
-1001210 1001210 0.057008389028729
-1001323 1001323 0.0106231802372828
+1001035 1001035 0.0144851977697558
+1001105 1001105 0.0732542373614076
+1001129 1001129 0.00529574201513106
+1001210 1001210 0.0570084654126558
+1001323 1001323 0.0106232171799868
 ```
 Individual_risk_values.txt - This contains all the calculated individual risk scores using the target dataset (e.g. Model 5), when the outcome is binary. The columns denote the following in order.
 * FID
@@ -497,8 +500,9 @@ As explained above, “mydata” is the prefix of the PLINK format files, “Q_o
 Q_trd.sscore - This contains the following columns in order.
 * FID 
 * IID 
-* number of alleles across scored variants (ALLELE_CT)  
-* polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics, of the full dataset
+* number of alleles across scored variants (ALLELE_CT)
+* sum of named allele dosages (NAMED_ALLELE_DOSAGE_SUM)
+* SCORE1_AVG (polygenic risk scores (PRSs), computed from the additive effects of GWAS summary statistics), of the full dataset
 
 ```
 #FID	IID	ALLELE_CT	NAMED_ALLELE_DOSAGE_SUM	SCORE1_AVG
@@ -510,8 +514,9 @@ Q_trd.sscore - This contains the following columns in order.
 Q_add.sscore - This contains the the following columns in order.
 * FID 
 * IID 
-* ALLELE_CT  
-* polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics, of the full dataset 
+* ALLELE_CT
+* NAMED_ALLELE_DOSAGE_SUM
+* SCORE1_AVG (polygenic risk scores (PRSs), computed from the additive effects of GWEIS summary statistics), of the full dataset 
 
 ```
 #FID	IID	ALLELE_CT	NAMED_ALLELE_DOSAGE_SUM	SCORE1_AVG
@@ -523,8 +528,9 @@ Q_add.sscore - This contains the the following columns in order.
 Q_gxe.sscore - This contains the the following columns in order.
 * FID 
 * IID 
-* ALLELE_CT  
-* polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics, of the full dataset
+* ALLELE_CT
+* NAMED_ALLELE_DOSAGE_SUM
+* SCORE1_AVG (polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics), of the full dataset
 
 **Command**
 ```
