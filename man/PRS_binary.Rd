@@ -29,6 +29,14 @@ This function will output
 PRS_binary function
 This function uses plink2 and outputs PRSs of each individual in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_out.trd.sum, B_out.add.sum or B_out.gxe.sum
 }
+\examples{
+\dontrun{ 
+x <- PRS_binary(plink_path, DummyData)
+head(x[[1]])
+head(x[[2]])
+head(x[[3]])
+}
+}
 \keyword{profile}
 \keyword{prs,}
 \keyword{scores}

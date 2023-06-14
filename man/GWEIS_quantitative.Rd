@@ -36,6 +36,13 @@ This function will perform GWEIS and output
 GWEIS_quantitative function
 This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named Q_out.add.sum and interaction SNP effects named Q_out.gxe.sum
 }
+\examples{
+\dontrun{ 
+x <- GWEIS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery)
+head(x[[1]])
+head(x[[2]])
+}
+}
 \keyword{gwies,}
 \keyword{gxe}
 \keyword{interaction,}

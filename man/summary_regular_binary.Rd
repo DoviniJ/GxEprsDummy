@@ -42,6 +42,30 @@ This function will output
 summary_regular_binary function
 This function uses plink2 and outputs the summary of regular model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 }
+\examples{
+\dontrun{ 
+x <- summary_regular_binary(Bphe_target, Bcov_target, Model = 5)
+x[[1]][[1]]
+x[[1]][[2]]
+x[[1]][[3]]
+x[[1]][[4]]
+x[[1]][[5]]
+x[[1]][[6]]
+x[[1]][[7]]
+x[[1]][[8]]
+x[[1]][[9]]
+x[[1]][[10]]
+x[[1]][[11]]
+x[[1]][[12]]
+x[[1]][[13]]
+x[[1]][[14]]
+x[[1]][[15]]
+x[[1]][[16]]
+x[[1]][[17]]
+x[[1]][[18]]
+head(x[[2]])
+}
+}
 \keyword{regression}
 \keyword{risk}
 \keyword{scores}

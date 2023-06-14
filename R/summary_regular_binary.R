@@ -14,26 +14,28 @@
 #' @return This function will output
 #' \item{Bsummary.txt} the summary of the fitted model
 #' \item{Individual_risk_values.txt} the estimated risk values of individuals in the target sample
-#' @example x <- summary_regular_binary(Bphe_target, Bcov_target, Model = 5)
-#' @example x[[1]][[1]]
-#' @example x[[1]][[2]]
-#' @example x[[1]][[3]]
-#' @example x[[1]][[4]]
-#' @example x[[1]][[5]]
-#' @example x[[1]][[6]]
-#' @example x[[1]][[7]]
-#' @example x[[1]][[8]]
-#' @example x[[1]][[9]]
-#' @example x[[1]][[10]]
-#' @example x[[1]][[11]]
-#' @example x[[1]][[12]]
-#' @example x[[1]][[13]]
-#' @example x[[1]][[14]]
-#' @example x[[1]][[15]]
-#' @example x[[1]][[16]]
-#' @example x[[1]][[17]]
-#' @example x[[1]][[18]]
-#' @example head(x[[2]])
+#' @examples \dontrun{ 
+#' x <- summary_regular_binary(Bphe_target, Bcov_target, Model = 5)
+#' x[[1]][[1]]
+#' x[[1]][[2]]
+#' x[[1]][[3]]
+#' x[[1]][[4]]
+#' x[[1]][[5]]
+#' x[[1]][[6]]
+#' x[[1]][[7]]
+#' x[[1]][[8]]
+#' x[[1]][[9]]
+#' x[[1]][[10]]
+#' x[[1]][[11]]
+#' x[[1]][[12]]
+#' x[[1]][[13]]
+#' x[[1]][[14]]
+#' x[[1]][[15]]
+#' x[[1]][[16]]
+#' x[[1]][[17]]
+#' x[[1]][[18]]
+#' head(x[[2]])
+#' }
 summary_regular_binary <- function(Bphe_target, Bcov_target, trd_score = "B_trd.sscore", add_score = "B_add.sscore", gxe_score = "B_gxe.sscore", Model, summary_output = "Bsummary.txt", risk_output = "Individual_risk_values.txt"){
   cov_file <- read.table(Bcov_target)
   n_confounders = ncol(cov_file) - 4
@@ -47,7 +49,7 @@ summary_regular_binary <- function(Bphe_target, Bcov_target, trd_score = "B_trd.
     colnames(prs0_all)[1] <- "FID"
     colnames(prs0_all)[2] <- "IID"
     prs0=merge(fam, prs0_all, by = "FID")
-    m1 <- match(prs0$IID.x, dat$IID)
+    m1 <- match(dat$IID, prs0$IID.x)     
     ps0=scale(prs0$V5)
     out = fam$PHENOTYPE[m1]
     cov=scale(dat$V3[m1])
@@ -59,7 +61,7 @@ summary_regular_binary <- function(Bphe_target, Bcov_target, trd_score = "B_trd.
     colnames(prs1_all)[1] <- "FID"
     colnames(prs1_all)[2] <- "IID"
     prs1=merge(fam, prs1_all, by = "FID")
-    m1 <- match(prs1$IID.x, dat$IID)
+    m1 <- match(dat$IID, prs1$IID.x)
     ps1=scale(prs1$V5)
     out = fam$PHENOTYPE[m1]
     cov=scale(dat$V3[m1])
@@ -71,7 +73,7 @@ summary_regular_binary <- function(Bphe_target, Bcov_target, trd_score = "B_trd.
     colnames(prs2_all)[1] <- "FID"
     colnames(prs2_all)[2] <- "IID"
     prs2=merge(fam, prs2_all, by = "FID")
-    m1 <- match(prs2$IID.x, dat$IID)
+    m1 <- match(dat$IID, prs2$IID.x)
     ps2=scale(prs2$V5)
     out = fam$PHENOTYPE[m1]
     cov=scale(dat$V3[m1])

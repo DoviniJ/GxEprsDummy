@@ -11,8 +11,10 @@
 #' @importFrom stats D cor dnorm
 #' @return This function will perform GWAS and output
 #' \item{B_out.trd.sum} GWAS summary statistics file with additive SNP effects
-#' @example x <- GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery)
-#' @example head(x)
+#' @examples \dontrun{
+#' x <- GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery)
+#' head(x)
+#' }
 GWAS_binary <- function(plink_path, b_file, Bphe_discovery, Bcov_discovery, thread = 20, summary_output = "B_out.trd.sum"){  
   cov_file <- read.table(Bcov_discovery)
   n_confounders = ncol(cov_file) - 4

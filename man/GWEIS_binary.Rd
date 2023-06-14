@@ -36,6 +36,13 @@ This function will perform GWEIS and output
 GWEIS_binary function
 This function performs GWEIS using plink2 and outputs the GWEIS summary statistics files with additive SNP effects named B_out.add.sum and interaction SNP effects named B_out.gxe.sum
 }
+\examples{
+\dontrun{ 
+x <- GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery)
+head(x[[1]])
+head(x[[2]])
+}
+}
 \keyword{gwies,}
 \keyword{gxe}
 \keyword{interaction,}

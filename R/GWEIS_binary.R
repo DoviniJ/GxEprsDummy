@@ -12,9 +12,11 @@
 #' @return This function will perform GWEIS and output
 #' \item{B_out.add.sum} GWEIS summary statistics file with additive SNP effects
 #' \item{B_out.gxe.sum} GWEIS summary statistics file with interaction SNP effects
-#' @example x <- GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery)
-#' @example head(x[[1]])
-#' @example head(x[[2]])
+#' @examples \dontrun{ 
+#' x <- GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery)
+#' head(x[[1]])
+#' head(x[[2]])
+#' }
 GWEIS_binary <- function(plink_path, b_file, Bphe_discovery, Bcov_discovery, thread = 20, summary_output = "B_out"){
   cov_file <- read.table(Bcov_discovery)
   n_confounders = ncol(cov_file) - 4

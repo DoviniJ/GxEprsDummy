@@ -35,4 +35,10 @@ This function will perform GWAS and output
 GWAS_quantitative function
 This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named Q_out.trd.sum
 }
+\examples{
+\dontrun{
+x <- GWAS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery)
+head(x)
+}
+}
 \keyword{gwas}

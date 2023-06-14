@@ -12,9 +12,11 @@
 #' @return This function will perform GWEIS and output
 #' \item{Q_out.add.sum} GWEIS summary statistics file with additive SNP effects
 #' \item{Q_out.gxe.sum} GWEIS summary statistics file with interaction SNP effects
-#' @example x <- GWEIS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery)
-#' @example head(x[[1]])
-#' @example head(x[[2]])
+#' @examples \dontrun{ 
+#' x <- GWEIS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery)
+#' head(x[[1]])
+#' head(x[[2]])
+#' }
 GWEIS_quantitative <- function(plink_path, b_file, Qphe_discovery, Qcov_discovery, thread = 20, summary_output = "Q_out"){
   cov_file <- read.table(Qcov_discovery)
   n_confounders = ncol(cov_file) - 4

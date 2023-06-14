@@ -10,8 +10,10 @@
 #' @importFrom stats D cor dnorm
 #' @return This function will output
 #' \item{B_permuted_p.txt} the p value of the permuted model
-#' @example x <- summary_permuted_binary(Bphe_target, Bcov_target)
-#' @example x
+#' @examples \dontrun{ 
+#' x <- summary_permuted_binary(Bphe_target, Bcov_target)
+#' x
+#' }
 summary_permuted_binary <- function(Bphe_target, Bcov_target, iterations = 1000, add_score = "B_add.sscore", gxe_score = "B_gxe.sscore"){
   cov_file <- read.table(Bcov_target)
   n_confounders = ncol(cov_file) - 4
@@ -28,7 +30,7 @@ summary_permuted_binary <- function(Bphe_target, Bcov_target, iterations = 1000,
   colnames(prs2_all)[1] <- "FID"
   colnames(prs2_all)[2] <- "IID"
   prs2=merge(fam, prs2_all, by = "FID")
-  m1 <- match(prs1$IID.x, dat$IID)
+  m1 <- match(dat$IID, prs1$IID.x)
   out = fam$PHENOTYPE[m1]
   cov=scale(dat$V3[m1])
   ps1=scale(prs1$V5)

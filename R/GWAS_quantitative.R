@@ -11,8 +11,10 @@
 #' @importFrom stats D cor dnorm
 #' @return This function will perform GWAS and output
 #' \item{Q_out.trd.sum} GWAS summary statistics file with additive SNP effects
-#' @example x <- GWAS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery)
-#' @example head(x)
+#' @examples \dontrun{
+#' x <- GWAS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery)
+#' head(x)
+#' }
 GWAS_quantitative <- function(plink_path, b_file, Qphe_discovery, Qcov_discovery, thread = 20, summary_output = "Q_out.trd.sum"){  
   cov_file <- read.table(Qcov_discovery)
   n_confounders = ncol(cov_file) - 4

@@ -32,5 +32,11 @@ This function will output
 summary_permuted_binary function
 This function uses plink2 and outputs the p value of permuted model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named B_trd.sum, B_add.sum and B_gxe.sum
 }
+\examples{
+\dontrun{ 
+x <- summary_permuted_binary(Bphe_target, Bcov_target)
+x
+}
+}
 \keyword{regression}
 \keyword{summary}

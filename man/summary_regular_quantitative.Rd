@@ -42,6 +42,24 @@ This function will output
 summary_regular_quantitative function
 This function uses plink2 and outputs the summary of regular model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named Q_trd.sum, Q_add.sum and Q_gxe.sum
 }
+\examples{
+\dontrun{
+x <- summary_regular_quantitative(Qphe_target, Qcov_target, Model = 4)
+x[[1]][[1]]
+x[[1]][[2]]
+x[[1]][[3]]
+x[[1]][[4]]
+x[[1]][[5]]
+x[[1]][[6]]
+x[[1]][[7]]
+x[[1]][[8]]
+x[[1]][[9]]
+x[[1]][[10]]
+x[[1]][[11]]
+x[[1]][[12]]
+head(x[[2]])
+}
+}
 \keyword{regression}
 \keyword{risk}
 \keyword{scores}

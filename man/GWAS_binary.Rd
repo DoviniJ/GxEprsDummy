@@ -35,4 +35,10 @@ This function will perform GWAS and output
 GWAS_binary function
 This function performs GWAS using plink2 and outputs the GWAS summary statistics file with additive SNP effects named B_out.trd.sum
 }
+\examples{
+\dontrun{
+x <- GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery)
+head(x)
+}
+}
 \keyword{gwas}

@@ -32,5 +32,11 @@ This function will output
 summary_permuted_quantitative function
 This function uses plink2 and outputs the p value of permuted model in the target dataset, using pre-generated GWAS and GWEIS summary statistics files named Q_trd.sum, Q_add.sum and Q_gxe.sum
 }
+\examples{
+\dontrun{ 
+x <- summary_permuted_quantitative(Qphe_target, Qcov_target)
+x
+}
+}
 \keyword{regression}
 \keyword{summary}

@@ -9,10 +9,12 @@
 #' @importFrom stats D cor dnorm
 #' @return This function will output
 #' \item{B_trd.sscore} PRSs for each target individual using GWAS additive effects
-#' @example x <- PRS_binary(plink_path, DummyData)
-#' @example head(x[[1]])
-#' @example head(x[[2]])
-#' @example head(x[[3]])
+#' @examples \dontrun{ 
+#' x <- PRS_binary(plink_path, DummyData)
+#' head(x[[1]])
+#' head(x[[2]])
+#' head(x[[3]])
+#' }
 PRS_binary <- function(plink_path, b_file, summary_input = "B_out.trd.sum", summary_output = "B_trd"){               
   runPLINK <- function(PLINKoptions = "") system(paste(plink_path, PLINKoptions))
     runPLINK(paste0(" --bfile ", b_file, 
