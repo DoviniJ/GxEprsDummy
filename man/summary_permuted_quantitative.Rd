@@ -35,7 +35,7 @@ This function uses plink2 and outputs the p value of permuted model in the targe
 \examples{
 \dontrun{ 
 x <- summary_permuted_quantitative(Qphe_target, Qcov_target)
-x
+x 
 }
 }
 \keyword{regression}

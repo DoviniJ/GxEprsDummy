@@ -44,20 +44,29 @@ This function uses plink2 and outputs the summary of regular model in the target
 }
 \examples{
 \dontrun{
-x <- summary_regular_quantitative(Qphe_target, Qcov_target, Model = 4)
-x[[1]][[1]]
-x[[1]][[2]]
-x[[1]][[3]]
-x[[1]][[4]]
-x[[1]][[5]]
-x[[1]][[6]]
-x[[1]][[7]]
-x[[1]][[8]]
-x[[1]][[9]]
-x[[1]][[10]]
-x[[1]][[11]]
-x[[1]][[12]]
-head(x[[2]])
+x <- summary_regular_quantitative(Qphe_target, Qcov_target, 
+                                  add_score = "Q_add.sscore", 
+                                  gxe_score = "Q_gxe.sscore", 
+                                  Model = 4, 
+                                  summary_output = "Qsummary.txt", 
+                                  risk_output = "Individual_risk_values.txt")
+x[[1]][[1]] #to obtain the content of the Qsummary.txt file
+x[[1]][[2]] #to extract "Call" of the model summary
+x[[1]][[3]] #to extract terms of the model summary
+x[[1]][[4]] #to extract the residuals
+x[[1]][[5]] #to extract regrerssion coefficients of the model summary
+x[[1]][[6]] #to extract aliesed information of the model summary
+x[[1]][[7]] #to extract "sigma" (residual standard error) information 
+            #of the model summary
+x[[1]][[8]] #to extract degrees of freedom of the model summary
+x[[1]][[9]] #to extract the R squared value of the model summary
+x[[1]][[10]] #to extract the adjusted R squared value of the model summary
+x[[1]][[11]] #to extract the test statistic values of the model summary
+x[[1]][[12]] #to extract unscaled variance covariance matrix of all variables
+head(x[[2]]) #to read the head of all columns in Individual_risk_values.txt file
+x[[2]][,1] #to extract the column containing family ID's 
+x[[2]][,2] #to extract the column containing individual ID's 
+x[[2]][,3] #to extract the column containing predicted risk scores 
 }
 }
 \keyword{regression}

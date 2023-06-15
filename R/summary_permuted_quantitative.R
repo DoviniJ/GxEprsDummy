@@ -12,7 +12,7 @@
 #' \item{Q_permuted_p.txt} the p value of the permuted model
 #' @examples \dontrun{ 
 #' x <- summary_permuted_quantitative(Qphe_target, Qcov_target)
-#' x
+#' x 
 #' }
 summary_permuted_quantitative <- function(Qphe_target, Qcov_target, iterations = 1000, add_score = "Q_add.sscore", gxe_score = "Q_gxe.sscore"){
   cov_file <- read.table(Qcov_target)

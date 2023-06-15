@@ -10,10 +10,14 @@
 #' @return This function will output
 #' \item{Q_trd.sscore} PRSs for each target individual using GWAS additive effects
 #' @examples \dontrun{ 
-#' x <- PRS_quantitative(plink_path, DummyData)
-#' head(x[[1]])
-#' head(x[[2]])
-#' head(x[[3]])
+#' x <- PRS_quantitative(plink_path, DummyData, summary_input = "Q_out.trd.sum", 
+#'                       summary_output = "Q_trd")
+#' head(x[[1]]) #to read the head of all columns in Q_trd.sscore file
+#' x$V1 #to extract the family ID's of target dataset (FID)
+#' x$V2 #to extract the individual ID's of target dataset (IID)
+#' x$V3 #to extract the number of alleles across scored variants (ALLELE_CT)
+#' x$V4 #to extract the sum of named allele dosages (NAMED_ALLELE_DOSAGE_SUM)
+#' x$V5 #to extract the polygenic risk scores (SCORE1_AVG)
 #' }
 PRS_quantitative <- function(plink_path, b_file, summary_input = "Q_out.trd.sum", summary_output = "Q_trd"){               
   runPLINK <- function(PLINKoptions = "") system(paste(plink_path, PLINKoptions))

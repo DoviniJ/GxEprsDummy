@@ -15,26 +15,36 @@
 #' \item{Bsummary.txt} the summary of the fitted model
 #' \item{Individual_risk_values.txt} the estimated risk values of individuals in the target sample
 #' @examples \dontrun{ 
-#' x <- summary_regular_binary(Bphe_target, Bcov_target, Model = 5)
-#' x[[1]][[1]]
-#' x[[1]][[2]]
-#' x[[1]][[3]]
-#' x[[1]][[4]]
-#' x[[1]][[5]]
-#' x[[1]][[6]]
-#' x[[1]][[7]]
-#' x[[1]][[8]]
-#' x[[1]][[9]]
-#' x[[1]][[10]]
-#' x[[1]][[11]]
-#' x[[1]][[12]]
-#' x[[1]][[13]]
-#' x[[1]][[14]]
-#' x[[1]][[15]]
-#' x[[1]][[16]]
-#' x[[1]][[17]]
-#' x[[1]][[18]]
-#' head(x[[2]])
+#' x <- summary_regular_binary(Bphe_target, Bcov_target, 
+#'                             add_score = "B_add.sscore", 
+#'                             gxe_score = "B_gxe.sscore", 
+#'                             Model = 5, 
+#'                             summary_output = "Bsummary.txt", 
+#'                             risk_output = "Individual_risk_values.txt") 
+#' x[[1]][[1]] #to obtain the content of the Bsummary.txt file
+#' x[[1]][[2]] #to extract "Call" of the model summary
+#' x[[1]][[3]] #to extract terms of the model summary
+#' x[[1]][[4]] #to extract family information of the model summary
+#' x[[1]][[5]] #to extract deviance information of the model summary
+#' x[[1]][[6]] #to extract AIC information of the model summary
+#' x[[1]][[7]] #to extract contrasts of the model summary
+#' x[[1]][[8]] #to extract degrees of freedom (df) of residuals of 
+#'             #the model summary
+#' x[[1]][[9]] #to extract "Null deviance" of the model summary
+#' x[[1]][[10]] #to extract degrees of freedom (df) of null deviance 
+#'              #of the model summary
+#' x[[1]][[11]] #to extract "iter" of the model summary
+#' x[[1]][[12]] #to extract deviance residuals 
+#' x[[1]][[13]] #to extract regrerssion coefficients of the model summary
+#' x[[1]][[14]] #to extract aliesed information of the model summary
+#' x[[1]][[15]] #to extract dispersion information of the model summary
+#' x[[1]][[16]] #to extract degrees of freedom of the model summary
+#' x[[1]][[17]] #to extract unscaled variance covariance matrix of all variables
+#' x[[1]][[18]] #to extract scaled variance covariance matrix of all variables
+#' head(x[[2]]) #to read the head of all columns in Individual_risk_values.txt file
+#' x[[2]][,1] #to extract the column containing family ID's  
+#' x[[2]][,2] #to extract the column containing individual ID's
+#' x[[2]][,3] #to extract the column containing predicted risk scores 
 #' }
 summary_regular_binary <- function(Bphe_target, Bcov_target, trd_score = "B_trd.sscore", add_score = "B_add.sscore", gxe_score = "B_gxe.sscore", Model, summary_output = "Bsummary.txt", risk_output = "Individual_risk_values.txt"){
   cov_file <- read.table(Bcov_target)

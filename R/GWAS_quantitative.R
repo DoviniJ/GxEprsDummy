@@ -12,8 +12,22 @@
 #' @return This function will perform GWAS and output
 #' \item{Q_out.trd.sum} GWAS summary statistics file with additive SNP effects
 #' @examples \dontrun{
-#' x <- GWAS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery)
-#' head(x)
+#' x <- GWAS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery, 
+#'                        thread = 20, summary_output = "Q_out.trd.sum")
+#' head(x) #to read the head of all columns in Q_out.trd.sum file
+#' x$V1 #to extract the chromosome number (CHROM)
+#' x$V2 #to extract the base pair position (POS)
+#' x$V3 #to extract the SNP ID (ID)
+#' x$V4 #to extract the reference allele (REF)
+#' x$V5 #to extract the alternate allele (ALT)
+#' x$V6 #to extract the minor allele (A1)
+#' x$V7 #to extract the type of test performed (TEST)
+#' x$V8 #to extract the nmber of allele observations (OBS_CT)
+#' x$V9 #to extract the SNP effect (BETA)
+#' x$V10 #to extract the standard error of each SNP effect (SE)
+#' x$V11 #to extract the test statistic (T_STAT)
+#' x$V12 #to extract the p value (P)
+#' x$V13 #to extract the error code (ERRCODE)
 #' }
 GWAS_quantitative <- function(plink_path, b_file, Qphe_discovery, Qcov_discovery, thread = 20, summary_output = "Q_out.trd.sum"){  
   cov_file <- read.table(Qcov_discovery)
