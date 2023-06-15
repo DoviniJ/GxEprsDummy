@@ -270,7 +270,7 @@ B_out.trd.sum - This contains GWAS summary statistics of all additive SNP effect
 * p-value  
 * error code 
 
-In addition to the output file, users can assign the function to an object and call each component in the output file separately. See the topic GWAS_binary in manual.pdf for examples.
+In addition to the output file, users can assign the function to an object and call each component in the output file separately. See the topic GWAS_binary (page 5) in manual.pdf for examples.
 
 **Command**
 ```
@@ -297,7 +297,7 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14
 ```
 B_out.gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is binary. 
 
-In addition to the output files, users can assign the function to an object and call each component in the output files separately. See the topic GWEIS_binary in manual.pdf for examples.
+In addition to the output files, users can assign the function to an object and call each component in the output files separately. See the topic GWEIS_binary (page 7) in manual.pdf for examples.
 
 **Command**
 ```
@@ -352,7 +352,7 @@ B_gxe.sscore - This contains the the following columns in order.
 * NAMED_ALLELE_DOSAGE_SUM
 * SCORE1_AVG (polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics), of the full dataset
 
-In addition to the output file, users can assign the function to an object and call each component in the output file separately. See the topic PRS_binary in manual.pdf for examples.
+In addition to the output file, users can assign the function to an object and call each component in the output file separately. See the topic PRS_binary (page 11) in manual.pdf for examples.
 
 **Command**
 ```
@@ -424,7 +424,7 @@ Individual_risk_values.txt - This contains all the calculated individual risk sc
 
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_binary("Bpt.txt", "Bct.txt", add_score = "B_add.sscore", gxe_score = "B_gxe.sscore", Model = 5)``` and ```summary_permuted_binary("Bpt.txt", "Bct.txt", iterations = 1000, add_score = "B_add.sscore", gxe_score = "B_gxe.sscore")```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 5) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 5, and insignificant in Model 5* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
 
-In addition to the output files, users can assign the function to an object and call each component in the output files separately. See the topic summary_regular_binary in manual.pdf for examples.
+In addition to the output files, users can assign the function to an object and call each component in the output files separately. See the topic summary_regular_binary (page 18) in manual.pdf for examples.
 
 **Command**
 ```
@@ -465,7 +465,7 @@ Q_out.trd.sum - This contains GWAS summary statistics of all additive SNP effect
 * p-value  
 * error code 
 
-In addition to the output file, users can assign the function to an object and call each component in the output file separately. See the topic GWAS_quantitative in manual.pdf for examples.
+In addition to the output file, users can assign the function to an object and call each component in the output file separately. See the topic GWAS_quantitative (page 6) in manual.pdf for examples.
 
 **Command**
 ```
@@ -492,7 +492,7 @@ V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13
 ```
 Q_out.gxe.sum - This contains GWEIS summary statistics of all interaction SNP effects, when the outcome is quantitative. 
 
-In addition to the output files, users can assign the function to an object and call each component in the output files separately. See the topic GWEIS_quantitative in manual.pdf for examples.
+In addition to the output files, users can assign the function to an object and call each component in the output files separately. See the topic GWEIS_quantitative (page 9) in manual.pdf for examples.
 
 **Command**
 ```
@@ -546,7 +546,7 @@ Q_gxe.sscore - This contains the the following columns in order.
 * SCORE1_AVG (polygenic risk scores (PRSs), computed from the interaction effects of GWEIS summary statistics), of the full dataset
 
 
-In addition to the output file, users can assign the function to an object and call each component in the output file separately. See the topic PRS_quantitative in manual.pdf for examples.
+In addition to the output file, users can assign the function to an object and call each component in the output file separately. See the topic PRS_quantitative (page 12) in manual.pdf for examples.
 
 **Command**
 ```
@@ -612,7 +612,7 @@ Individual_risk_values.txt - This contains all the calculated individual risk sc
 
 Note: It is recommended to fit both regular and permuted models and obtain the summary of both fitted models (using ```summary_regular_quantitative("Qpt.txt", "Qct.txt", add_score = "Q_add.sscore", gxe_score = "Q_gxe.sscore", Model = 4)``` and ```summary_permuted_quantitative("qpt.txt", "qct.txt", iterations = 1000, add_score = "Q_add.sscore", gxe_score = "Q_gxe.sscore")```), if you choose to fit 'PRS_gxe x E' interaction component (i.e. novel proposed model, Model 4) when generating risk scores. If the 'PRS_gxe x E' term is significant in Model 4, and insignificant in Model 4* (permuted p value), consider that the 'PRS_gxe x E' interaction component is actually insignificant (always give priority to the p value obtained from the permuted model). 
 
-In addition to the output files, users can assign the function to an object and call each component in the output files separately. See the topic summary_regular_quantitative in manual.pdf for examples.
+In addition to the output files, users can assign the function to an object and call each component in the output files separately. See the topic summary_regular_quantitative (page 17) in manual.pdf for examples.
 
 **Command**
 ```
