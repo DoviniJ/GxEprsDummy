@@ -648,7 +648,7 @@ The fitted (target) models in ```summary_regular_binary("Bpt.txt", "Bct.txt", tr
 
 where y is the outcome variable, E is the covariate of interest, PRS_trd and PRS_add are the polygenic risk scores computed using additive SNP effects of GWAS and GWEIS summary statistics respectively, and PRS_gxe is the polygenic risk scores computed using GxE interaction SNP effects of GWEIS summary statistics.
 
-
+When deciding on the number of permutations to be used, always get an idea from the p value obtained from either Model 4 or 5 (accordingly). If that p value is insignificant, you can use any number of permututations (e.g. 1000), but if that p value is highly significant (p value is very small and very close to zero), it is recommended to increase the number of permutations for better results. For example assume that the p value obtained from Model 4 is 0.000154, then it is recommended to use at least 10,000 iterations in the permutation model.
 
 
 # Contact 
