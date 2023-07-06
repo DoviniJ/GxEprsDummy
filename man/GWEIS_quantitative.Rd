@@ -29,8 +29,8 @@ GWEIS_quantitative(
 }
 \value{
 This function will perform GWEIS and output
-\item{Q_out.add.sum} GWEIS summary statistics file with additive SNP effects
-\item{Q_out.gxe.sum} GWEIS summary statistics file with interaction SNP effects
+\item{Q_out.add.sum}{GWEIS summary statistics file with additive SNP effects}
+\item{Q_out.gxe.sum}{GWEIS summary statistics file with interaction SNP effects}
 }
 \description{
 GWEIS_quantitative function

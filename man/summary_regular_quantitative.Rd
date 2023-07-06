@@ -35,8 +35,8 @@ summary_regular_quantitative(
 }
 \value{
 This function will output
-\item{Qsummary.txt} the summary of the fitted model
-\item{Individual_risk_values.txt} the estimated risk values of individuals in the target sample
+\item{Qsummary.txt}{the summary of the fitted model}
+\item{Individual_risk_values.txt}{the estimated risk values of individuals in the target sample}
 }
 \description{
 summary_regular_quantitative function

@@ -10,7 +10,7 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will perform GWAS and output
-#' \item{B_out.trd.sum} GWAS summary statistics file with additive SNP effects
+#' \item{B_out.trd.sum}{GWAS summary statistics file with additive SNP effects}
 #' @examples \dontrun{
 #' x <- GWAS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 
 #'                  thread = 20, summary_output = "B_out.trd.sum")

@@ -23,7 +23,7 @@ PRS_quantitative(
 }
 \value{
 This function will output
-\item{Q_trd.sscore} PRSs for each target individual using GWAS additive effects
+\item{Q_trd.sscore}{PRSs for each target individual using GWAS additive effects}
 }
 \description{
 PRS_binary function

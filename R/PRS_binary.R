@@ -8,7 +8,7 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will output
-#' \item{B_trd.sscore} PRSs for each target individual using GWAS additive effects
+#' \item{B_trd.sscore}{PRSs for each target individual using GWAS additive effects}
 #' @examples \dontrun{ 
 #' x <- PRS_binary(plink_path, DummyData, summary_input = "B_out.trd.sum", 
 #'                 summary_output = "B_trd")

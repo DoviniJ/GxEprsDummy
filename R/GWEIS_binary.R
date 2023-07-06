@@ -10,8 +10,8 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will perform GWEIS and output
-#' \item{B_out.add.sum} GWEIS summary statistics file with additive SNP effects
-#' \item{B_out.gxe.sum} GWEIS summary statistics file with interaction SNP effects
+#' \item{B_out.add.sum}{GWEIS summary statistics file with additive SNP effects}
+#' \item{B_out.gxe.sum}{GWEIS summary statistics file with interaction SNP effects}
 #' @examples \dontrun{ 
 #' x <- GWEIS_binary(plink_path, DummyData, Bphe_discovery, Bcov_discovery, 
 #'                   thread = 20, summary_output = "B_out")

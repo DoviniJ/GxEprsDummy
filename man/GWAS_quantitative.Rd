@@ -29,7 +29,7 @@ GWAS_quantitative(
 }
 \value{
 This function will perform GWAS and output
-\item{Q_out.trd.sum} GWAS summary statistics file with additive SNP effects
+\item{Q_out.trd.sum}{GWAS summary statistics file with additive SNP effects}
 }
 \description{
 GWAS_quantitative function

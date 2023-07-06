@@ -10,8 +10,8 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will perform GWEIS and output
-#' \item{Q_out.add.sum} GWEIS summary statistics file with additive SNP effects
-#' \item{Q_out.gxe.sum} GWEIS summary statistics file with interaction SNP effects
+#' \item{Q_out.add.sum}{GWEIS summary statistics file with additive SNP effects}
+#' \item{Q_out.gxe.sum}{GWEIS summary statistics file with interaction SNP effects}
 #' @examples \dontrun{ 
 #' x <- GWEIS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery, 
 #'                         thread = 20, summary_output = "Q_out")

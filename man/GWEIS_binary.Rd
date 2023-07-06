@@ -29,8 +29,8 @@ GWEIS_binary(
 }
 \value{
 This function will perform GWEIS and output
-\item{B_out.add.sum} GWEIS summary statistics file with additive SNP effects
-\item{B_out.gxe.sum} GWEIS summary statistics file with interaction SNP effects
+\item{B_out.add.sum}{GWEIS summary statistics file with additive SNP effects}
+\item{B_out.gxe.sum}{GWEIS summary statistics file with interaction SNP effects}
 }
 \description{
 GWEIS_binary function

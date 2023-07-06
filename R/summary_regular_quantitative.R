@@ -12,8 +12,8 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will output
-#' \item{Qsummary.txt} the summary of the fitted model
-#' \item{Individual_risk_values.txt} the estimated risk values of individuals in the target sample
+#' \item{Qsummary.txt}{the summary of the fitted model}
+#' \item{Individual_risk_values.txt}{the estimated risk values of individuals in the target sample}
 #' @examples \dontrun{
 #' x <- summary_regular_quantitative(Qphe_target, Qcov_target, 
 #'                                   add_score = "Q_add.sscore", 

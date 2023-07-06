@@ -29,7 +29,7 @@ GWAS_binary(
 }
 \value{
 This function will perform GWAS and output
-\item{B_out.trd.sum} GWAS summary statistics file with additive SNP effects
+\item{B_out.trd.sum}{GWAS summary statistics file with additive SNP effects}
 }
 \description{
 GWAS_binary function

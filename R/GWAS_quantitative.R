@@ -10,7 +10,7 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will perform GWAS and output
-#' \item{Q_out.trd.sum} GWAS summary statistics file with additive SNP effects
+#' \item{Q_out.trd.sum}{GWAS summary statistics file with additive SNP effects}
 #' @examples \dontrun{
 #' x <- GWAS_quantitative(plink_path, DummyData, Qphe_discovery, Qcov_discovery, 
 #'                        thread = 20, summary_output = "Q_out.trd.sum")

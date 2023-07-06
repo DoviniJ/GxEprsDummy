@@ -26,7 +26,7 @@ summary_permuted_binary(
 }
 \value{
 This function will output
-\item{B_permuted_p.txt} the p value of the permuted model
+\item{B_permuted_p.txt}{the p value of the permuted model}
 }
 \description{
 summary_permuted_binary function

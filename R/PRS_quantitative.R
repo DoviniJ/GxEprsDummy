@@ -8,7 +8,7 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will output
-#' \item{Q_trd.sscore} PRSs for each target individual using GWAS additive effects
+#' \item{Q_trd.sscore}{PRSs for each target individual using GWAS additive effects}
 #' @examples \dontrun{ 
 #' x <- PRS_quantitative(plink_path, DummyData, summary_input = "Q_out.trd.sum", 
 #'                       summary_output = "Q_trd")

@@ -9,7 +9,7 @@
 #' @export 
 #' @importFrom stats D cor dnorm
 #' @return This function will output
-#' \item{Q_permuted_p.txt} the p value of the permuted model
+#' \item{Q_permuted_p.txt}{the p value of the permuted model}
 #' @examples \dontrun{ 
 #' x <- summary_permuted_quantitative(Qphe_target, Qcov_target)
 #' x 
