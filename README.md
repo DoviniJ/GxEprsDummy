@@ -652,4 +652,4 @@ When deciding on the number of permutations to be used, always get an idea from 
 
 
 # Contact 
-Please contact Dovini Jayasinghe (dovini.jayasinghe@mymail.unisa.edu.au) or Moksedul Momin (md_moksedul.momin@mymail.unisa.edu.au) or Hong Lee (hong.lee@unisa.edu.au) for queries.
+Please contact Dovini Jayasinghe (dovini.jayasinghe@mymail.unisa.edu.au) or Md Moksedul Momin (md_moksedul.momin@mymail.unisa.edu.au) or Hong Lee (hong.lee@unisa.edu.au) for queries.
